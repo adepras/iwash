@@ -8,7 +8,7 @@
     <div class="container-wash py-5">
         <h2>Pesan Layanan iWash</h2>
         <a href="{{ route('menu') }}"><img src="image/back-to.svg" alt="">Kembali ke jenis layanan</a>
-        <div class="category-menu mt-5 mb-2" id="menu2">
+        <div class="category-menu mt-5 mb-2">
             <h5>Pilih Paket Salon Mobil / Detailing</h5>
             <p class="mt-4">Pilih ukuran mobil Anda</p>
             <div class="car-category">
@@ -98,14 +98,34 @@
                 </div>
             </div>
         </div>
-        <div class="category-menu ">
-            <div class="order-menu mt-5">
-                <button class="btn-reset">Reset</button>
-                <button class="btn-next" onclick="window.location.href='{{ route('menu_order') }}'">Lanjutkan</button>
+        {{-- Layanan dipilih --}}
+        <h5 class="mt-5">Layanan yang Anda pilih</h5>
+        
+        {{-- Pilih Kendaraan --}}
+        <h5 class="mt-5">Pilih Kendaraan dari Profil Anda</h5>
+
+        {{-- Atur Jadwal --}}
+        <h5 class="mt-5">Atur Jadwal</h5>
+        <div class="form-input mt-3 mb-5">
+            <div class="form-row">
+                <div class="form-col">
+                    <label for="date">Pilih Tanggal<span>*</span></label>
+                    <input type="date" class="form-control" id="date" name="date-booking" required>
+                    <div class="error-message" id="date-error"></div>
+                </div>
+                <div class="form-col">
+                    <label for="time">Pilih Waktu<span>*</span></label>
+                    <input type="time" class="form-control" id="time" name="time-booking"
+                        placeholder="Pilih Waktu" required>
+                    <div class="error-message" id="time-error"></div>
+                </div>
             </div>
         </div>
+        <div class="order-menu mt-5">
+            <button class="btn-reset">Reset</button>
+            <button class="btn-next">Pesan Sekarang</button>
+        </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {

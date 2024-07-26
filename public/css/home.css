@@ -27,6 +27,7 @@ body {
     width: 100%;
     justify-content: space-between;
     align-items: center;
+    padding: 50px 0;
 }
 
 .tagline {
@@ -63,6 +64,7 @@ body {
 .slogan img {
     width: 40px;
     height: auto;
+    margin-left: 20px;
 }
 
 .tagline h4 {

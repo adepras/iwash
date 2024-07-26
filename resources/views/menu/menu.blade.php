@@ -10,9 +10,9 @@
         <h2>Pesan Layanan iWash</h2>
         <p class="mb-5">Mau pilih layanan apa?</p>
         <div class="option-menu">
-            <a class="btn-menu" href="{{ route('menu1') }}" onclick="checkLogin(event)">Satu Kali Cuci <img
+            <a class="btn-menu" href="{{ route('menu1') }}" onclick="checkLogin(event)">Perawatan Satu Kali Cuci<img
                     src="image/next-ill.png" alt=""></a>
-            <a class="btn-menu" href="{{ route('menu2') }}" onclick="checkLogin(event)">Salon Mobil / Detailing <img
+            <a class="btn-menu" href="{{ route('menu2') }}" onclick="checkLogin(event)">Salon Mobil / Detailing<img
                     src="image/next-ill.png" alt=""></a>
         </div>
         <p class="mt-4 mb-5" style="color: #bebebe; font-size: 18px;">Sebelum memiilih jenis layanan diatas,<br>kami sarankan untuk mendaftar atau login terlebih dahulu</p>

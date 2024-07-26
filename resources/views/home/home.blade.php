@@ -8,7 +8,7 @@
     <div class="container-home py-5">
         <div class="top-content">
             <div class="tagline">
-                <h4>Cuci dan Salon Mobil Profesional<img src="image/patch-check-fill.svg" alt=""></h4>
+                <h4>Cuci dan Salon Mobil Profesional</h4>
                 <p>Tidak perlu menunggu lama lagi saat ingin mencuci kendaraan Anda<br>Dan kami siap membersihkan kendaraan
                     Anda kapanpun dibutuhkan.</p>
                 <button class="btn-learn" onclick="window.location.href='{{ route('register') }}'">Daftar Sekarang</button>
@@ -17,18 +17,13 @@
                 <img src="image/car-wash-ill.png" alt="" class="half-size">
             </div>
         </div>
-        <ul class="slogan">
-            <li><img src="image/check-box-ill.png" alt="">Bersih</li>
-            <li><img src="image/check-box-ill.png" alt="">Cepat</li>
-            <li><img src="image/check-box-ill.png" alt="">Murah</li>
-        </ul>
     </div>
     <div class="container-layanan py-5">
-        <h2 class="mb-4 mt-5">Sekarang, cuci kendaraan lebih mudah dan tanpa ribet antri.</h2>
+        <h2 class="mb-4 mt-5">Kami siap merawat mobil Anda</h2>
         <p>Banyak orang sudah menggunakan layanan kami. <br>Apa yang kami tawarkan?</p>
         <img src="image/car-ill.png" alt="" id="car-ill">
         <ul class="text-service mt-5">
-            <li><img src="image/fast-time-ill.png" alt="">Cepat Tanpa Repot Antri</li>
+            <li><img src="image/fast-time-ill.png" alt="">Proses Cepat</li>
             <li><img src="image/calendar-check-ill.png" alt="">Bebas Atur Jadwal</li>
             <li><img src="image/shield-check-ill.png" alt="">Kendaraan Aman Terjaga</li>
             <li><img src="image/group-ill.png" alt="">Profesional dan Tanggap</li>
