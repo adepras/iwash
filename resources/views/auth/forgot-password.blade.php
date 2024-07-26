@@ -14,7 +14,7 @@
                         icon: 'success',
                         title: 'Email Verifikasi Terkirim',
                         text: '',
-                        timer: 2500,
+                        timer: 1800,
                         showConfirmButton: false
                     });
                 </script>

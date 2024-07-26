@@ -14,8 +14,6 @@
                     src="image/next-ill.png" alt=""></a>
             <a class="btn-menu" href="{{ route('menu2') }}" onclick="checkLogin(event)">Salon Mobil / Detailing <img
                     src="image/next-ill.png" alt=""></a>
-            <a class="btn-menu" href="{{ route('menu3') }}" onclick="checkLogin(event)">Paket Super <img
-                    src="image/next-ill.png" alt=""></a>
         </div>
     </div>
 

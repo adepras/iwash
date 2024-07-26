@@ -40,7 +40,7 @@
                         <li><img src="image/check-ill.png" alt="">Spot Remover (Body)</li>
                         <li><img src="image/check-ill.png" alt="">Engine Cleaning</li>
                     </ul>
-                    <p class="price">Rp 75.000</p>
+                    <p class="price">Rp 60.000</p>
                 </div>
                 <div class="card">
                     <div class="card-title">
@@ -55,7 +55,7 @@
                         <li><img src="image/check-ill.png" alt="">Spot Remover (Window)</li>
                         <li><img src="image/check-ill.png" alt="">Tar Remover</li>
                     </ul>
-                    <p class="price">Rp 100.000</p>
+                    <p class="price">Rp 70.000</p>
                 </div>
             </div>
         </div>

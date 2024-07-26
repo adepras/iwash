@@ -7,31 +7,34 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
+    // Cuci Mobil
     public function menu()
     {
         return view('menu.menu');
     }
 
+    // Satu Kali Cuci
     public function menu1()
     {
         return view('menu.menu_first');
     }
 
+    // Salon Mobil dan Detailing
     public function menu2()
     {
         return view('menu.menu_second');
     }
-
-    public function menu3()
+    
+    // Order
+    public function menu_order()
     {
-        return view('menu.menu_third');
+        return view('menu.menu_order');
     }
 
+    // public function showWashPage()
+    // {
+    //     $vehicles = auth()->user()->vehicles;
 
-    public function showWashPage()
-    {
-        $vehicles = auth()->user()->vehicles;
-
-        return view('menu.menu_first', compact('vehicles'));
-    }
+    //     return view('menu.menu_first', compact('vehicles'));
+    // }
 }

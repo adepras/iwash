@@ -11,7 +11,7 @@
                 <h4>Cuci dan Salon Mobil Profesional<img src="image/patch-check-fill.svg" alt=""></h4>
                 <p>Tidak perlu menunggu lama lagi saat ingin mencuci kendaraan Anda<br>Dan kami siap membersihkan kendaraan
                     Anda kapanpun dibutuhkan.</p>
-                <button class="btn-learn" onclick="window.location.href='{{ route('menu') }}'">Pesan Sekarang</button>
+                <button class="btn-learn" onclick="window.location.href='{{ route('register') }}'">Daftar Sekarang</button>
             </div>
             <div class="image-container">
                 <img src="image/car-wash-ill.png" alt="" class="half-size">
@@ -36,54 +36,6 @@
             <li><img src="image/verify-ill.png" alt="">Garansi Cuci Kembali</li>
         </ul>
     </div>
-    <div class="container-package py-5">
-        <h2 class="mb-4 mt-5">Pilihan Paket Lengkap dan Kualitas Terjamin <br>Ayo Cuci Mobil Anda Sekarang!</h2>
-        <p>Pilihan paket dan harga yang bervariasi sesuai kebutuhanmu.</p>
-        <div class="card-container">
-            <div class="card">
-                <div class="card-title">
-                    <img src="image/cuci-mobil-ill.png" alt="">
-                    <h5>Cuci Mobil</h5>
-                    <a href="">Lihat detail</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-title">
-                    <img src="image/interior-ill.png" alt="">
-                    <h5>Detailing Interior</h5>
-                    <a href="">Lihat detail</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-title">
-                    <img src="image/eksterior-ill.png" alt="">
-                    <h5>Detailing Eksterior</h5>
-                    <a href="">Lihat detail</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-title">
-                    <img src="image/kaca-ill.png" alt="">
-                    <h5>Detailing Kaca</h5>
-                    <a href="">Lihat detail</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-title">
-                    <img src="image/mesin-ill.png" alt="">
-                    <h5>Detailing Mesin</h5>
-                    <a href="">Lihat detail</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-title">
-                    <img src="image/ban-velg-ill.png" alt="">
-                    <h5>Detailing Ban & Velg</h5>
-                    <a href="">Lihat detail</a>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="container-testimoni py-5">
         <div class="testimoni-title">
             <h3>Kata mereka yang telah<br>menggunakan iWash</h3>
@@ -107,7 +59,7 @@
                 icon: 'success',
                 title: 'Berhasil!',
                 text: '{{ session('success') }}',
-                timer: 2500,
+                timer: 1500,
                 showConfirmButton: false
             });
         @endif

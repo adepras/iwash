@@ -1,3 +1,7 @@
+.container-menu {
+    width: 100%;
+}
+
 .container-menu h2 {
     text-align: center;
     font-weight: 600;
@@ -49,62 +53,9 @@
     color: #333;
 }
 
-@media (max-width: 767.98px) {
-    .container-menu h2 {
-        font-size: 30px;
-    }
-
-    .container-menu p {
-        font-size: 20px;
-    }
-
-    .btn-menu {
-        width: 80%;
-    }
-}
-
-/* Pesan Layanan */
-.container-wash {
-    width: 100%;
-    padding: 0 150px;
-}
-
-.container-wash h2 {
-    font-weight: 600;
-}
-
-.container-wash a {
-    color: #2277b9;
-    font-size: 14px;
-}
-
-.container-wash a img {
-    margin-right: 8px;
-}
-
-.car-category {
-    width: 60%;
-    padding: 12px;
-}
-
-.car-category img {
-    width: 80px;
-}
-
-.btn-car {
-    width: 25%;
-    border: 1px solid #bebebe;
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 2px 0;
-    margin: 0;
-    color: #333;
-    font-weight: 500;
-    font-size: 16px;
-}
-
-/* Harga */
-.price-menu {
+/* Satu Kali Cuci dan Add-ons Satu Kali Cuci */
+.price-menu,
+.add-menu {
     width: 80%;
     display: flex;
     flex-wrap: wrap;
@@ -112,8 +63,9 @@
     gap: 20px;
 }
 
-.card-price {
-    width: 30%;
+.card-price,
+.add-card {
+    width: 26%;
     border: 1px solid #bebebe;
     border-radius: 10px;
     padding: 16px;
@@ -148,7 +100,8 @@
     margin: -2px 10px 0 0;
 }
 
-.card-service li {
+.card-service li,
+.add-service p {
     list-style: none;
     padding: 3px 0;
     font-size: 14px;
@@ -171,7 +124,8 @@
     font-weight: 600;
 }
 
-.select-price {
+.select-price,
+.select-add {
     display: flex;
     justify-content: center;
     margin-top: 15px;
@@ -190,10 +144,9 @@
     box-shadow: none;
 }
 
-/* Estimasi */
 .estimation {
-    width: 55%;
-    font-size: 12px !important;
+    width: 67%;
+    font-size: 5px;
     text-align: center;
     padding: 3px 0;
     border-radius: 25px;
@@ -201,12 +154,12 @@
     background-color: #abe6ff;
 }
 
-/* Order */
+/* Pesan */
 .order-menu {
     width: 65%;
     background-color: #abdef3;
     border: 2px solid #abdef3;
-    border-radius: 10px;
+    border-radius: 18px;
     padding: 10px;
     display: flex;
     justify-content: space-between;
@@ -233,51 +186,51 @@
     border: 1px solid #2277b9;
 }
 
-.order-menu {
+/* .order-menu {
     visibility: hidden;
 }
 
 .order-menu.visible {
     visibility: visible;
+} */
+
+/* Salon mobil dan detailing */
+.container-wash {
+    width: 100%;
+    padding: 0 150px;
 }
 
-/* List Kendaraan */
-.vehicle-list {
-    width: 75.6%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.container-wash h2 {
+    font-weight: 600;
+}
+
+.container-wash a {
+    color: #2277b9;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.container-wash a img {
+    margin-right: 8px;
+}
+
+.car-category {
+    width: 60%;
     padding: 12px;
 }
 
-.vehicle-item {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.car-category img {
+    width: 80px;
+}
+
+.btn-car {
+    width: 25%;
     border: 1px solid #bebebe;
+    background-color: #fff;
     border-radius: 10px;
-    padding: 14px;
-    background-color: #f9f9f9;
-    cursor: pointer;
-}
-
-.vehicle-item p {
+    padding: 2px 0;
     margin: 0;
-    font-size: 14px;
-    font-weight: 500;
     color: #333;
-}
-
-.vehicle-item {
-    transition: opacity 0.3s;
-}
-
-.vehicle-item.selected {
-    opacity: 1;
-    border: 2px solid #2277b9;
-    background-color: #abdef3;
-}
-
-.vehicle-item:not(.selected) {
-    opacity: 0.7;
+    font-weight: 500;
+    font-size: 16px;
 }

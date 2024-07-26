@@ -112,7 +112,7 @@
                 icon: 'error',
                 title: 'Login Gagal!',
                 text: '{{ $errors->first() }}',
-                timer: 2500,
+                timer: 1800,
                 showConfirmButton: false
             });
         @endif
