@@ -25,7 +25,6 @@ use App\Http\Controllers\ForgotPasswordController;
 // Halaman Website
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/menu-layanan', [MenuController::class, 'menu'])->name('menu');
-Route::get('/paket-layanan', [HomeController::class, 'pack'])->name('pack');
 Route::get('/harga', [HomeController::class, 'price'])->name('price');
 Route::get('/tentang-kami', [HomeController::class, 'about'])->name('about');
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'iWash | Daftar')
+@section('title', 'iWash | Daftar Layanan')
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/auth.css') }}">

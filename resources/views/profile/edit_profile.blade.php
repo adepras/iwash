@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Profile')
+@section('title', 'iWash | Edit Profil')
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">

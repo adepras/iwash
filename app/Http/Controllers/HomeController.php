@@ -25,9 +25,4 @@ class HomeController extends Controller
     {
         return view('home.about');
     }
-    // Detailing Mobil
-    public function pack()
-    {
-        return view('home.pack');
-    }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'iWash | Harga')
+@section('title', 'iWash | Detail Harga')
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/price.css') }}">

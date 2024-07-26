@@ -13,11 +13,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('menu') }}">Cuci Mobil</a>
                     </li>
-                    {{-- <li class="nav-item">
-                        <a class="nav-link" href="{{ route('pack') }}">Paket Layanan</a>
-                    </li> --}}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('price') }}">Harga</a>
+                        <a class="nav-link" href="{{ route('price') }}">Harga Paket</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('about') }}">Tentang Kami</a>

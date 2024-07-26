@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'iWash | Privacy Policy')
+@section('title', 'iWash | Kebijakan Privasi')
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/auth.css') }}">

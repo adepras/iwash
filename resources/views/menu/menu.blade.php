@@ -15,6 +15,7 @@
             <a class="btn-menu" href="{{ route('menu2') }}" onclick="checkLogin(event)">Salon Mobil / Detailing <img
                     src="image/next-ill.png" alt=""></a>
         </div>
+        <p class="mt-4 mb-5" style="color: #bebebe; font-size: 18px;">Sebelum memiilih jenis layanan diatas,<br>kami sarankan untuk mendaftar atau login terlebih dahulu</p>
     </div>
 
     <script>
@@ -26,7 +27,7 @@
                 Swal.fire({
                     title: 'Ooops!',
                     text: 'Silahkan Login atau Daftar terlebih dahulu.',
-                    icon: 'error',
+                    icon: 'warning',
                     confirmButtonText: 'OK'
                 }).then((result) => {
                     if (result.isConfirmed) {

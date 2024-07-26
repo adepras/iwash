@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'iWash | Login')
+@section('title', 'iWash | Login Layanan')
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
@@ -14,7 +14,7 @@
                         icon: 'success',
                         title: 'Password Berhasil Diubah',
                         text: '',
-                        timer: 2500,
+                        timer: 1500,
                         showConfirmButton: false
                     });
                 </script>

@@ -72,6 +72,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    cursor: pointer;
 }
 
 .card-price:nth-child(4),
@@ -154,7 +155,7 @@
     background-color: #abe6ff;
 }
 
-/* Pesan */
+/* Tombol Lanjutkan */
 .order-menu {
     width: 65%;
     background-color: #abdef3;
@@ -186,15 +187,7 @@
     border: 1px solid #2277b9;
 }
 
-/* .order-menu {
-    visibility: hidden;
-}
-
-.order-menu.visible {
-    visibility: visible;
-} */
-
-/* Salon mobil dan detailing */
+/* Bagian Krusial */
 .container-wash {
     width: 100%;
     padding: 0 150px;
@@ -214,6 +207,7 @@
     margin-right: 8px;
 }
 
+/* Salon mobil dan detailing */
 .car-category {
     width: 60%;
     padding: 12px;

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Profile')
+@section('title', 'iWash | Profil')
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
@@ -32,8 +32,8 @@
             <input type="text" id="address" name="address" value="{{ $user->address }}" disabled>
         </div>
         <div class="btn-tools mt-3 mb-3">
-            <a href="{{ route('profile.edit') }}"><button  type="button" class="btn-edit">Edit</button></a>
-            
+            <a href="{{ route('profile.edit') }}"><button type="button" class="btn-edit">Edit</button></a>
+
         </div>
         {{-- Data Kendaraan --}}
         <div class="vehicle-data">
@@ -91,50 +91,4 @@
             </div>
         </div>
     </div>
-
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#btn-edit-save').click(function() {
-                const button = $(this);
-                const inputs = $('.profile-data input, .profile-data select');
-                const profileData = $('.profile-data');
-
-                if (button.hasClass('btn-edit')) {
-                    inputs.prop('disabled', false);
-                    profileData.addClass('edit-mode');
-                    button.text('Save').removeClass('btn-edit').addClass('btn-save');
-                } else if (button.hasClass('btn-save')) {
-                    const data = {};
-                    inputs.each(function() {
-                        data[$(this).attr('name')] = $(this).val();
-                    });
-
-                    $.ajax({
-                        url: '{{ route('profile.update') }}',
-                        method: 'POST',
-                        data: data,
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                inputs.prop('disabled', true);
-                                profileData.removeClass('edit-mode');
-                                button.text('Edit').removeClass('btn-save').addClass(
-                                    'btn-edit');
-                                alert('Profile updated successfully!');
-                            } else {
-                                alert('Failed to update profile!');
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            console.error('Error:', error);
-                            alert('An error occurred!');
-                        }
-                    });
-                }
-            });
-        });
-    </script> --}}
 @endsection

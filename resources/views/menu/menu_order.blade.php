@@ -7,23 +7,18 @@
 
     <div class="container-wash py-5">
         <h2>Pesan Layanan iWash</h2>
-        <a href="{{ route('menu1') }}"><img src="image/back-to.svg" alt="">Kembali ke Menu layanan</a>
+        <a href="{{ url()->previous() }}">
+            <img src="image/back-to.svg" alt="">Kembali ke Menu layanan
+        </a>
         <div class="data-order mt-5 mb-2">
+            {{-- Layanan dipilih --}}
+            <h5 class="mt-5">Layanan yang Anda pilih</h5>
+
             {{-- Pilih Kendaraan --}}
             <h5 class="mt-5">Pilih Kendaraan dari Profil Anda</h5>
-            <div class="vehicle-list">
-                {{-- @if ($vehicles)
-                    @foreach ($vehicles as $vehicle)
-                        <div class="vehicle-item" data-id="{{ $vehicle->id }}">
-                            <p>{{ $vehicle->vehicle_brand }}</p>
-                            <p>{{ $vehicle->vehicle_type }}</p>
-                            <p>{{ $vehicle->license_plate }}</p>
-                        </div>
-                    @endforeach
-                @else
-                    <p>No vehicles found.</p>
-                @endif --}}
-            </div>
+
+            {{-- Atur Jadwal --}}
+            <h5 class="mt-5">Atur Jadwal</h5>
 
         </div>
     </div>
