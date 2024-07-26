@@ -1,0 +1,191 @@
+.container-profile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Profile */
+.profile-title {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-title h2,
+.vehicle-data h2 {
+    font-weight: 600;
+    color: #333;
+    font-size: 24px;
+}
+
+.profile-title img {
+    width: 45px;
+}
+
+/* Data User */
+.profile-data {
+    width: 50%;
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto 1fr;
+    gap: 10px 20px;
+}
+
+.profile-data label {
+    text-align: left;
+    font-weight: 500;
+    font-size: 18px;
+    color: #333;
+}
+
+.profile-data input,
+.profile-data select {
+    text-align: left;
+    font-weight: 400;
+    font-size: 16px;
+    color: #333;
+    border-radius: 4px;
+    border: 1px solid #cecece;
+    padding: 13px;
+    background-color: #fff;
+}
+
+.profile-data.edit-mode input,
+.profile-data.edit-mode select {
+    border-color: #555;
+}
+
+.profile-data select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* Data Kendaraan */
+.vehicle-data {
+    width: 50%;
+    text-align: left;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Tampilan Data Kendaraan */
+.vehicle-display {
+    margin: 20px 0;
+}
+
+.vehicle-header,
+.vehicle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #cecece;
+    padding: 8px 0;
+}
+
+.header-item {
+    flex: 1;
+    font-weight: 500;
+    text-align: center;
+}
+
+.vehicle-item {
+    flex: 1;
+    text-align: center;
+}
+
+.btn-remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.remove-icon {
+    width: 30px;
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
+
+/* Form Menambahkan Kendaraan */
+.form-input {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.form-input label {
+    font-size: 14px;
+    color: #333;
+    padding: 10px 0;
+}
+
+.form-input input {
+    border-radius: 4px;
+    border: 1px solid #555;
+    padding: 13px;
+    color: #3e3e3e;
+    font-size: 14px;
+}
+
+.form-input input::placeholder {
+    font-size: 14px;
+    color: #a6a6a6;
+}
+
+.form-input label span {
+    color: red;
+    margin-left: 3px;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.form-col {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* Button Submit */
+.btn-confirm {
+    display: flex;
+    justify-content: end;
+}
+
+.btn-tools {
+    width: 50%;
+    text-align: right;
+    font-size: 16px;
+    color: #333;
+}
+
+.btn-submit,
+.btn-edit,
+.btn-save {
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    width: 20%;
+    padding: 10px;
+}
+
+.btn-submit,
+.btn-edit {
+    background-color: #2277b9;
+    border: 1px solid #2277b9;
+    color: #fff;
+}
+
+.btn-save {
+    background-color: #36b922;
+    border: 1px solid #36b922;
+    color: #fff;
+}

@@ -1,0 +1,383 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@font-face {
+    font-family: 'Nutmeg Bold', sans-serif;
+    src: url('/public/font/Fontspring-DEMO-nutmeg-bold.otf') format('truetype');
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Home */
+.container-home {
+    padding: 0 80px;
+    background-color: #2daae1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.top-content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tagline {
+    flex: 1;
+    text-align: left;
+}
+
+.image-container {
+    flex: 1;
+    text-align: right;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+}
+
+.slogan {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.slogan li {
+    list-style: none;
+    font-size: 30px;
+    color: #222;
+    font-weight: 500;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+}
+
+.slogan img {
+    width: 40px;
+    height: auto;
+}
+
+.tagline h4 {
+    font-size: 28px;
+    color: #000;
+    font-weight: 600;
+    padding: 20px 0;
+}
+
+.tagline p {
+    font-size: 17px;
+    color: #333;
+}
+
+.btn-learn {
+    font-weight: 500;
+    color: #000;
+    background-color: #ffcb05;
+    border: 2px solid #ffcb05;
+    border-radius: 8px;
+    padding: 10px 20px;
+}
+
+.btn-learn:hover {
+    background-color: #e5b909;
+    border-color: #e5b909;
+    color: #222;
+}
+
+/* Layanan */
+.container-layanan {
+    width: 100%;
+    text-align: center;
+    background-color: #fff;
+}
+
+.container-layanan h2 {
+    color: #000;
+}
+
+.container-layanan p {
+    color: #333;
+    margin-bottom: 50px;
+}
+
+.container-layanan img {
+    width: 40%;
+    height: auto;
+}
+
+.text-service {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: 80px;
+}
+
+.text-service li {
+    flex: 0 0 33%;
+    text-align: left;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.text-service img {
+    width: 50px;
+    height: auto;
+    padding-right: 10px;
+}
+
+
+/* Paket */
+.container-package {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #fff;
+}
+
+.container-package h2 {
+    color: #333;
+}
+
+.container-package p {
+    color: #333;
+    margin-bottom: 50px;
+}
+
+.card-container {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 80px;
+}
+
+.card {
+    width: 300px;
+    height: auto;
+    box-sizing: border-box;
+    margin-bottom: 35px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+    padding: 10px;
+}
+
+.card-title img {
+    width: 200px;
+    height: auto;
+}
+
+.card-title h5 {
+    padding: 20px 20px 0;
+}
+
+.card-title a {
+    padding: 20px 20px 0;
+    color: #2d7fc1;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+/* Testimoni */
+.container-testimoni {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #2277b9;
+    padding: 50px 0;
+    user-select: none;
+}
+
+.testimoni-title h3 {
+    font-weight: 600;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.slider {
+    width: 80%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.slide {
+    flex: 0 0 auto;
+    width: 37%;
+    scroll-snap-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.testimoni-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    min-width: 300px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.testimoni-item p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.testimoni-item .nama {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #2277b9;
+}
+
+.slider::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.slider::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.slider::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    /* Home */
+    .container-home {
+        padding: 0 20px;
+    }
+
+    .top-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image-container {
+        display: none;
+    }
+
+    .slogan {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .slogan li {
+        margin: 5px 0;
+        font-size: 17px;
+    }
+
+    .slogan img {
+        width: 20px;
+    }
+
+    /* Layanan */
+    #car-ill {
+        display: none;
+    }
+
+    .text-service {
+        flex-direction: column;
+        margin-left: 0;
+    }
+
+    .text-service li {
+        flex: 0 0 100%;
+        text-align: left;
+        padding: 10px 18%;
+    }
+
+    .text-service img {
+        padding-right: 10px;
+    }
+
+    /* Paket */
+    .card-container {
+        width: 90%;
+        flex-direction: column;
+        padding: 0 20px;
+    }
+
+    .card {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .card-title {
+        display: flex;
+        align-items: center;
+    }
+
+    .card-title img {
+        width: 30%;
+    }
+
+    .card-title h5,
+    .card-title a {
+        padding: 10px 10px 0;
+    }
+
+    /* Testimoni */
+    .slider {
+        width: 90%;
+        gap: 10px;
+    }
+
+    .slide {
+        width: 100%;
+    }
+
+    .testimoni-item {
+        min-width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .testimoni-title h3 {
+        font-size: 1.5rem;
+    }
+
+    .testimoni-item p {
+        font-size: 1rem;
+    }
+}

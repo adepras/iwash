@@ -19,8 +19,12 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'phone_number',
         'email',
         'password',
+        'address',
+        'gender',
+        'role'
     ];
 
     /**
@@ -41,4 +45,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+
+    public function getGenderTextAttribute()
+    {
+        return $this->attributes['gender'] === 'male' ? 'Laki-laki' : 'Perempuan';
+    }
 }

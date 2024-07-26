@@ -1,0 +1,113 @@
+.container-footer {
+    background-color: #fff;
+    width: 80%;
+    padding: 70px 70px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.iwash-logo img {
+    width: 120px;
+    margin: 0 25px;
+}
+
+.maker-tile img {
+    width: 30px;
+    height: auto;
+    margin-right: 5px;
+}
+
+.service,
+.about {
+    padding: 15px;
+}
+
+.service,
+.about,
+.operasional h6 {
+    margin-bottom: 10px;
+}
+
+.maker-tile li,
+.service li,
+.about li,
+.copy-rights li,
+.operasional li {
+    list-style: none;
+    margin-bottom: 5px;
+}
+
+.operasional p {
+    color: #333;
+    font-size: 14px;
+    margin: 0;
+}
+
+.service a,
+.about a {
+    text-decoration: none;
+    color: #2d7fc1;
+    font-size: 14px;
+}
+
+.service a:hover,
+.about a:hover {
+    color: #000;
+}
+
+.licence {
+    display: flex;
+    justify-content: center;
+    background-color: #343a40;
+    gap: 20px;
+    padding: 15px 10px;
+}
+
+.licence p,
+a {
+    text-decoration: none;
+    margin: 0;
+    color: #f8f9fa;
+    font-size: 14px;
+}
+
+.licence a:hover {
+    text-decoration: underline;
+}
+
+.licence img {
+    width: 12px;
+    height: auto;
+    margin-right: 3px;
+    margin-top: -2px;
+}
+
+@media (max-width: 768px) {
+    .container-footer {
+        width: 100%;
+        padding: 20px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .maker,
+    .service,
+    .about,
+    .operasional {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .licence {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .licence p,
+    a {
+        text-align: center;
+        font-size: 12px;
+    }
+}

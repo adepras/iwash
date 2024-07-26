@@ -1,0 +1,92 @@
+/* Sidebar */
+.sidebar {
+    width: 80px;
+    height: 100vh;
+    background-color: #343a40;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+.sidebar.expanded {
+    width: 250px;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar-header img {
+    width: 50px;
+    height: auto;
+}
+
+.sidebar.expanded .sidebar-header img {
+    width: 100px;
+    height: auto;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu li {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-menu li img {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.sidebar-menu li a {
+    color: #adb5bd;
+    text-decoration: none;
+    display: none;
+}
+
+.sidebar.expanded .sidebar-menu li a {
+    display: block;
+}
+
+.sidebar-menu li a:hover {
+    color: #fff;
+}
+
+.btn-sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.btn-sidebar button {
+    background: none;
+    border: none;
+    color: #adb5bd;
+    margin: 10px 0;
+    cursor: pointer;
+    display: none;
+}
+
+.sidebar.expanded .btn-sidebar button {
+    display: block;
+}
+
+.btn-sidebar button:hover {
+    color: #fff;
+}

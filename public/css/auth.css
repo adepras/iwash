@@ -1,0 +1,141 @@
+.container-register,
+.container-login,
+.container-forgot,
+.container-reset {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    padding: 0 5%;
+}
+
+.container-form {
+    width: 60%;
+    text-align: start;
+    margin-left: 80px;
+}
+
+.container-form h1 {
+    color: #333;
+    font-weight: 600;
+    font-size: 36px;
+}
+
+.container-form h2 {
+    color: #333;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.form-input {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.form-input label {
+    font-size: 14px;
+    color: #333;
+    padding: 10px 0;
+}
+
+.form-input label span {
+    color: red;
+    margin-left: 3px;
+}
+
+.form-input input {
+    border-radius: 4px;
+    border: 1px solid #555;
+    padding: 13px;
+    color: #3e3e3e;
+    font-size: 14px;
+}
+
+.form-input input::placeholder {
+    font-size: 14px;
+    color: #a6a6a6;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-radio {
+    display: flex;
+    gap: 20px;
+}
+
+.form-radio input[type="radio"] {
+    margin: 10px;
+    cursor: pointer;
+}
+
+.form-radio label {
+    user-select: none;
+}
+
+/* Button Submit */
+.btn-confirm {
+    display: flex;
+    justify-content: start;
+    gap: 30px;
+}
+
+.btn-submit,
+.btn-back {
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    width: 20%;
+    padding: 10px;
+}
+
+.btn-submit {
+    background-color: #2277b9;
+    border: 1px solid #2277b9;
+    color: #fff;
+}
+
+.btn-back {
+    background-color: #f9f9f9;
+    border: 1px solid #f9f9f9;
+    color: #333;
+}
+
+/* Tampilkan Password */
+.show-password {
+    display: flex;
+    align-items: center;
+}
+
+.show-password input[type="checkbox"] {
+    margin: 10px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.show-password label {
+    user-select: none;
+}
+
+.error-message {
+    font-size: 12px;
+    color: red;
+    display: none;
+}
+
+.forgot-password {
+    color: #2277b9 !important;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 10px;
+    text-align: right;
+}

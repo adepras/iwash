@@ -1,0 +1,283 @@
+.container-menu h2 {
+    text-align: center;
+    font-weight: 600;
+    font-size: 36px;
+    color: #333;
+}
+
+.container-menu p {
+    text-align: center;
+    font-weight: 500;
+    font-size: 22px;
+    color: #333;
+}
+
+.option-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.option-menu img {
+    width: 50px;
+    height: auto;
+}
+
+.btn-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    font-size: 18px;
+    color: #333;
+    background-color: #ffff;
+    border: 2px solid #ffff;
+    border-radius: 16px;
+    color: #333;
+    box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, border-color 0.3s;
+    padding: 8px 20px;
+    width: 28%;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.btn-menu:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: #b8e7fb;
+    border-color: #b8e7fb;
+    color: #333;
+}
+
+@media (max-width: 767.98px) {
+    .container-menu h2 {
+        font-size: 30px;
+    }
+
+    .container-menu p {
+        font-size: 20px;
+    }
+
+    .btn-menu {
+        width: 80%;
+    }
+}
+
+/* Pesan Layanan */
+.container-wash {
+    width: 100%;
+    padding: 0 150px;
+}
+
+.container-wash h2 {
+    font-weight: 600;
+}
+
+.container-wash a {
+    color: #2277b9;
+    font-size: 14px;
+}
+
+.container-wash a img {
+    margin-right: 8px;
+}
+
+.car-category {
+    width: 60%;
+    padding: 12px;
+}
+
+.car-category img {
+    width: 80px;
+}
+
+.btn-car {
+    width: 25%;
+    border: 1px solid #bebebe;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 2px 0;
+    margin: 0;
+    color: #333;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+/* Harga */
+.price-menu {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 12px;
+    gap: 20px;
+}
+
+.card-price {
+    width: 30%;
+    border: 1px solid #bebebe;
+    border-radius: 10px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-price:nth-child(4),
+.card-price:nth-child(5) {
+    width: calc(45%+20px);
+}
+
+.card-price ul {
+    margin: 0;
+    padding: 0;
+}
+
+.card-price h5 {
+    color: #333;
+    text-align: start;
+}
+
+.card-price img {
+    width: 18px;
+    height: auto;
+    margin: -2px 8px 0 0;
+}
+
+.card-service img {
+    width: 16px;
+    margin: -2px 10px 0 0;
+}
+
+.card-service li {
+    list-style: none;
+    padding: 3px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.price {
+    margin-top: auto;
+}
+
+.price p {
+    font-size: 13px;
+    color: #777;
+    margin: 0;
+}
+
+.price h6 {
+    margin: 0;
+    color: #333;
+    font-weight: 600;
+}
+
+.select-price {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.form-check-input {
+    cursor: pointer;
+}
+
+.form-check-input:checked {
+    background-color: #333;
+    border-color: #333;
+}
+
+.form-check-input:focus {
+    box-shadow: none;
+}
+
+/* Estimasi */
+.estimation {
+    width: 55%;
+    font-size: 12px !important;
+    text-align: center;
+    padding: 3px 0;
+    border-radius: 25px;
+    color: #2277b9 !important;
+    background-color: #abe6ff;
+}
+
+/* Order */
+.order-menu {
+    width: 65%;
+    background-color: #abdef3;
+    border: 2px solid #abdef3;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-reset,
+.btn-next {
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 9px 0;
+    width: 30%;
+}
+
+.btn-reset {
+    background-color: #f9f9f9;
+    color: #2277b9;
+    border: 1px solid #f9f9f9;
+}
+
+.btn-next {
+    background-color: #2277b9;
+    color: #fff;
+    border: 1px solid #2277b9;
+}
+
+.order-menu {
+    visibility: hidden;
+}
+
+.order-menu.visible {
+    visibility: visible;
+}
+
+/* List Kendaraan */
+.vehicle-list {
+    width: 75.6%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+}
+
+.vehicle-item {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid #bebebe;
+    border-radius: 10px;
+    padding: 14px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+.vehicle-item p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.vehicle-item {
+    transition: opacity 0.3s;
+}
+
+.vehicle-item.selected {
+    opacity: 1;
+    border: 2px solid #2277b9;
+    background-color: #abdef3;
+}
+
+.vehicle-item:not(.selected) {
+    opacity: 0.7;
+}

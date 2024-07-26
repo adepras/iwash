@@ -1,0 +1,110 @@
+.navbar {
+    background-color: #2daae1;
+    padding: 15px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    transition: top 0.3s;
+    z-index: 100;
+}
+
+.navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: #fff;
+    font-size: 30px;
+}
+
+.navbar-nav .nav-link {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: #fff;
+    transition: color 0.3s;
+}
+
+.navbar-brand:hover,
+.navbar-nav .nav-link:hover {
+    color: #2d7fc1;
+}
+
+.navbar-nav .nav-link.active {
+    font-weight: 600;
+    color: #e9ecef;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%280, 123, 255, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.nav-login,
+.nav-register,
+.nav-profile,
+.nav-logout {
+    font-family: 'Poppins', sans-serif;
+    border-radius: 8px;
+    border: 2px solid #ffff;
+    font-weight: 500;
+    transition: background-color 0.3s, border-color 0.3s;
+
+}
+
+.nav-login,
+.nav-profile {
+    color: #fff;
+    background-color: #2daae1;
+    padding: 8px 30px;
+    margin-right: 25px;
+}
+
+.nav-register,
+.nav-logout {
+    color: #2daae1;
+    background-color: #ffff;
+    padding: 8px 26px;
+}
+
+.nav-login:hover,
+.nav-register:hover,
+.nav-profile:hover,
+.nav-logout:hover {
+    background-color: #e9ecef;
+    border-color: #e9ecef;
+    color: #2daae1;
+}
+
+@media (max-width: 767.98px) {
+    .nav-link {
+        flex-direction: column;
+        text-align: left;
+    }
+
+    .navbar-collapse {
+        flex-direction: column;
+        text-align: left;
+    }
+
+    .nav-button {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-login,
+    .nav-register,
+    .nav-profile,
+    .nav-logout {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .nav-login,
+    .nav-profile {
+        margin-bottom: 10px;
+    }
+}
