@@ -19,11 +19,13 @@
                 <button class="btn-car" id="large-car" data-size="large"><img src="image/large-car-ill.png"
                         alt="">Besar</button>
             </div>
-            <a href="">Cari tahu ukuran mobil Anda <img src="image/arrow-right.svg" alt=""></a>
+            <a href="" data-bs-toggle="modal" data-bs-target="#carSizeModal">Cari tahu ukuran mobil Anda <img
+                    src="image/arrow-right.svg" alt=""></a>
             <p class="mt-4">Harga di bawah sudah sesuai dengan ukuran mobil Anda</p>
             <div class="price-menu">
                 <div class="card-price" data-service="Detailing Interior" data-small-price="50000" data-medium-price="70000"
-                    data-large-price="90000" data-small-time="1 Jam" data-medium-time="1.5 Jam" data-large-time="2 Jam">
+                    data-large-price="90000" data-small-time="1 jam" data-medium-time="1 jam 30 menit"
+                    data-large-time="2 jam">
                     <h5>Detailing Interior</h5>
                     <div class="price mt-3">
                         <p>Harga</p>
@@ -37,8 +39,8 @@
                     </div>
                 </div>
                 <div class="card-price" data-service="Detailing Eksterior" data-small-price="60000"
-                    data-medium-price="80000" data-large-price="100000" data-small-time="1 Jam" data-medium-time="1.5 Jam"
-                    data-large-time="2 Jam">
+                    data-medium-price="80000" data-large-price="100000" data-small-time="1 jam"
+                    data-medium-time="1 jam 30 menit" data-large-time="2 jam">
                     <h5>Detailing Eksterior</h5>
                     <div class="price mt-3">
                         <p>Harga</p>
@@ -52,8 +54,8 @@
                     </div>
                 </div>
                 <div class="card-price" data-service="Detailing Kaca Mobil" data-small-price="40000"
-                    data-medium-price="60000" data-large-price="80000" data-small-time="1 Jam" data-medium-time="1.5 Jam"
-                    data-large-time="2 Jam">
+                    data-medium-price="60000" data-large-price="80000" data-small-time="1 jam"
+                    data-medium-time="1 jam 30 menit" data-large-time="2 jam">
                     <h5>Detailing Kaca Mobil</h5>
                     <div class="price mt-3">
                         <p>Harga</p>
@@ -67,8 +69,8 @@
                     </div>
                 </div>
                 <div class="card-price" data-service="Detailing Mesin Mobil" data-small-price="50000"
-                    data-medium-price="70000" data-large-price="90000" data-small-time="1 Jam" data-medium-time="1.5 Jam"
-                    data-large-time="2 Jam">
+                    data-medium-price="70000" data-large-price="90000" data-small-time="1 jam"
+                    data-medium-time="1 jam 30 menit" data-large-time="2 jam">
                     <h5>Detailing Mesin Mobil</h5>
                     <div class="price mt-3">
                         <p>Harga</p>
@@ -82,8 +84,8 @@
                     </div>
                 </div>
                 <div class="card-price" data-service="Detailing Ban & Velg" data-small-price="40000"
-                    data-medium-price="60000" data-large-price="80000" data-small-time="1 Jam"
-                    data-medium-time="1.5 Jam" data-large-time="2 Jam">
+                    data-medium-price="60000" data-large-price="80000" data-small-time="1 jam"
+                    data-medium-time="1 jam 30 menit" data-large-time="2 jam">
                     <h5>Detailing Ban & Velg</h5>
                     <div class="price mt-3">
                         <p>Harga</p>
@@ -99,25 +101,45 @@
             </div>
         </div>
         {{-- Layanan dipilih --}}
-        <h5 class="mt-5">Layanan yang Anda pilih</h5>
-        
+        <h5 class="mt-5">Layanan yang di pilih</h5>
+        <div class="menu-selected">
+            <div class="card-selected">
+                <div class="add-selected">
+                    <h5>Detailing Interior</h5>
+                    <h5>Detailing Eksterior</h5>
+                </div>
+                <div class="price">
+                    <p>Total Harga</p>
+                    <h6 class="service-price">Rp110.000</h6>
+                    <p class="time mt-3">Total Estimasi 2 jam</p>
+                </div>
+            </div>
+        </div>
         {{-- Pilih Kendaraan --}}
-        <h5 class="mt-5">Pilih Kendaraan dari Profil Anda</h5>
-
+        <h5 class="mt-5">Data Kendaraan</h5>
+        <div class="vehicle-list"></div>
         {{-- Atur Jadwal --}}
         <h5 class="mt-5">Atur Jadwal</h5>
         <div class="form-input mt-3 mb-5">
             <div class="form-row">
                 <div class="form-col">
                     <label for="date">Pilih Tanggal<span>*</span></label>
-                    <input type="date" class="form-control" id="date" name="date-booking" required>
-                    <div class="error-message" id="date-error"></div>
+                    <input type="date" class="form-control" id="booking_date" name="booking_date" required>
                 </div>
                 <div class="form-col">
                     <label for="time">Pilih Waktu<span>*</span></label>
-                    <input type="time" class="form-control" id="time" name="time-booking"
-                        placeholder="Pilih Waktu" required>
-                    <div class="error-message" id="time-error"></div>
+                    <select class="form-control" id="booking_time" name="booking_time" required>
+                        <option value="">Pilih Waktu</option>
+                        <option value="08:00">08:00 WIB</option>
+                        <option value="09:001">09:00 WIB</option>
+                        <option value="10:00">10:00 WIB</option>
+                        <option value="11:00">11:00 WIB</option>
+                        <option value="12:00">12:00 WIB</option>
+                        <option value="13:00">13:00 WIB</option>
+                        <option value="14:00">14:00 WIB</option>
+                        <option value="15:00">15:00 WIB</option>
+                        <option value="16:00">16:00 WIB</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -126,6 +148,60 @@
             <button class="btn-next">Pesan Sekarang</button>
         </div>
     </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="carSizeModal" tabindex="-1" aria-labelledby="carSizeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="carSizeModalLabel">Ukuran Mobil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <ul>
+                                <h6>Kecil</h6>
+                                <li>Mini Cooper</li>
+                                <li>Fiesta ST</li>
+                                <li>Focus ST</li>
+                                <li>Jazz</li>
+                                <li>Swift</li>
+                                <li>Yaris</li>
+                                <li>Corolla</li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <ul>
+                                <h6>Sedang</h6>
+                                <li>HRV</li>
+                                <li>CX-5</li>
+                                <li>E-Class</li>
+                                <li>Xpander</li>
+                                <li>BRV</li>
+                                <li>Innova</li>
+                                <li>5 Series</li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <ul>
+                                <h6>Besar</h6>
+                                <li>Alphard</li>
+                                <li>7 Series</li>
+                                <li>S-Class</li>
+                                <li>Land Cruiser</li>
+                                <li>Pajero</li>
+                                <li>CRV</li>
+                                <li>Fortuner</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {

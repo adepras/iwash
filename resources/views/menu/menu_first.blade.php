@@ -23,7 +23,7 @@
                     <div class="price mt-3">
                         <p>Harga</p>
                         <h6 class="service-price">Rp50.000</h6>
-                        <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 1 Jam
+                        <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 1 jam
                         </p>
                     </div>
                     <div class="select-price">
@@ -42,7 +42,7 @@
                     <div class="price">
                         <p>Harga</p>
                         <h6 class="service-price">Rp60.000</h6>
-                        <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 2 Jam
+                        <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 2 jam
                         </p>
                     </div>
                     <div class="select-price">
@@ -61,7 +61,7 @@
                     <div class="price mt-3">
                         <p>Harga</p>
                         <h6 class="service-price">Rp70.000</h6>
-                        <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 3 Jam
+                        <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 3 jam
                         </p>
                     </div>
                     <div class="select-price">
@@ -150,10 +150,55 @@
                 </div>
             </div>
         </div>
+        <div class="data-order mt-5 mb-2">
+            {{-- Layanan dipilih --}}
+            <h5 class="mt-5">Layanan yang di pilih</h5>
+            <div class="menu-selected">
+                <div class="card-selected">
+                    <div class="add-selected">
+                        <h5>Basic</h5>
+                        <h5>Spot Remover - Window</h5>
+                    </div>
+                    <div class="price">
+                        <p>Total Harga</p>
+                        <h6 class="service-price">Rp110.000</h6>
+                        <p class="time mt-3">Total Estimasi 1 jam 30 menit</p>
+                    </div>
+                </div>
+            </div>
+            {{-- Pilih Kendaraan --}}
+            <h5 class="mt-5">Pilih Kendaraan dari Profil Anda</h5>
+            <div class="vehicle-list"></div>
+            {{-- Atur Jadwal --}}
+            <h5 class="mt-5">Atur Jadwal</h5>
+            <div class="form-input mt-3 mb-5">
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="date">Pilih Tanggal<span>*</span></label>
+                        <input type="date" class="form-control" id="date" name="date-booking" required>
+                    </div>
+                    <div class="form-col">
+                        <label for="time">Pilih Waktu<span>*</span></label>
+                        <select class="form-control" id="booking_time" name="booking_time" required>
+                            <option value="">Pilih Waktu</option>
+                            <option value="08:00">08:00 WIB</option>
+                            <option value="09:001">09:00 WIB</option>
+                            <option value="10:00">10:00 WIB</option>
+                            <option value="11:00">11:00 WIB</option>
+                            <option value="12:00">12:00 WIB</option>
+                            <option value="13:00">13:00 WIB</option>
+                            <option value="14:00">14:00 WIB</option>
+                            <option value="15:00">15:00 WIB</option>
+                            <option value="16:00">16:00 WIB</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="category-menu ">
             <div class="order-menu mt-5">
                 <button class="btn-reset">Reset</button>
-                <button class="btn-next" onclick="window.location.href='{{ route('menu_order') }}'">Lanjutkan</button>
+                <button class="btn-next">Pesan Sekarang</button>
             </div>
         </div>
     </div>

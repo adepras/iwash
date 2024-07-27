@@ -26,9 +26,9 @@ class MenuController extends Controller
     }
     
     // Order
-    public function menu_order()
+    public function detail_order()
     {
-        return view('menu.menu_order');
+        return view('menu.detail_order');
     }
 
     // public function showWashPage()

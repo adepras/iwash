@@ -51,15 +51,12 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/vehicles/{id}', [VehicleController::class, 'destroy'])->name('vehicles.destroy');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    // Menu Layanan
+    // Pemesanan Layanan
     Route::get('/satu-kali-cuci', [MenuController::class, 'menu1'])->name('menu1');
     Route::get('/salon-mobil', [MenuController::class, 'menu2'])->name('menu2');
 
-    // Order
-    Route::get('/order-layanan', [MenuController::class, 'menu_order'])->name('menu_order');
-
-    // Booking
-
+    // Detail Pemesanan
+    Route::get('/detail-pemesanan', [MenuController::class, 'detail_order'])->name('detail_order');
 
 });
 
