@@ -328,3 +328,58 @@
     margin: 0;
     padding: 0;
 }
+
+/* Detail Pemesanan */
+.container-detail-order {
+    width: 100%;
+    padding: 0 150px;
+}
+
+.container-detail {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Detail Order */
+.layout-order {
+    width: 45%;
+}
+
+.detail-order {
+    background-color: #f9f9f9;
+    width: 100%;
+    height: 200px;
+}
+
+/* FAQ */
+.layout-faq {
+    width: 35%;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    outline: none;
+    border: none;
+    background-color: inherit;
+}
+
+.accordion-button:not(.collapsed) {
+    color: inherit;
+    background-color: inherit;
+}
+
+.accordion-item h2:focus,
+.accordion-item button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.accordion-item h2 {
+    font-weight: 500;
+    color: #333;
+}
+
+.accordion-body {
+    font-size: 14px;
+    color: #333;
+}

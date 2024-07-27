@@ -198,7 +198,7 @@
         <div class="category-menu ">
             <div class="order-menu mt-5">
                 <button class="btn-reset">Reset</button>
-                <button class="btn-next">Pesan Sekarang</button>
+                <button class="btn-next" onclick="window.location.href='{{ route('detail_order') }}'">Pesan Sekarang</button>
             </div>
         </div>
     </div>
