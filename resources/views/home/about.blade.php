@@ -3,7 +3,7 @@
 @section('title', 'iWash | Tentang Kami')
 
 @section('content')
-    <link rel="stylesheet" href="{{ asset('css/about.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 
     <div class="container-about">
         <h2>Tentang Kami</h2>

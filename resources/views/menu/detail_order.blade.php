@@ -3,6 +3,7 @@
 @section('title', 'iWash | Detail Pemesanan')
 
 @section('content')
-    <link rel="stylesheet" href="{{ asset('css/.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/menu.css') }}">
 
+    
 @endsection

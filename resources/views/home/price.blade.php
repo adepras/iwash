@@ -3,7 +3,7 @@
 @section('title', 'iWash | Detail Harga')
 
 @section('content')
-    <link rel="stylesheet" href="{{ asset('css/price.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 
     <div class="container-harga">
         <h2 class="mb-4">Harga bersahabat hasil mantap.</h2>
