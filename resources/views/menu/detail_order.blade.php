@@ -29,6 +29,10 @@
                             <li>Total Estimasi :</li>
                             <li>1 jam 30 menit</li>
                         </ul>
+                        <ul>
+                            <li>Tanggal :</li>
+                            <li>27/07/2024</li>
+                        </ul>
                         <hr class="line">
                         <h6>Data Diri</h6>
                         <ul>
@@ -42,10 +46,6 @@
                         <hr class="line">
                         <h6>Data Kendaraan</h6>
                         <ul>
-                            <li>Ukuran Kendaraan :</li>
-                            <li>-</li>
-                        </ul>
-                        <ul>
                             <li>Brand :</li>
                             <li>Totoya</li>
                         </ul>
@@ -56,16 +56,6 @@
                         <ul>
                             <li>Nomor Polisi :</li>
                             <li>D 3 PRAS</li>
-                        </ul>
-                        <hr class="line">
-                        <h6>Jadwal Pemesanan</h6>
-                        <ul>
-                            <li>Tanggal :</li>
-                            <li>27/07/2024</li>
-                        </ul>
-                        <ul>
-                            <li>Waktu :</li>
-                            <li>12:00 WIB</li>
                         </ul>
                     </div>
                 </div>

@@ -56,6 +56,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/satu-kali-cuci', [MenuController::class, 'menu1'])->name('menu1');
     Route::get('/salon-mobil', [MenuController::class, 'menu2'])->name('menu2');
 
+    // Order
+    Route::post('/order', [MenuController::class, 'createBooking'])->name('order');
+
     // Detail Pemesanan
     Route::get('/detail-pemesanan', [MenuController::class, 'detail_order'])->name('detail_order');
 });

@@ -31,7 +31,7 @@
 
     <div id="whatsapp-popup">
         <a href="https://wa.me/" target="_blank">
-            <img src="image/whatsapp-ill.svg" alt="whatsapp icon">
+            <img src="/image/whatsapp-ill.svg" alt="whatsapp icon">
             <span>Konsultasi gratis!</span>
         </a>
     </div>

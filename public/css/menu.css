@@ -52,9 +52,8 @@
     color: #333;
 }
 
-/* Satu Kali Cuci dan Add-ons Satu Kali Cuci */
-.price-menu,
-.add-menu {
+/* Satu Kali Cuci */
+.price-menu {
     width: 80%;
     display: flex;
     flex-wrap: wrap;
@@ -62,8 +61,7 @@
     gap: 20px;
 }
 
-.card-price,
-.add-card {
+.card-price {
     width: 26%;
     border: 1px solid #bebebe;
     border-radius: 10px;
@@ -84,8 +82,7 @@
     padding: 0;
 }
 
-.card-price h5,
-.add-card h5 {
+.card-price h5 {
     color: #333;
     text-align: start;
 }
@@ -101,8 +98,7 @@
     margin: -2px 10px 0 0;
 }
 
-.card-service li,
-.add-service p {
+.card-service li {
     list-style: none;
     padding: 3px 0;
     font-size: 14px;
@@ -125,8 +121,7 @@
     font-weight: 600;
 }
 
-.select-price,
-.select-add {
+.select-price {
     display: flex;
     justify-content: center;
     margin-top: 15px;
@@ -233,40 +228,21 @@
     font-size: 16px;
 }
 
-/* Layanan dipilih */
-.menu-selected {
+/* Form Tanggal */
+.data-order {
+    width: 70%;
     display: flex;
-    flex-direction: column;
-    text-align: start;
-    width: 65%;
-    background-color: #f9f9f9;
-    border-radius: 18px;
-    padding: 10px;
+    justify-content: space-evenly;
 }
 
-.card-selected {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 10px 20px;
+.data-layout {
+    width: 100%;
 }
 
-.add-selected {
-    gap: 20px;
-    margin-bottom: 30px;
+.booking-date {
+    width: 132% !important;
 }
 
-.add-selected h5 {
-    background-color: #abdef3;
-    width: fit-content;
-    border-radius: 4px;
-    padding: 2px 6px;
-}
-
-/* Pilih Kendaraan */
-
-
-
-/* Form Kendaraan dan Tanggal */
 .form-input {
     display: flex;
     flex-direction: column;
@@ -285,8 +261,11 @@
     margin-left: 3px;
 }
 
-.form-input input,
-.form-input select {
+.form-date input {
+    width: 50%;
+}
+
+.form-input input {
     border-radius: 4px;
     border: 1px solid #555;
     padding: 13px;
@@ -294,16 +273,14 @@
     font-size: 14px;
 }
 
-.form-input input:focus,
-.form-input select:focus {
+.form-input input:focus {
     outline: none;
     border-color: #333;
     box-shadow: none;
     border: 2px solid #333;
 }
 
-.form-input input::placeholder,
-.form-input select::placeholder {
+.form-input input::placeholder {
     font-size: 14px;
     color: #a6a6a6;
 }
@@ -329,6 +306,48 @@
     list-style: none;
     margin: 0;
     padding: 0;
+}
+
+/* List Kendaraan */
+.vehicle-list {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+}
+
+.vehicle-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #bebebe;
+    border-radius: 10px;
+    padding: 14px;
+    gap: 35px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+.vehicle-item p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.vehicle-item {
+    transition: opacity 0.3s;
+}
+
+.vehicle-item.selected {
+    opacity: 1;
+    border: 2px solid #2277b9;
+    background-color: #abdef3;
+}
+
+.vehicle-item:not(.selected) {
+    opacity: 0.7;
 }
 
 /* Detail Pemesanan */

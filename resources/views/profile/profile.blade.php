@@ -32,8 +32,8 @@
             <input type="text" id="address" name="address" value="{{ $user->address }}" disabled>
         </div>
         <div class="btn-tools mt-3 mb-3">
+            <a href="{{ route('password.request') }}"><button type="button" class="btn-edit">Ganti Password</button></a>
             <a href="{{ route('profile.edit') }}"><button type="button" class="btn-edit">Edit</button></a>
-
         </div>
         {{-- Data Kendaraan --}}
         <div class="vehicle-data">

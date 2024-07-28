@@ -53,9 +53,9 @@
     background-color: #fff;
 }
 
-.profile-data.edit-mode input,
-.profile-data.edit-mode select {
-    border-color: #555;
+.edit-mode input,
+.edit-mode select {
+    border: 1px solid #333;
 }
 
 .profile-data select {
@@ -82,8 +82,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #cecece;
+    border: 1px solid #cecece;
+    border-radius: 4px;
     padding: 8px 0;
+    margin: 10px 0;
 }
 
 .header-item {
@@ -173,19 +175,15 @@
     font-size: 16px;
     font-weight: 500;
     border-radius: 8px;
-    width: 20%;
+    width: 25%;
     padding: 10px;
 }
 
 .btn-submit,
-.btn-edit {
+.btn-edit,
+.btn-save {
     background-color: #2277b9;
     border: 1px solid #2277b9;
     color: #fff;
-}
-
-.btn-save {
-    background-color: #36b922;
-    border: 1px solid #36b922;
-    color: #fff;
+    margin-left: 10px;
 }

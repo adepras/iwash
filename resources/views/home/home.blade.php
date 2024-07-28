@@ -36,14 +36,18 @@
             <h3>Kata mereka yang telah<br>menggunakan iWash</h3>
         </div>
         <div class="slider">
-            @foreach ($testimoni as $testimoniItem)
-                <div class="slide">
-                    <div class="testimoni-item">
-                        <p>{{ $testimoniItem->quote }}</p>
-                        <span class="name">{{ $testimoniItem->name }}</span>
+            @if ($testimoni)
+                @foreach ($testimoni as $testimoniItem)
+                    <div class="slide">
+                        <div class="testimoni-item">
+                            <p>{{ $testimoniItem->quote }}</p>
+                            <span class="name">{{ $testimoniItem->name }}</span>
+                        </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            @else
+                <p>Belum ada testimoni untuk ditampilkan.</p>
+            @endif
         </div>
     </div>
 

@@ -8,145 +8,134 @@
     <div class="container-wash py-5">
         <h2>Pesan Layanan iWash</h2>
         <a href="{{ route('menu') }}"><img src="image/back-to.svg" alt="">Kembali ke jenis layanan</a>
-        <div class="category-menu mt-5 mb-2">
-            <h5>Pilih Paket Salon Mobil / Detailing</h5>
-            <p class="mt-4">Pilih ukuran mobil Anda</p>
-            <div class="car-category">
-                <button class="btn-car" id="small-car" data-size="small"><img src="image/small-car-ill.png"
-                        alt="">Kecil</button>
-                <button class="btn-car" id="medium-car" data-size="medium"><img src="image/medium-car-ill.png"
-                        alt="">Sedang</button>
-                <button class="btn-car" id="large-car" data-size="large"><img src="image/large-car-ill.png"
-                        alt="">Besar</button>
-            </div>
-            <a href="" data-bs-toggle="modal" data-bs-target="#carSizeModal">Cari tahu ukuran mobil Anda <img
-                    src="image/arrow-right.svg" alt=""></a>
-            <p class="mt-4">Harga di bawah sudah sesuai dengan ukuran mobil Anda</p>
-            <div class="price-menu">
-                <div class="card-price" data-service="Detailing Interior" data-small-price="50000" data-medium-price="70000"
-                    data-large-price="90000" data-small-time="1 jam" data-medium-time="1 jam 30 menit"
-                    data-large-time="2 jam">
-                    <h5>Detailing Interior</h5>
-                    <div class="price mt-3">
-                        <p>Harga</p>
-                        <h6 class="service-price">Rp -</h6>
-                        <p class="estimation mt-3"><img src="image/stopwatch.svg" alt="">Estimasi <span
-                                class="service-time">- Jam</span></p>
-                    </div>
-                    <div class="select-price">
-                        <input class="form-check-input" type="checkbox" name="flexCheckboxDefault"
-                            value="Detailing Interior">
-                    </div>
+        <form action="" method="post">
+            <div class="category-menu mt-5 mb-2">
+                <h5>Pilih Paket Salon Mobil / Detailing</h5>
+                <p class="mt-4">Pilih ukuran mobil Anda</p>
+                <div class="car-category">
+                    <button class="btn-car" id="small-car" data-size="small"><img src="image/small-car-ill.png"
+                            alt="">Kecil</button>
+                    <button class="btn-car" id="medium-car" data-size="medium"><img src="image/medium-car-ill.png"
+                            alt="">Sedang</button>
+                    <button class="btn-car" id="large-car" data-size="large"><img src="image/large-car-ill.png"
+                            alt="">Besar</button>
                 </div>
-                <div class="card-price" data-service="Detailing Eksterior" data-small-price="60000"
-                    data-medium-price="80000" data-large-price="100000" data-small-time="1 jam"
-                    data-medium-time="1 jam 30 menit" data-large-time="2 jam">
-                    <h5>Detailing Eksterior</h5>
-                    <div class="price mt-3">
-                        <p>Harga</p>
-                        <h6 class="service-price">Rp -</h6>
-                        <p class="estimation mt-3"><img src="image/stopwatch.svg" alt="">Estimasi <span
-                                class="service-time">- Jam</span></p>
+                <a href="" data-bs-toggle="modal" data-bs-target="#carSizeModal">Cari tahu ukuran mobil Anda <img
+                        src="image/arrow-right.svg" alt=""></a>
+                <p class="mt-4">Harga di bawah sudah sesuai dengan ukuran mobil Anda</p>
+                <div class="price-menu">
+                    <div class="card-price" data-service="Detailing Interior" data-small-price="50000"
+                        data-medium-price="70000" data-large-price="90000" data-small-time="1 jam"
+                        data-medium-time="1 jam 30 menit" data-large-time="2 jam">
+                        <h5>Detailing Interior</h5>
+                        <div class="price mt-3">
+                            <p>Harga</p>
+                            <h6 class="service-price">Rp -</h6>
+                            <p class="estimation mt-3"><img src="image/stopwatch.svg" alt="">Estimasi <span
+                                    class="service-time">- Jam</span></p>
+                        </div>
+                        <div class="select-price">
+                            <input class="form-check-input" type="checkbox" name="flexCheckboxDefault"
+                                value="Detailing Interior">
+                        </div>
                     </div>
-                    <div class="select-price">
-                        <input class="form-check-input" type="checkbox" name="flexCheckboxDefault"
-                            value="Detailing Eksterior">
+                    <div class="card-price" data-service="Detailing Eksterior" data-small-price="60000"
+                        data-medium-price="80000" data-large-price="100000" data-small-time="1 jam"
+                        data-medium-time="1 jam 30 menit" data-large-time="2 jam">
+                        <h5>Detailing Eksterior</h5>
+                        <div class="price mt-3">
+                            <p>Harga</p>
+                            <h6 class="service-price">Rp -</h6>
+                            <p class="estimation mt-3"><img src="image/stopwatch.svg" alt="">Estimasi <span
+                                    class="service-time">- Jam</span></p>
+                        </div>
+                        <div class="select-price">
+                            <input class="form-check-input" type="checkbox" name="flexCheckboxDefault"
+                                value="Detailing Eksterior">
+                        </div>
                     </div>
-                </div>
-                <div class="card-price" data-service="Detailing Kaca Mobil" data-small-price="40000"
-                    data-medium-price="60000" data-large-price="80000" data-small-time="1 jam"
-                    data-medium-time="1 jam 30 menit" data-large-time="2 jam">
-                    <h5>Detailing Kaca Mobil</h5>
-                    <div class="price mt-3">
-                        <p>Harga</p>
-                        <h6 class="service-price">Rp -</h6>
-                        <p class="estimation mt-3"><img src="image/stopwatch.svg" alt="">Estimasi <span
-                                class="service-time">- Jam</span></p>
+                    <div class="card-price" data-service="Detailing Kaca Mobil" data-small-price="40000"
+                        data-medium-price="60000" data-large-price="80000" data-small-time="1 jam"
+                        data-medium-time="1 jam 30 menit" data-large-time="2 jam">
+                        <h5>Detailing Kaca Mobil</h5>
+                        <div class="price mt-3">
+                            <p>Harga</p>
+                            <h6 class="service-price">Rp -</h6>
+                            <p class="estimation mt-3"><img src="image/stopwatch.svg" alt="">Estimasi <span
+                                    class="service-time">- Jam</span></p>
+                        </div>
+                        <div class="select-price">
+                            <input class="form-check-input" type="checkbox" name="flexCheckboxDefault"
+                                value="Detailing Kaca Mobil">
+                        </div>
                     </div>
-                    <div class="select-price">
-                        <input class="form-check-input" type="checkbox" name="flexCheckboxDefault"
-                            value="Detailing Kaca Mobil">
+                    <div class="card-price" data-service="Detailing Mesin Mobil" data-small-price="50000"
+                        data-medium-price="70000" data-large-price="90000" data-small-time="1 jam"
+                        data-medium-time="1 jam 30 menit" data-large-time="2 jam">
+                        <h5>Detailing Mesin Mobil</h5>
+                        <div class="price mt-3">
+                            <p>Harga</p>
+                            <h6 class="service-price">Rp -</h6>
+                            <p class="estimation mt-3"><img src="image/stopwatch.svg" alt="">Estimasi <span
+                                    class="service-time">- Jam</span></p>
+                        </div>
+                        <div class="select-price">
+                            <input class="form-check-input" type="checkbox" name="flexCheckboxDefault"
+                                value="Detailing Mesin Mobil">
+                        </div>
                     </div>
-                </div>
-                <div class="card-price" data-service="Detailing Mesin Mobil" data-small-price="50000"
-                    data-medium-price="70000" data-large-price="90000" data-small-time="1 jam"
-                    data-medium-time="1 jam 30 menit" data-large-time="2 jam">
-                    <h5>Detailing Mesin Mobil</h5>
-                    <div class="price mt-3">
-                        <p>Harga</p>
-                        <h6 class="service-price">Rp -</h6>
-                        <p class="estimation mt-3"><img src="image/stopwatch.svg" alt="">Estimasi <span
-                                class="service-time">- Jam</span></p>
+                    <div class="card-price" data-service="Detailing Ban & Velg" data-small-price="40000"
+                        data-medium-price="60000" data-large-price="80000" data-small-time="1 jam"
+                        data-medium-time="1 jam 30 menit" data-large-time="2 jam">
+                        <h5>Detailing Ban & Velg</h5>
+                        <div class="price mt-3">
+                            <p>Harga</p>
+                            <h6 class="service-price">Rp -</h6>
+                            <p class="estimation mt-3"><img src="image/stopwatch.svg" alt="">Estimasi <span
+                                    class="service-time">- Jam</span></p>
+                        </div>
+                        <div class="select-price">
+                            <input class="form-check-input" type="checkbox" name="flexCheckboxDefault"
+                                value="Detailing Ban & Velg">
+                        </div>
                     </div>
-                    <div class="select-price">
-                        <input class="form-check-input" type="checkbox" name="flexCheckboxDefault"
-                            value="Detailing Mesin Mobil">
-                    </div>
-                </div>
-                <div class="card-price" data-service="Detailing Ban & Velg" data-small-price="40000"
-                    data-medium-price="60000" data-large-price="80000" data-small-time="1 jam"
-                    data-medium-time="1 jam 30 menit" data-large-time="2 jam">
-                    <h5>Detailing Ban & Velg</h5>
-                    <div class="price mt-3">
-                        <p>Harga</p>
-                        <h6 class="service-price">Rp -</h6>
-                        <p class="estimation mt-3"><img src="image/stopwatch.svg" alt="">Estimasi <span
-                                class="service-time">- Jam</span></p>
-                    </div>
-                    <div class="select-price">
-                        <input class="form-check-input" type="checkbox" name="flexCheckboxDefault"
-                            value="Detailing Ban & Velg">
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{-- Layanan dipilih --}}
-        <h5 class="mt-5">Layanan yang di pilih</h5>
-        <div class="menu-selected">
-            <div class="card-selected">
-                <div class="add-selected">
-                    <h5>Detailing Interior</h5>
-                    <h5>Detailing Eksterior</h5>
-                </div>
-                <div class="price">
-                    <p>Total Harga</p>
-                    <h6 class="service-price">Rp110.000</h6>
-                    <p class="time mt-3">Total Estimasi 2 jam</p>
                 </div>
             </div>
-        </div>
-        {{-- Pilih Kendaraan --}}
-        <h5 class="mt-5">Data Kendaraan</h5>
-        <div class="vehicle-list"></div>
-        {{-- Atur Jadwal --}}
-        <h5 class="mt-5">Atur Jadwal</h5>
-        <div class="form-input mt-3 mb-5">
-            <div class="form-row">
-                <div class="form-col">
-                    <label for="date">Pilih Tanggal<span>*</span></label>
-                    <input type="date" class="form-control" id="booking_date" name="booking_date" required>
+            <div class="data-order mt-5 mb-2">
+                <div class="data-layout">
+                    {{-- Pilih Kendaraan --}}
+                    <h5 class="mt-5">Pilih Kendaraan Dari Profil Anda</h5>
+                    <div class="vehicle-list">
+                        @foreach ($vehicles as $vehicle)
+                            <div class="vehicle-item" data-id="{{ $vehicle->id }}">
+                                <p>{{ $vehicle->vehicle_brand }}</p>
+                                <p>{{ $vehicle->vehicle_type }}</p>
+                                <p>{{ $vehicle->license_plate }}</p>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
-                <div class="form-col">
-                    <label for="time">Pilih Waktu<span>*</span></label>
-                    <select class="form-control" id="booking_time" name="booking_time" required>
-                        <option value="">Pilih Waktu</option>
-                        <option value="08:00">08:00 WIB</option>
-                        <option value="09:001">09:00 WIB</option>
-                        <option value="10:00">10:00 WIB</option>
-                        <option value="11:00">11:00 WIB</option>
-                        <option value="12:00">12:00 WIB</option>
-                        <option value="13:00">13:00 WIB</option>
-                        <option value="14:00">14:00 WIB</option>
-                        <option value="15:00">15:00 WIB</option>
-                        <option value="16:00">16:00 WIB</option>
-                    </select>
+                <div class="data-layout">
+                    {{-- Atur Jadwal --}}
+                    <h5 class="mt-5">Atur Jadwal</h5>
+                    <div class="form-input mt-3 mb-5">
+                        <div class="form-row">
+                            <div class="form-col">
+                                <label for="date">Pilih Tanggal<span>*</span></label>
+                                <input type="date" class="form-control booking-date" id="booking_date"
+                                    name="booking_date" required>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="order-menu mt-5">
-            <button class="btn-reset">Reset</button>
-            <button class="btn-next" onclick="window.location.href='{{ route('detail_order') }}'">Pesan Sekarang</button>
-        </div>
+            {{-- Tombol Reset dan Pesan Sekarang --}}
+            <div class="order-menu mt-5">
+                <button class="btn-reset">Reset</button>
+                <button class="btn-next" onclick="window.location.href='{{ route('detail_order') }}'">Pesan
+                    Sekarang</button>
+            </div>
+        </form>
     </div>
 
 

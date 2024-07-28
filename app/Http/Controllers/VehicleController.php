@@ -28,6 +28,7 @@ class VehicleController extends Controller
 
     public function index()
     {
+
         $vehicles = Vehicle::where('user_id', auth()->id())->orderBy('vehicle_brand')->get();
         return view('profile', compact('vehicles'));
     }

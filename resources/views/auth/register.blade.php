@@ -23,7 +23,7 @@
                             <label for="phone_number">Nomor WhatsApp<span>*</span></label>
                             <div class="input-group">
                                 <span class="input-prefix">+62</span>
-                                <input type="text" id="phone_number" name="phone_number" placeholder="8xx xxxx xxxx"
+                                <input type="number" id="phone_number" name="phone_number" placeholder="8xx xxxx xxxx"
                                     value="{{ old('phone_number') }}" required>
                             </div>
                             <div class="error-message" id="phone_number-error"></div>
@@ -75,7 +75,7 @@
                     <div id="password-mismatch-error" class="error-message">Password yang dimasukan tidak sama.</div>
                     {{-- Alamat --}}
                     <label for="address">Alamat Lengkap<span>*</span></label>
-                    <input type="text" id="address" name="address" placeholder="Tuliskan dengan lengkap dan benar"
+                    <input type="text" id="address" name="address" placeholder="Tuliskan alamat Anda dengan lengkap dan benar"
                         value="{{ old('address') }}" required>
                     <div class="error-message" id="address-error"></div>
                 </div>

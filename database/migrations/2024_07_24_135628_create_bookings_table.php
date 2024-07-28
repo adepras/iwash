@@ -12,14 +12,16 @@ return new class extends Migration {
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->string('license_plate');
-            $table->foreignId('outlet_id')->constrained('outlets');
-            $table->foreignId('service_id')->constrained('services');
-            $table->foreignId('package_id')->constrained('packages');
+            $table->string('service');
+            $table->string('package');
+            $table->integer('price');
             $table->date('booking_date');
-            $table->time('booking_time');
-            $table->enum('status', ['pending', 'confirmed', 'completed', 'canceled'])->default('pending');
+            $table->foreignId('user_id')->constrained('users');
+            $table->integer('phone_number');
+            $table->string('vehicle_brand');
+            $table->string('vehicle_type');
+            $table->string('license_plate');
+            $table->enum('status', ['waiting', 'processing', 'finished'])->default('waiting');
             $table->timestamps();
         });
     }

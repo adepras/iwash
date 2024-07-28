@@ -16,31 +16,22 @@ class UserSeeder extends Seeder
         $userData = [
             [
                 'name' => 'Ade Prasetyo',
-                'phone_number' => '081212341234',
-                'email' => 'user1@gmail.com',
+                'phone_number' => '+6281326793922',
+                'email' => 'adeprasestyo6@gmail.com',
                 'password' => bcrypt('akunuser1'),
-                'address' => 'Kab.Purworejo',
+                'address' => 'Kec.Kutoarjo, Kab.Purworejo',
                 'gender' => 'male',
                 'role' => 'user'
             ],
             [
-                'name' => 'Azyumi Azra',
-                'phone_number' => '081212341234',
-                'email' => 'admin1@gmail.com',
-                'password' => bcrypt('akunadmin1'),
-                'address' => 'Kab.Kudus',
-                'gender' => 'female',
+                'name' => 'Admin Iwash',
+                'phone_number' => '081219999204',
+                'email' => 'iwashadmin@gmail.com',
+                'address' => 'Kec.Kutoarjo, Kab.Purworejo',
+                'password' => bcrypt('admin1234'),
+                'gender' => 'male',
                 'role' => 'admin'
             ],
-            // [
-            //     'name' => 'Admin Iwash',
-            //     'phone_number' => '081219999204',
-            //     'email' => 'iwashadmin@gmail.com',
-            //     'address' => 'Desa Wirun, Kec.Kutoarjo, Kab.Purworejo, Jawa Tengah',
-            //     'password' => bcrypt('adminiwash1234'),
-            //     'gender' => 'male',
-            //     'role' => 'admin'
-            // ],
             // [
             //     'name' => '',
             //     'phone_number' => '',
