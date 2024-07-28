@@ -21,6 +21,7 @@ use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\AdminDashboardController;
 
 // Halaman Website
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -57,7 +58,6 @@ Route::middleware(['auth'])->group(function () {
 
     // Detail Pemesanan
     Route::get('/detail-pemesanan', [MenuController::class, 'detail_order'])->name('detail_order');
-
 });
 
 // Admin
@@ -70,4 +70,5 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
     Route::get('/booking', [AdminController::class, 'booking'])->name('admin.booking');
     Route::get('/queue', [AdminController::class, 'queue'])->name('admin.queue');
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 });
