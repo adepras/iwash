@@ -78,6 +78,7 @@ class AuthController extends Controller
         }
 
         $validatedData = $validator->validated();
+        $validatedData['phone_number'] = '+62' . $validatedData['phone_number'];
         $validatedData['password'] = Hash::make($validatedData['password']);
 
         User::create($validatedData);

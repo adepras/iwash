@@ -21,8 +21,11 @@
                         <div class="form-col">
                             {{-- Nomor Whatsapp --}}
                             <label for="phone_number">Nomor WhatsApp<span>*</span></label>
-                            <input type="text" id="phone_number" name="phone_number" placeholder="081122334455"
-                                value="{{ old('phone_number') }}" required>
+                            <div class="input-group">
+                                <span class="input-prefix">+62</span>
+                                <input type="text" id="phone_number" name="phone_number" placeholder="8xx xxxx xxxx"
+                                    value="{{ old('phone_number') }}" required>
+                            </div>
                             <div class="error-message" id="phone_number-error"></div>
                         </div>
                         <div class="form-col">
@@ -131,7 +134,7 @@
         var phoneNumberField = document.getElementById('phone_number');
         var emailField = document.getElementById('email');
         var addressField = document.getElementById('address');
-        
+
 
         function validateField(field, errorFieldId, errorMessage) {
             var errorField = document.getElementById(errorFieldId);
@@ -163,6 +166,12 @@
             validateField(emailField, 'email-error', 'Email belum di isi!');
             validateField(addressField, 'address-error', 'Alamat belum di isi!');
         });
-    </script>
 
+        // Validasi nomor WhatsApp
+        var phoneNumberField = document.getElementById('phone_number');
+        phoneNumberField.addEventListener('input', function() {
+            validateField(phoneNumberField, 'phone_number-error', 'Nomor WhatsApp belum di isi!');
+            this.value = this.value.replace(/^0/, '');
+        });
+    </script>
 @endsection

@@ -81,6 +81,31 @@
     user-select: none;
 }
 
+/* Input Group */
+.input-group {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.input-prefix {
+    background-color: #f0f0f0;
+    border: 1px solid #555;
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    padding: 13px;
+    color: #3e3e3e;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+#phone_number {
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    flex: 1;
+}
+
 /* Button Submit */
 .btn-confirm {
     display: flex;
