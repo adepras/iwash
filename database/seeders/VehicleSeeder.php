@@ -15,14 +15,14 @@ class VehicleSeeder extends Seeder
         $vehicles = [
             [
                 'user_id' => 1,
-                'brand' => 'Toyota',
-                'type' => 'GR Corrola',
+                'vehicle_brand' => 'Toyota',
+                'vehicle_type' => 'GR Corrola',
                 'license_plate' => 'B 1234 ABC',
             ],
             [
                 'user_id' => 1,
-                'brand' => 'Honda',
-                'type' => 'Jazz',
+                'vehicle_brand' => 'Honda',
+                'vehicle_type' => 'Jazz',
                 'license_plate' => 'B 5678 ABC',
             ],
         ];

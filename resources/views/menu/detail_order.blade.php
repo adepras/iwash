@@ -20,7 +20,6 @@
                     <div class="detail-title">
                         <h6>Paket Satu Kali Cuci</h6>
                         <p>Basic</p>
-                        <p>Spot Remover - Body</p>
                         <ul>
                             <li>Total Harga :</li>
                             <li>Rp.110.000</li>

@@ -15,8 +15,10 @@ return new class extends Migration {
             $table->string('service');
             $table->string('package');
             $table->integer('price');
+            $table->integer('estimated');
             $table->date('booking_date');
             $table->foreignId('user_id')->constrained('users');
+            $table->string('name');
             $table->integer('phone_number');
             $table->string('vehicle_brand');
             $table->string('vehicle_type');
