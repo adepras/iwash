@@ -8,95 +8,61 @@
     <div class="container-wash py-5">
         <h2>Pesan Layanan iWash</h2>
         <a href="{{ route('menu') }}"><img src="image/back-to.svg" alt="">Kembali ke jenis layanan</a>
-        <form action="" method="post">
+        <form id="booking-form" action="{{ route('booking.store') }}" method="post">
+            @csrf
+            <input type="hidden" name="service" id="selected-service" value="Perawatan Salon Mobil / Detailing">
+            <input type="hidden" name="package" id="selected-package" value="">
+            <input type="hidden" name="price" id="selected-price" value="">
+            <input type="hidden" name="estimated" id="selected-time" value="">
+            <input type="hidden" name="date_booking" id="selected-date" value="">
+            <input type="hidden" name="vehicle_brand" id="selected-vehicle-brand" value="">
+            <input type="hidden" name="vehicle_type" id="selected-vehicle-type" value="">
+            <input type="hidden" name="license_plate" id="selected-license-plate" value="">
+
             <div class="category-menu mt-5 mb-2">
                 <h5>Pilih Paket Salon Mobil / Detailing</h5>
-                <p class="mt-4">Pilih ukuran mobil Anda</p>
-                <div class="car-category">
-                    <button class="btn-car" id="small-car" data-size="small"><img src="image/small-car-ill.png"
-                            alt="">Kecil</button>
-                    <button class="btn-car" id="medium-car" data-size="medium"><img src="image/medium-car-ill.png"
-                            alt="">Sedang</button>
-                    <button class="btn-car" id="large-car" data-size="large"><img src="image/large-car-ill.png"
-                            alt="">Besar</button>
-                </div>
-                <a href="" data-bs-toggle="modal" data-bs-target="#carSizeModal">Cari tahu ukuran mobil Anda <img
-                        src="image/arrow-right.svg" alt=""></a>
-                <p class="mt-4">Harga di bawah sudah sesuai dengan ukuran mobil Anda</p>
                 <div class="price-menu">
-                    <div class="card-price" data-service="Detailing Interior" data-small-price="50000"
-                        data-medium-price="70000" data-large-price="90000" data-small-time="1 jam"
-                        data-medium-time="1 jam 30 menit" data-large-time="2 jam">
+                    <div class="card-price selectable" data-package="Detailing Interior" data-price="50000" data-time="60">
                         <h5>Detailing Interior</h5>
                         <div class="price mt-3">
                             <p>Harga</p>
-                            <h6 class="service-price">Rp -</h6>
-                            <p class="estimation mt-3"><img src="image/stopwatch.svg" alt="">Estimasi <span
-                                    class="service-time">- Jam</span></p>
-                        </div>
-                        <div class="select-price">
-                            <input class="form-check-input" type="checkbox" name="flexCheckboxDefault"
-                                value="Detailing Interior">
+                            <h6 class="service-price">Rp50.000</h6>
+                            <p class="estimation mt-3"><img src="image/stopwatch.svg" alt="">Estimasi 1 jam</p>
                         </div>
                     </div>
-                    <div class="card-price" data-service="Detailing Eksterior" data-small-price="60000"
-                        data-medium-price="80000" data-large-price="100000" data-small-time="1 jam"
-                        data-medium-time="1 jam 30 menit" data-large-time="2 jam">
+                    <div class="card-price selectable" data-package="Detailing Ekterior" data-price="60000" data-time="60">
                         <h5>Detailing Eksterior</h5>
                         <div class="price mt-3">
                             <p>Harga</p>
-                            <h6 class="service-price">Rp -</h6>
-                            <p class="estimation mt-3"><img src="image/stopwatch.svg" alt="">Estimasi <span
-                                    class="service-time">- Jam</span></p>
-                        </div>
-                        <div class="select-price">
-                            <input class="form-check-input" type="checkbox" name="flexCheckboxDefault"
-                                value="Detailing Eksterior">
+                            <h6 class="service-price">Rp60.000</h6>
+                            <p class="estimation mt-3"><img src="image/stopwatch.svg" alt="">Estimasi 1 jam</p>
                         </div>
                     </div>
-                    <div class="card-price" data-service="Detailing Kaca Mobil" data-small-price="40000"
-                        data-medium-price="60000" data-large-price="80000" data-small-time="1 jam"
-                        data-medium-time="1 jam 30 menit" data-large-time="2 jam">
+                    <div class="card-price selectable" data-package="Detailing Kaca Mobil" data-price="40000"
+                        data-time="30">
                         <h5>Detailing Kaca Mobil</h5>
                         <div class="price mt-3">
                             <p>Harga</p>
-                            <h6 class="service-price">Rp -</h6>
-                            <p class="estimation mt-3"><img src="image/stopwatch.svg" alt="">Estimasi <span
-                                    class="service-time">- Jam</span></p>
-                        </div>
-                        <div class="select-price">
-                            <input class="form-check-input" type="checkbox" name="flexCheckboxDefault"
-                                value="Detailing Kaca Mobil">
+                            <h6 class="service-price">Rp40.000</h6>
+                            <p class="estimation mt-3"><img src="image/stopwatch.svg" alt="">Estimasi 1 jam</p>
                         </div>
                     </div>
-                    <div class="card-price" data-service="Detailing Mesin Mobil" data-small-price="50000"
-                        data-medium-price="70000" data-large-price="90000" data-small-time="1 jam"
-                        data-medium-time="1 jam 30 menit" data-large-time="2 jam">
+                    <div class="card-price selectable" data-package="Detailing Mesin Mobil" data-price="40000"
+                        data-time="60">
                         <h5>Detailing Mesin Mobil</h5>
                         <div class="price mt-3">
                             <p>Harga</p>
-                            <h6 class="service-price">Rp -</h6>
-                            <p class="estimation mt-3"><img src="image/stopwatch.svg" alt="">Estimasi <span
-                                    class="service-time">- Jam</span></p>
-                        </div>
-                        <div class="select-price">
-                            <input class="form-check-input" type="checkbox" name="flexCheckboxDefault"
-                                value="Detailing Mesin Mobil">
+                            <h6 class="service-price">Rp40.000</h6>
+                            <p class="estimation mt-3"><img src="image/stopwatch.svg" alt="">Estimasi 1 jam</p>
                         </div>
                     </div>
-                    <div class="card-price" data-service="Detailing Ban & Velg" data-small-price="40000"
-                        data-medium-price="60000" data-large-price="80000" data-small-time="1 jam"
-                        data-medium-time="1 jam 30 menit" data-large-time="2 jam">
+                    <div class="card-price selectable" data-package="Detailing Ban & Velg" data-price="30000"
+                        data-time="30">
                         <h5>Detailing Ban & Velg</h5>
                         <div class="price mt-3">
                             <p>Harga</p>
-                            <h6 class="service-price">Rp -</h6>
-                            <p class="estimation mt-3"><img src="image/stopwatch.svg" alt="">Estimasi <span
-                                    class="service-time">- Jam</span></p>
-                        </div>
-                        <div class="select-price">
-                            <input class="form-check-input" type="checkbox" name="flexCheckboxDefault"
-                                value="Detailing Ban & Velg">
+                            <h6 class="service-price">Rp30.000</h6>
+                            <p class="estimation mt-3"><img src="image/stopwatch.svg" alt="">Estimasi 30 menit</p>
                         </div>
                     </div>
                 </div>
@@ -104,10 +70,12 @@
             <div class="data-order mt-5 mb-2">
                 <div class="data-layout">
                     {{-- Pilih Kendaraan --}}
-                    <h5 class="mt-5">Pilih Kendaraan Dari Profil Anda</h5>
+                    <h5 class="mt-5">Pilih Kendaraan dari Profil Anda</h5>
                     <div class="vehicle-list">
                         @foreach ($vehicles as $vehicle)
-                            <div class="vehicle-item" data-id="{{ $vehicle->id }}">
+                            <div class="vehicle-item selectable" data-id="{{ $vehicle->id }}"
+                                data-brand="{{ $vehicle->vehicle_brand }}" data-type="{{ $vehicle->vehicle_type }}"
+                                data-plate="{{ $vehicle->license_plate }}">
                                 <p>{{ $vehicle->vehicle_brand }}</p>
                                 <p>{{ $vehicle->vehicle_type }}</p>
                                 <p>{{ $vehicle->license_plate }}</p>
@@ -118,12 +86,12 @@
                 <div class="data-layout">
                     {{-- Atur Jadwal --}}
                     <h5 class="mt-5">Atur Jadwal</h5>
-                    <div class="form-input mt-3 mb-5">
+                    <div class="form-input form-date mt-3 mb-5">
                         <div class="form-row">
                             <div class="form-col">
                                 <label for="date">Pilih Tanggal<span>*</span></label>
-                                <input type="date" class="form-control booking-date" id="booking_date"
-                                    name="booking_date" required>
+                                <input type="date" class="form-control booking-date" id="date"
+                                    name="date_booking" required>
                             </div>
                         </div>
                     </div>
@@ -137,123 +105,30 @@
         </form>
     </div>
 
-
-    <!-- Modal -->
-    <div class="modal fade" id="carSizeModal" tabindex="-1" aria-labelledby="carSizeModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="carSizeModalLabel">Ukuran Mobil</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col">
-                            <ul>
-                                <h6>Kecil</h6>
-                                <li>Mini Cooper</li>
-                                <li>Fiesta ST</li>
-                                <li>Focus ST</li>
-                                <li>Jazz</li>
-                                <li>Swift</li>
-                                <li>Yaris</li>
-                                <li>Corolla</li>
-                            </ul>
-                        </div>
-                        <div class="col">
-                            <ul>
-                                <h6>Sedang</h6>
-                                <li>HRV</li>
-                                <li>CX-5</li>
-                                <li>E-Class</li>
-                                <li>Xpander</li>
-                                <li>BRV</li>
-                                <li>Innova</li>
-                                <li>5 Series</li>
-                            </ul>
-                        </div>
-                        <div class="col">
-                            <ul>
-                                <h6>Besar</h6>
-                                <li>Alphard</li>
-                                <li>7 Series</li>
-                                <li>S-Class</li>
-                                <li>Land Cruiser</li>
-                                <li>Pajero</li>
-                                <li>CRV</li>
-                                <li>Fortuner</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
-            function updatePricesAndTimes(size) {
-                $('.card-price').each(function() {
-                    var price = $(this).data(size + '-price');
-                    var time = $(this).data(size + '-time');
-                    $(this).find('.service-price').text('Rp ' + price);
-                    $(this).find('.service-time').text(time);
-                });
-            }
-
-            function setActiveSizeButton(size) {
-                $('.btn-car').css('opacity', '0.5');
-                $('#' + size + '-car').css('opacity', '1');
-            }
-
-            // Setup biar ukuran mobil kecil yang terpilih saat pertama kali load halaman
-            function resetSelections() {
-                $('.btn-car').css('opacity', '0.5');
-                $('#small-car').css('opacity', '1');
-                updatePricesAndTimes('small');
-            }
-            setActiveSizeButton('small');
-            updatePricesAndTimes('small');
-
-            $('.btn-car').click(function() {
-                var size = $(this).data('size');
-                updatePricesAndTimes(size);
-                setActiveSizeButton(size);
-            });
-
             $('.card-price').click(function() {
-                $(this).find('input[name="flexCheckboxDefault"]').prop('checked', function(i, value) {
-                    return !value;
-                }).trigger('change');
+                $('.card-price').removeClass('selected');
+                $(this).addClass('selected');
+                $('#selected-package').val($(this).data('package'));
+                $('#selected-price').val($(this).data('price'));
+                $('#selected-time').val($(this).data('time'));
             });
 
-            $('.btn-next').click(function() {
-                var selectedSize = $('.btn-car').filter(function() {
-                    return $(this).css('opacity') == 1;
-                }).data('size');
-
-                var selectedServices = $('input[name="flexCheckboxDefault"]:checked').map(function() {
-                    return {
-                        service: this.value,
-                        price: $(this).closest('.card-price').find('.service-price').text(),
-                        time: $(this).closest('.card-price').find('.service-time').text()
-                    };
-                }).get();
-
-                var message = 'Ukuran Mobil: ' + (selectedSize ? selectedSize : 'None');
-                if (selectedServices.length > 0) {
-                    message += '\nPaket yang dipilih:\n' + selectedServices.map(function(service) {
-                        return service.service + '\nHarga: ' + service.price + '\nEstimasi: ' +
-                            service.time;
-                    }).join('\n');
-                }
-
-                alert(message);
+            $('.vehicle-item').click(function() {
+                $('.vehicle-item').removeClass('selected');
+                $(this).addClass('selected');
+                $('#selected-vehicle-brand').val($(this).data('brand'));
+                $('#selected-vehicle-type').val($(this).data('type'));
+                $('#selected-license-plate').val($(this).data('plate'));
             });
 
             $('.btn-reset').click(function() {
-                resetSelections();
+                $('.card-price, .vehicle-item').removeClass('selected');
+                $('#selected-package, #selected-price, #selected-time, #selected-vehicle-brand, #selected-vehicle-type, #selected-license-plate')
+                    .val('');
+                $('#date').val('');
             });
         });
     </script>

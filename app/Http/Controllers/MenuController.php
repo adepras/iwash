@@ -23,25 +23,6 @@ class MenuController extends Controller
         return view('menu.menu_first', compact('vehicles'));
     }
 
-    public function createBooking(Request $request)
-    {
-        $data = $request->all();
-
-        $request->validate([
-            'vehicle_id' => 'required',
-            'service' => 'required',
-            'date' => 'required',
-            'time' => 'required',
-            'address' => 'required',
-        ]);
-
-        $data['user_id'] = auth()->id();
-
-        Booking::create($data);
-
-        return redirect()->back()->with('success', 'Booking created successfully');
-    }
-
     // Salon Mobil dan Detailing
     public function menu2()
     {

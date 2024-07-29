@@ -10,7 +10,7 @@
         <a href="{{ route('menu') }}"><img src="image/back-to.svg" alt="">Kembali ke jenis layanan</a>
         <form id="booking-form" action="{{ route('booking.store') }}" method="post">
             @csrf
-            <input type="hidden" name="service" id="selected-service" value="Satu Kali Cuci">
+            <input type="hidden" name="service" id="selected-service" value="Perawatan Satu Kali Cuci">
             <input type="hidden" name="package" id="selected-package" value="">
             <input type="hidden" name="price" id="selected-price" value="">
             <input type="hidden" name="estimated" id="selected-time" value="">
@@ -101,6 +101,7 @@
                     </div>
                 </div>
             </div>
+            {{-- Tombol Reset dan Pesan Sekarang --}}
             <div class="order-menu mt-5">
                 <button type="button" class="btn-reset">Reset</button>
                 <button type="submit" class="btn-next">Pesan Sekarang</button>

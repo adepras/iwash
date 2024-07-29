@@ -18,7 +18,7 @@
                     </div>
                     <hr class="line">
                     <div class="detail-title">
-                        <h6>Nomor Antrian </h6>
+                        {{-- <h6>Nomor Antrian </h6> --}}
                         <h6>{{ $service }}</h6>
                         <p>{{ $package }}</p>
                         <ul>

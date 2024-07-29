@@ -58,22 +58,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/satu-kali-cuci', [MenuController::class, 'menu1'])->name('menu1');
     Route::get('/salon-mobil', [MenuController::class, 'menu2'])->name('menu2');
 
-    // Order
-    Route::post('/order', [MenuController::class, 'createBooking'])->name('order');
+    // Pesan Layanan Satu Kali Cuci & Pesan Salon Mobil / Detailing
     Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
     Route::get('/detail_order/{id}', [BookingController::class, 'show'])->name('detail_order');
     Route::get('/order/{id}', [BookingController::class, 'show'])->name('order.detail');
     Route::get('/detail-pemesanan', [BookingController::class, 'createBooking'])->name('createBooking');
 
-
-    // Route::get('/detail_order', function () {
-    //     $booking = Booking::where('user_id', auth()->id())->latest()->first();
-    //     return view('detail_order', compact('booking'));
-    // })->name('detail_order');
-
-    // // Detail Pemesanan
-    // Route::get('/detail-pemesanan', [MenuController::class, 'detail_order'])->name('detail_order');
-
+   
     
 });
 
