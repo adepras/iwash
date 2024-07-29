@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Models\Booking;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,15 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ResetPasswordController;
-use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\ForgotPasswordController;
 
 // Halaman Website
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -58,9 +60,21 @@ Route::middleware(['auth'])->group(function () {
 
     // Order
     Route::post('/order', [MenuController::class, 'createBooking'])->name('order');
+    Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
+    Route::get('/detail_order/{id}', [BookingController::class, 'show'])->name('detail_order');
+    Route::get('/order/{id}', [BookingController::class, 'show'])->name('order.detail');
+    Route::get('/detail-pemesanan', [BookingController::class, 'createBooking'])->name('createBooking');
 
-    // Detail Pemesanan
-    Route::get('/detail-pemesanan', [MenuController::class, 'detail_order'])->name('detail_order');
+
+    // Route::get('/detail_order', function () {
+    //     $booking = Booking::where('user_id', auth()->id())->latest()->first();
+    //     return view('detail_order', compact('booking'));
+    // })->name('detail_order');
+
+    // // Detail Pemesanan
+    // Route::get('/detail-pemesanan', [MenuController::class, 'detail_order'])->name('detail_order');
+
+    
 });
 
 // Admin

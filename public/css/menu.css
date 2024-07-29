@@ -340,15 +340,19 @@
     transition: opacity 0.3s;
 }
 
-.vehicle-item.selected {
+.vehicle-item.selected,
+.card-price.selected {
     opacity: 1;
     border: 2px solid #2277b9;
-    background-color: #abdef3;
+    background-color: #cdebf8;
 }
 
-.vehicle-item:not(.selected) {
-    opacity: 0.7;
+.vehicle-item:not(.selected), 
+.card-price:not(.selected) {
+    opacity: 1;
 }
+
+
 
 /* Detail Pemesanan */
 .container-detail-order {
@@ -374,11 +378,6 @@
     height: auto;
     padding: 12px;
     margin-left: 12px;
-}
-
-.pay-logo {
-    display: flex;
-    justify-content: space-between;
 }
 
 .pay-logo img {

@@ -11,20 +11,22 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('bookings', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->unsignedBigInteger('user_id');
             $table->string('service');
             $table->string('package');
-            $table->integer('price');
+            $table->decimal('price', 8, 2);
             $table->integer('estimated');
             $table->date('booking_date');
-            $table->foreignId('user_id')->constrained('users');
             $table->string('name');
-            $table->integer('phone_number');
+            $table->string('phone_number');
             $table->string('vehicle_brand');
             $table->string('vehicle_type');
             $table->string('license_plate');
-            $table->enum('status', ['waiting', 'processing', 'finished'])->default('waiting');
+            $table->string('status')->default('waiting');
             $table->timestamps();
+    
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

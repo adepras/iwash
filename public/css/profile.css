@@ -171,7 +171,8 @@
 
 .btn-submit,
 .btn-edit,
-.btn-save {
+.btn-save,
+.btn-back {
     font-size: 16px;
     font-weight: 500;
     border-radius: 8px;
@@ -186,4 +187,10 @@
     border: 1px solid #2277b9;
     color: #fff;
     margin-left: 10px;
+}
+
+.btn-back {
+    background-color: #f9f9f9;
+    border: 1px solid #f9f9f9;
+    color: #333;
 }

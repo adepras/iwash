@@ -132,8 +132,7 @@
             {{-- Tombol Reset dan Pesan Sekarang --}}
             <div class="order-menu mt-5">
                 <button class="btn-reset">Reset</button>
-                <button class="btn-next" onclick="window.location.href='{{ route('detail_order') }}'">Pesan
-                    Sekarang</button>
+                <button class="btn-next" type="submit">Pesan Sekarang</button>
             </div>
         </form>
     </div>

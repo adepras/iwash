@@ -7,61 +7,62 @@
 
     <div class="container-detail-order py-5">
         <h2>Pesan Layanan iWash</h2>
-        <a href="{{ url()->previous() }}"><img src="image/back-to.svg" alt="">Kembali ke menu layanan</a>
+        {{-- <a href="{{ url()->previous() }}"><img src="/image/back-to.svg" alt="">Kembali ke menu layanan</a> --}}
         <div class="container-detail mt-5 mb-2">
             <div class="layout-order">
                 <h5>Detail Pemesanan dan Pembayaran</h5>
                 <div class="detail-order">
                     <div class="pay-logo">
-                        <img src="image/iwash-full-logo.png" alt="">
-                        <h6>ID Pemesanan : 1eadew22337f7sefe7dw4</h6>
+                        <img src="/image/iwash-full-logo.png" alt="">
+                        <h6>ID Pemesanan : {{ $booking->id }}</h6>
                     </div>
                     <hr class="line">
                     <div class="detail-title">
-                        <h6>Paket Satu Kali Cuci</h6>
-                        <p>Basic</p>
+                        <h6>Nomor Antrian </h6>
+                        <h6>{{ $service }}</h6>
+                        <p>{{ $package }}</p>
                         <ul>
                             <li>Total Harga :</li>
-                            <li>Rp.110.000</li>
+                            <li>Rp {{ number_format($booking->price, 0, ',', '.') }}</li>
                         </ul>
                         <ul>
                             <li>Total Estimasi :</li>
-                            <li>1 jam 30 menit</li>
+                            <li>{{ $estimated }} menit</li>
                         </ul>
                         <ul>
-                            <li>Tanggal :</li>
-                            <li>27/07/2024</li>
+                            <li>Tanggal Pemesanan :</li>
+                            <li>{{ $date_booking }}</li>
                         </ul>
                         <hr class="line">
                         <h6>Data Diri</h6>
                         <ul>
                             <li>Nama :</li>
-                            <li>Ade Prasetyo</li>
+                            <li>{{ $name }}</li>
                         </ul>
                         <ul>
                             <li>Nomor WhatsApp:</li>
-                            <li>+62 812 2233 4455</li>
+                            <li>{{ $phone_number }}</li>
                         </ul>
                         <hr class="line">
                         <h6>Data Kendaraan</h6>
                         <ul>
                             <li>Brand :</li>
-                            <li>Totoya</li>
+                            <li>{{ $vehicle_brand }}</li>
                         </ul>
                         <ul>
                             <li>Type :</li>
-                            <li>GR Corolla</li>
+                            <li>{{ $vehicle_type }}</li>
                         </ul>
                         <ul>
                             <li>Nomor Polisi :</li>
-                            <li>D 3 PRAS</li>
+                            <li>{{ $license_plate }}</li>
                         </ul>
                     </div>
                 </div>
                 <div class="order-menu pay-now mt-3">
                     <div class="pay-price">
                         <p>Total Pembayaran</p>
-                        <h6>Rp.110.000</h6>
+                        <h6>Rp {{ number_format($booking->price, 0, ',', '.') }}</h6>
                     </div>
                     <button class="btn-next" type="submit">Bayar</button>
                 </div>
@@ -78,7 +79,7 @@
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                Pembayaran dapat dilakukan melalui transfer ke Bank Mandiri via Virtual Account yang
+                                Pembayaran dapat dilakukan melalui transfer ke Bank yang tersedia via Virtual Account yang
                                 diberikan pada proses pembayaran.
                             </div>
                         </div>
