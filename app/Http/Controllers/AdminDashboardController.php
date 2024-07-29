@@ -9,13 +9,18 @@ use Carbon\Carbon;
 
 class AdminDashboardController extends Controller
 {
-    public function dashboard()
+    public function index()
     {
+        // Menghitung jumlah total pengguna
         $userCount = User::count();
-        $todayBookingsCount = Booking::whereDate('created_at', Carbon::today())->count();
-        
-        dd(compact('userCount', 'todayBookingsCount')); // Tambahkan ini untuk debugging
 
-        return view('admin.dashboard', compact('userCount', 'todayBookingsCount'));
+        // Menghitung jumlah pemesanan yang dibuat hari ini
+        $todayBookingsCount = Booking::whereDate('created_at', Carbon::today())->count();
+
+        // Mengirimkan data ke view
+        return view('admin.dashboard', [
+            'userCount' => $userCount,
+            'todayBookingsCount' => $todayBookingsCount
+        ]);
     }
 }
