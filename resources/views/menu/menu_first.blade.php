@@ -15,19 +15,19 @@
             <input type="hidden" name="price" id="selected-price" value="">
             <input type="hidden" name="estimated" id="selected-time" value="">
             <input type="hidden" name="date_booking" id="selected-date" value="">
-            <input type="hidden" name="vehicle_id" id="selected-vehicle-id" value=""> <!-- Update here -->
-
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+            <input type="hidden" name="time_booking" id="selected-time-booking" value="">
+            <input type="hidden" name="vehicle_id" id="selected-vehicle-id" value="">
 
             <div class="category-menu mt-5 mb-2">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 {{-- Satu Kali Cuci --}}
                 <h5>Pilih Paket Satu Kali Cuci</h5>
                 <div class="price-menu">
@@ -72,8 +72,8 @@
                         <div class="price mt-3">
                             <p>Harga</p>
                             <h6 class="service-price">Rp70.000</h6>
-                            <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 3
-                                jam</p>
+                            <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi
+                                3 jam</p>
                         </div>
                     </div>
                 </div>
@@ -102,6 +102,22 @@
                                 <label for="date">Pilih Tanggal<span>*</span></label>
                                 <input type="date" class="form-control booking-date" id="date"
                                     name="date_booking" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-col">
+                                <label for="time">Pilih Waktu<span>*</span></label>
+                                <select name="time_booking" id="time" class="form-control booking-time" required>
+                                    <option value="" disabled selected>Pilih Jam Kedatangan</option>
+                                    @foreach ($slots as $slot => $available)
+                                        @if ($available)
+                                            <option value="{{ $slot }}">{{ $slot }}</option>
+                                        @else
+                                            <option value="{{ $slot }}" disabled>{{ $slot }} - Sudah
+                                                Dipesan</option>
+                                        @endif
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -135,11 +151,16 @@
                 $('#selected-time').val($(this).data('time'));
             });
 
+            $('.booking-time').change(function() {
+                $('#selected-time-booking').val($(this).val());
+            });
+
             $('.btn-reset').click(function() {
                 $('.card-price, .vehicle-item').removeClass('selected');
-                $('#selected-package, #selected-price, #selected-time, #selected-vehicle-id').val(
-                '');
+                $('#selected-package, #selected-price, #selected-time, #selected-vehicle-id, #selected-time-booking')
+                    .val('');
                 $('#date').val('');
+                $('#time').val('');
             });
         });
     </script>

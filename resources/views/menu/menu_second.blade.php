@@ -20,6 +20,16 @@
             <input type="hidden" name="license_plate" id="selected-license-plate" value="">
 
             <div class="category-menu mt-5 mb-2">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                {{-- Salon Mobil / Detailing --}}
                 <h5>Pilih Paket Salon Mobil / Detailing</h5>
                 <div class="price-menu">
                     <div class="card-price selectable" data-package="Detailing Interior" data-price="50000" data-time="60">
@@ -74,8 +84,7 @@
                     <div class="vehicle-list">
                         @foreach ($vehicles as $vehicle)
                             <div class="vehicle-item selectable" data-id="{{ $vehicle->id }}"
-                                data-brand="{{ $vehicle->vehicle_brand }}" data-type="{{ $vehicle->vehicle_type }}"
-                                data-plate="{{ $vehicle->license_plate }}">
+                                data-booked="{{ $vehicle->hasActiveBooking() ? 'true' : 'false' }}">
                                 <p>{{ $vehicle->vehicle_brand }}</p>
                                 <p>{{ $vehicle->vehicle_type }}</p>
                                 <p>{{ $vehicle->license_plate }}</p>
@@ -92,6 +101,22 @@
                                 <label for="date">Pilih Tanggal<span>*</span></label>
                                 <input type="date" class="form-control booking-date" id="date"
                                     name="date_booking" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-col">
+                                <label for="time">Pilih Waktu<span>*</span></label>
+                                <select name="time" id="time" class="form-control booking-time" required>
+                                    <option value="" disabled selected>Pilih Jam Kedatangan</option>
+                                    @foreach ($slots as $slot => $available)
+                                        @if ($available)
+                                            <option value="{{ $slot }}">{{ $slot }}</option>
+                                        @else
+                                            <option value="{{ $slot }}" disabled>{{ $slot }} - Sudah
+                                                Dipesan</option>
+                                        @endif
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>

@@ -15,18 +15,18 @@ class Booking extends Model
     protected $keyType = 'string';
 
     protected $fillable = [
-        'id',
         'queue_number',
         'service',
         'package',
         'price',
         'estimated',
         'booking_date',
+        'time_booking',
         'user_id',
         'name',
         'phone_number',
         'vehicle_id',
-        'status'
+        'status',
     ];
 
     public function user()
@@ -53,5 +53,10 @@ class Booking extends Model
     public function vehicle()
     {
         return $this->belongsTo(Vehicle::class);
+    }
+
+    public function slot()
+    {
+        return $this->hasOne(Slot::class);
     }
 }

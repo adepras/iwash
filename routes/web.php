@@ -69,13 +69,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/check-active-booking/{id}', [VehicleController::class, 'checkActiveBooking']);
 
-
     // Route::patch('/bookings/{id}/cancel', [BookingController::class, 'cancelBooking'])->name('cancelBooking');
     // Route::patch('/bookings/{id}/finish', [BookingController::class, 'finishBooking'])->name('finishBooking');
-
-
-
-
 });
 
 // Admin

@@ -99,6 +99,7 @@
                             <h6>Nomor Antrian: {{ str_pad($booking->queue_number, 3, '0', STR_PAD_LEFT) }}</h6>
                             <p>Status: {{ $booking->status }}</p>
                             <p>Tanggal Pemesanan: {{ $booking->created_at->format('d-m-Y') }}</p>
+                            <p>Waktu Kedatangan: {{ $booking->time_booking }}</p>
                         </div>
                     @endforeach
                 </div>
