@@ -96,10 +96,10 @@
                 <div class="detail-order mt-4">
                     @foreach ($bookings as $booking)
                         <div class="order-item mb-3 p-2 border rounded">
-                            <h6>Nomor Antrian: {{ str_pad($booking->queue_number, 3, '0', STR_PAD_LEFT) }}</h6>
                             <p>Status: {{ $booking->status }}</p>
                             <p>Tanggal Pemesanan: {{ $booking->created_at->format('d-m-Y') }}</p>
                             <p>Waktu Kedatangan: {{ $booking->time_booking }}</p>
+                            <button type="button" onclick="window.location.href='{{ route('detail_order', ['id' => $booking->id]) }}'">Detail Order</button>    
                         </div>
                     @endforeach
                 </div>
