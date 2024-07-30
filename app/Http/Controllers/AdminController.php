@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Booking;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -19,7 +21,17 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        return view('admin.dashboard');
+        // Menghitung jumlah total pengguna
+        $userCount = User::count();
+
+        // Menghitung jumlah pemesanan yang dibuat hari ini
+        $todayBookingsCount = Booking::whereDate('created_at', Carbon::today())->count();
+
+        // Mengirimkan data ke view
+        return view('admin.dashboard', [
+            'userCount' => $userCount,
+            'todayBookingsCount' => $todayBookingsCount
+        ]);
     }
 
     public function users()
@@ -35,5 +47,10 @@ class AdminController extends Controller
     public function queue()
     {
         return view('admin.queue');
+    }
+
+    public function sidebar()
+    {
+        return view('admin.sidebar');
     }
 }

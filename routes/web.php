@@ -79,6 +79,7 @@ Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
 Route::middleware(['auth', 'admin'])->group(function () {
     // Admin
     Route::put('/admin/profile', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
+    Route::get('/admin/profile', [AdminController::class, 'adminprofile'])->name('admin.adminprofile');
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
     Route::get('/booking', [AdminController::class, 'booking'])->name('admin.booking');
@@ -87,4 +88,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
     Route::get('/admin/customers', [CustomerController::class, 'index'])->name('admin.customers.index');
     Route::get('/admin/bookings/today', [BookingController::class, 'today'])->name('admin.bookings.today');
+    Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+
+    // Edit dan Hapus
+    Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+    Route::put('/admin/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
+
 });
