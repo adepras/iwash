@@ -15,4 +15,14 @@ class Vehicle extends Model
         'vehicle_type',
         'license_plate',
     ];
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+    public function hasActiveBooking()
+    {
+        return $this->bookings()->where('status', '!=', 'finished')->exists();
+    }
 }

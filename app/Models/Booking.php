@@ -16,6 +16,7 @@ class Booking extends Model
 
     protected $fillable = [
         'id',
+        'queue_number',
         'service',
         'package',
         'price',
@@ -24,9 +25,7 @@ class Booking extends Model
         'user_id',
         'name',
         'phone_number',
-        'vehicle_brand',
-        'vehicle_type',
-        'license_plate',
+        'vehicle_id',
         'status'
     ];
 
@@ -44,5 +43,15 @@ class Booking extends Model
                 $model->id = (string) Str::uuid();
             }
         });
+    }
+
+    public function getFormattedQueueNumberAttribute()
+    {
+        return sprintf('%03d', $this->queue_number);
+    }
+
+    public function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class);
     }
 }

@@ -89,7 +89,20 @@
                     </div>
                 </form>
             </div>
-            <h2 class="mt-4">Status Pemesanan Layanan</h2>
+            <h2 class="mt-4" id="status-pemesanan">Status Pemesanan</h2>
+            @if ($bookings->isEmpty())
+                <p>Tidak ada pemesanan yang ditemukan.</p>
+            @else
+                <div class="detail-order mt-4">
+                    @foreach ($bookings as $booking)
+                        <div class="order-item mb-3 p-2 border rounded">
+                            <h6>Nomor Antrian: {{ str_pad($booking->queue_number, 3, '0', STR_PAD_LEFT) }}</h6>
+                            <p>Status: {{ $booking->status }}</p>
+                            <p>Tanggal Pemesanan: {{ $booking->created_at->format('d-m-Y') }}</p>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
         </div>
     </div>
 @endsection

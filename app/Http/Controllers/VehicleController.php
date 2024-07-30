@@ -40,4 +40,11 @@ class VehicleController extends Controller
 
         return redirect()->back()->with('success', 'Data kendaraan berhasil dihapus.');
     }
+
+    public function checkActiveBooking($id)
+    {
+        $vehicle = Vehicle::findOrFail($id);
+        $active = $vehicle->hasActiveBooking();
+        return response()->json(['active' => $active]);
+    }
 }

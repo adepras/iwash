@@ -347,12 +347,10 @@
     background-color: #cdebf8;
 }
 
-.vehicle-item:not(.selected), 
+.vehicle-item:not(.selected),
 .card-price:not(.selected) {
     opacity: 1;
 }
-
-
 
 /* Detail Pemesanan */
 .container-detail-order {
@@ -422,6 +420,18 @@
 .pay-price p {
     margin: 0 5px;
     padding: 0;
+}
+
+.btn-back {
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 10px;
+    width: 50%;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #f9f9f9;
+    color: #333;
+    margin-left: 10px;
 }
 
 /* FAQ */

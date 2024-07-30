@@ -62,12 +62,20 @@ Route::middleware(['auth'])->group(function () {
 
     // Pesan Layanan Satu Kali Cuci & Pesan Salon Mobil / Detailing
     Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
+    Route::get('/booking/detail/{id}', [BookingController::class, 'detailOrder'])->name('detail_order');
     Route::get('/detail_order/{id}', [BookingController::class, 'show'])->name('detail_order');
     Route::get('/order/{id}', [BookingController::class, 'show'])->name('order.detail');
     Route::get('/detail-pemesanan', [BookingController::class, 'createBooking'])->name('createBooking');
 
-   
-    
+    Route::get('/check-active-booking/{id}', [VehicleController::class, 'checkActiveBooking']);
+
+
+    // Route::patch('/bookings/{id}/cancel', [BookingController::class, 'cancelBooking'])->name('cancelBooking');
+    // Route::patch('/bookings/{id}/finish', [BookingController::class, 'finishBooking'])->name('finishBooking');
+
+
+
+
 });
 
 // Admin

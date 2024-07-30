@@ -6,11 +6,11 @@
     <link rel="stylesheet" href="{{ asset('css/menu.css') }}">
 
     <div class="container-detail-order py-5">
-        <h2>Pesan Layanan iWash</h2>
+        <h2>Detail Pesanan Layanan iWash</h2>
         {{-- <a href="{{ url()->previous() }}"><img src="/image/back-to.svg" alt="">Kembali ke menu layanan</a> --}}
         <div class="container-detail mt-5 mb-2">
             <div class="layout-order">
-                <h5>Detail Pemesanan dan Pembayaran</h5>
+                <h5>Pesanan Layanan Anda Telah Dibuat</h5>
                 <div class="detail-order">
                     <div class="pay-logo">
                         <img src="/image/iwash-full-logo.png" alt="">
@@ -18,7 +18,7 @@
                     </div>
                     <hr class="line">
                     <div class="detail-title">
-                        {{-- <h6>Nomor Antrian </h6> --}}
+                        <h6>Nomor Antrian : {{ $booking->formatted_queue_number }}</h6>
                         <h6>{{ $service }}</h6>
                         <p>{{ $package }}</p>
                         <ul>
@@ -47,16 +47,17 @@
                         <h6>Data Kendaraan</h6>
                         <ul>
                             <li>Brand :</li>
-                            <li>{{ $vehicle_brand }}</li>
+                            <li>{{ $booking->vehicle->vehicle_brand ?? 'Tidak tersedia' }}</li>
                         </ul>
                         <ul>
                             <li>Type :</li>
-                            <li>{{ $vehicle_type }}</li>
+                            <li>{{ $booking->vehicle->vehicle_type ?? 'Tidak tersedia' }}</li>
                         </ul>
                         <ul>
                             <li>Nomor Polisi :</li>
-                            <li>{{ $license_plate }}</li>
+                            <li>{{ $booking->vehicle->license_plate ?? 'Tidak tersedia' }}</li>
                         </ul>
+                        <h6>Status {{ $status }}</h6>
                     </div>
                 </div>
                 <div class="order-menu pay-now mt-3">
@@ -66,6 +67,9 @@
                     </div>
                     <button class="btn-next" type="submit">Bayar</button>
                 </div>
+                <button type="button" class="btn-back mt-3"
+                    onclick="window.location.href='{{ route('profile') }}#status-pemesanan'">Lihat Status
+                    Pemesanan</button>
             </div>
             <div class="layout-faq">
                 <div class="accordion" id="accordionExample">

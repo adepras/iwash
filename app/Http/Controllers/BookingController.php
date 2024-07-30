@@ -15,27 +15,48 @@ class BookingController extends Controller
     {
         $user = Auth::user();
 
-        $booking = Booking::create([
+        $validated = $request->validate([
+            'service' => 'required',
+            'package' => 'required',
+            'price' => 'required|numeric',
+            'estimated' => 'required|integer',
+            'date_booking' => 'required|date',
+            'vehicle_id' => 'required|exists:vehicles,id',
+        ]);
+
+        $existingBooking = Booking::where('vehicle_id', $request->input('vehicle_id'))
+            ->where('status', '!=', 'finished')
+            ->first();
+
+        if ($existingBooking) {
+            return redirect()->back()->withErrors(['vehicle_id' => 'Kendaraan ini sudah di dalam pemesanan layanan.']);
+        }
+
+        $queueNumber = Booking::whereDate('booking_date', $validated['date_booking'])->max('queue_number') + 1;
+        $formattedQueueNumber = sprintf('%03d', $queueNumber);
+
+        $booking = new Booking([
+            'queue_number' => $formattedQueueNumber,
             'service' => $request->input('service'),
             'package' => $request->input('package'),
             'price' => $request->input('price'),
             'estimated' => $request->input('estimated'),
-            'booking_date' => Carbon::parse($request->input('booking_date'))->format('Y-m-d'),
+            'booking_date' => Carbon::parse($request->input('date_booking')),
             'user_id' => $user->id,
             'name' => $user->name,
             'phone_number' => $user->phone_number,
-            'vehicle_brand' => $request->input('vehicle_brand'),
-            'vehicle_type' => $request->input('vehicle_type'),
-            'license_plate' => $request->input('license_plate'),
-            'status' => 'waiting'
+            'vehicle_id' => $request->input('vehicle_id'),
+            'status' => 'pending',
         ]);
 
-        return redirect()->route('detail_order', ['id' => $booking->id])->with('success', 'Pemesanan berhasil dibuat.');
+        $booking->save();
+
+        return redirect()->route('detail_order', ['id' => $booking->id])->with('success', 'Booking berhasil dibuat!');
     }
 
     public function show($id)
     {
-        $booking = Booking::findOrFail($id);
+        $booking = Booking::with('vehicle')->findOrFail($id);
 
         $user = User::find($booking->user_id);
 
@@ -53,11 +74,11 @@ class BookingController extends Controller
             'date_booking' => $date_booking,
             'name' => $user->name,
             'phone_number' => $sensor_phone_number,
-            'vehicle_brand' => $booking->vehicle_brand,
-            'vehicle_type' => $booking->vehicle_type,
-            'license_plate' => $booking->license_plate,
+            'vehicle' => $booking->vehicle,
+            'status' => $booking->status,
         ]);
     }
+
 
     public function createBooking(Request $request)
     {
@@ -66,9 +87,7 @@ class BookingController extends Controller
         $price = 100000;
         $estimated = 60;
         $date_booking = now();
-        $vehicle_brand = 'Toyota';
-        $vehicle_type = 'SUV';
-        $license_plate = 'B 1234 ABC';
+        $vehicle_id = 1;
 
         return view(
             'menu.detail_order',
@@ -78,11 +97,25 @@ class BookingController extends Controller
                 'price',
                 'estimated',
                 'date_booking',
-                'vehicle_brand',
-                'vehicle_type',
-                'license_plate'
+                'vehicle_id',
+                'status'
             )
         );
     }
+
+    public function detailOrder($id)
+    {
+        $booking = Booking::findOrFail($id);
+        return view('menu.detail_order', compact('booking'));
+    }
+
+    // public function cancelBooking($id)
+    // {
+    //     $booking = Booking::findOrFail($id);
+    //     $booking->status = 'Cancelled';
+    //     $booking->save();
+
+    //     return redirect()->back()->with('status', 'Pemesanan Layanan Anda Dibatalkan');
+    // }
 
 }

@@ -17,16 +17,16 @@
             @method('PUT')
             <div class="profile-data edit-mode">
                 <label for="name">Nama:</label>
-                <input type="text" id="name" name="name" value="{{ $user->name }}" placeholder="Nama lengkap"
+                <input type="text" id="name" name="name" value="{{ $user->name }}" placeholder="Masukan Nama lengkap Anda"
                     required>
 
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="" placeholder="Masukan alamat email baru"
+                <input type="email" id="email" name="email" value="{{ $user->email }}" placeholder="Masukan alamat email Anda"
                     required>
 
                 <label for="phone_number">Nomor WhatsApp:</label>
-                <input type="text" id="phone_number" name="phone_number" value=""
-                    placeholder="Masukan nomor whatsapp baru" required>
+                <input type="text" id="phone_number" name="phone_number" value="{{ $user->phone_number }}"
+                    placeholder="Masukan nomor whatsapp Anda" required>
 
                 <label for="gender">Jenis Kelamin:</label>
                 <select id="gender" name="gender" required>
@@ -36,7 +36,7 @@
 
                 <label for="address">Alamat Anda:</label>
                 <input type="text" id="address" name="address" value="{{ $user->address }}"
-                    placeholder="Masukan alamat lengkap baru" required>
+                    placeholder="Masukan alamat lengkap Anda" required>
             </div>
             <div class="btn-tools mt-3 mb-3">
                 <button type="button" class="btn-back"

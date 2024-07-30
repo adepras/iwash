@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,7 +14,8 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $vehicles = Vehicle::where('user_id', $user->id)->orderBy('vehicle_brand')->get();
-        return view('profile.profile', compact('user', 'vehicles'));
+        $bookings = Booking::where('user_id', $user->id)->get();
+        return view('profile.profile', compact('user', 'vehicles', 'bookings'));
     }
 
     public function update(Request $request)
@@ -29,7 +31,7 @@ class ProfileController extends Controller
             'address' => 'required|string|max:255',
         ]);
 
-        // Update user data
+        // Update data user
         $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];
         $user->phone_number = $validatedData['phone_number'];
@@ -37,7 +39,6 @@ class ProfileController extends Controller
         $user->address = $validatedData['address'];
         $user->save();
 
-        // Redirect back to the profile page with a success message
         return redirect()->route('profile')->with('success', 'Profil berhasil diperbarui');
     }
 
@@ -47,6 +48,6 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         return view('profile.edit_profile', compact('user'));
-        
+
     }
 }

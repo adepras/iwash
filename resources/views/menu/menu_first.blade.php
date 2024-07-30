@@ -15,15 +15,23 @@
             <input type="hidden" name="price" id="selected-price" value="">
             <input type="hidden" name="estimated" id="selected-time" value="">
             <input type="hidden" name="date_booking" id="selected-date" value="">
-            <input type="hidden" name="vehicle_brand" id="selected-vehicle-brand" value="">
-            <input type="hidden" name="vehicle_type" id="selected-vehicle-type" value="">
-            <input type="hidden" name="license_plate" id="selected-license-plate" value="">
+            <input type="hidden" name="vehicle_id" id="selected-vehicle-id" value=""> <!-- Update here -->
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
             <div class="category-menu mt-5 mb-2">
                 {{-- Satu Kali Cuci --}}
                 <h5>Pilih Paket Satu Kali Cuci</h5>
                 <div class="price-menu">
-                    <div class="card-price selectable" data-package="Basic" data-price="50000" data-time="60">
+                    <div class="card-price selectable" data-package="Paket Basic" data-price="50000" data-time="60">
                         <h5><img src="image/p-basic.png" alt="">Basic</h5>
                         <ul class="card-service">
                             <li><img src="image/check-ill.png" alt="">Hand Wash</li>
@@ -38,7 +46,7 @@
                                 jam</p>
                         </div>
                     </div>
-                    <div class="card-price selectable" data-package="Standard" data-price="60000" data-time="120">
+                    <div class="card-price selectable" data-package="Paket Standard" data-price="60000" data-time="120">
                         <h5><img src="image/p-standard.png" alt="">Standard</h5>
                         <ul class="card-service">
                             <li style="font-weight: 600"><img src="image/check-ill.png" alt="">All in Basic</li>
@@ -53,7 +61,7 @@
                                 jam</p>
                         </div>
                     </div>
-                    <div class="card-price selectable" data-package="Professional" data-price="70000" data-time="180">
+                    <div class="card-price selectable" data-package="Paket Professional" data-price="70000" data-time="180">
                         <h5><img src="image/p-professional.png" alt="">Professional</h5>
                         <ul class="card-service">
                             <li style="font-weight: 600"><img src="image/check-ill.png" alt="">All in Standard</li>
@@ -64,8 +72,7 @@
                         <div class="price mt-3">
                             <p>Harga</p>
                             <h6 class="service-price">Rp70.000</h6>
-                            <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg"
-                                    alt="">Estimasi 3
+                            <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 3
                                 jam</p>
                         </div>
                     </div>
@@ -78,8 +85,7 @@
                     <div class="vehicle-list">
                         @foreach ($vehicles as $vehicle)
                             <div class="vehicle-item selectable" data-id="{{ $vehicle->id }}"
-                                data-brand="{{ $vehicle->vehicle_brand }}" data-type="{{ $vehicle->vehicle_type }}"
-                                data-plate="{{ $vehicle->license_plate }}">
+                                data-booked="{{ $vehicle->hasActiveBooking() ? 'true' : 'false' }}">
                                 <p>{{ $vehicle->vehicle_brand }}</p>
                                 <p>{{ $vehicle->vehicle_type }}</p>
                                 <p>{{ $vehicle->license_plate }}</p>
@@ -112,6 +118,15 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
+            $('.vehicle-item').click(function() {
+                if ($(this).hasClass('disabled')) {
+                    return;
+                }
+                $('.vehicle-item').removeClass('selected');
+                $(this).addClass('selected');
+                $('#selected-vehicle-id').val($(this).data('id'));
+            });
+
             $('.card-price').click(function() {
                 $('.card-price').removeClass('selected');
                 $(this).addClass('selected');
@@ -120,18 +135,10 @@
                 $('#selected-time').val($(this).data('time'));
             });
 
-            $('.vehicle-item').click(function() {
-                $('.vehicle-item').removeClass('selected');
-                $(this).addClass('selected');
-                $('#selected-vehicle-brand').val($(this).data('brand'));
-                $('#selected-vehicle-type').val($(this).data('type'));
-                $('#selected-license-plate').val($(this).data('plate'));
-            });
-
             $('.btn-reset').click(function() {
                 $('.card-price, .vehicle-item').removeClass('selected');
-                $('#selected-package, #selected-price, #selected-time, #selected-vehicle-brand, #selected-vehicle-type, #selected-license-plate')
-                    .val('');
+                $('#selected-package, #selected-price, #selected-time, #selected-vehicle-id').val(
+                '');
                 $('#date').val('');
             });
         });
