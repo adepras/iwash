@@ -70,7 +70,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/check-active-booking/{id}', [VehicleController::class, 'checkActiveBooking']);
 
     // Route::patch('/bookings/{id}/cancel', [BookingController::class, 'cancelBooking'])->name('cancelBooking');
-    // Route::patch('/bookings/{id}/finish', [BookingController::class, 'finishBooking'])->name('finishBooking');
 });
 
 // Admin
@@ -81,15 +80,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/admin/profile', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
     Route::get('/admin/profile', [AdminController::class, 'adminprofile'])->name('admin.adminprofile');
 
-    // Admin View
+    // Admin Sidebar View
     Route::get('/admin/menu/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/menu/users', [AdminController::class, 'users'])->name('admin.users');
     Route::get('/admin/menu/vehicle', [AdminController::class, 'vehicle'])->name('admin.vehicle');
     Route::get('/admin/menu/booking', [AdminController::class, 'booking'])->name('admin.booking');
     Route::get('/admin/menu/queue', [AdminController::class, 'queue'])->name('admin.queue');
-
-
-    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard.index');
 
     // Admin - Users
     Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
