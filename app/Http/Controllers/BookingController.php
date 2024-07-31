@@ -312,4 +312,22 @@ class BookingController extends Controller
 
     //     return redirect()->back()->with('status', 'Pemesanan Layanan Anda Dibatalkan');
     // }
+
+    public function queue()
+    {
+        $bookings = Booking::where('status', 'pending')->get();
+        return view('admin.menu.queues', compact('bookings'));
+    }
+
+    public function index()
+    {
+        $bookings = Booking::where('user_id', auth()->id())->get();
+        return view('admin.menu.bookings', compact('bookings'));
+    }
+
+    public function today()
+    {
+        $bookings = Booking::where('booking_date', Carbon::today())->get();
+        return view('admin.menu.bookings', compact('bookings'));
+    }
 }

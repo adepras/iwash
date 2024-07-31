@@ -7,19 +7,19 @@
         <h5>Dashboard</h5>
     </div>
     <div class="sidebar-menu">
-        <button type="button" id="dashboard" data-url="{{ route('admin.dashboard') }}">
+        <button type="button" id="dashboard" data-url="{{ route('admin.menu.dashboard') }}">
             <img src="/image/app.svg" alt=""><span>Dashboard</span>
         </button>
-        <button type="button" id="users" data-url="{{ route('admin.users') }}">
+        <button type="button" id="users" data-url="{{ route('admin.menu.users') }}">
             <img src="/image/app.svg" alt=""><span>Data Pelanggan</span>
         </button>
-        <button type="button" id="vehicle" data-url="{{ route('admin.vehicle') }}">
+        <button type="button" id="vehicle" data-url="{{ route('admin.menu.vehicles') }}">
             <img src="/image/app.svg" alt=""><span>Data Kendaraan</span>
         </button>
-        <button type="button" id="booking" data-url="{{ route('admin.booking') }}">
+        <button type="button" id="booking" data-url="{{ route('admin.menu.bookings') }}">
             <img src="/image/app.svg" alt=""><span>Data Pemesanan</span>
         </button>
-        <button type="button" id="queue" data-url="{{ route('admin.queue') }}">
+        <button type="button" id="queue" data-url="{{ route('admin.menu.queues') }}">
             <img src="/image/app.svg" alt=""><span>Data Antrian</span>
         </button>
     </div>

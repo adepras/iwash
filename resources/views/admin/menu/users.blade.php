@@ -6,23 +6,34 @@
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 
     <div class="container">
-        <h1>Daftar Pelanggan</h1>
-        <table class="table table-bordered">
+        <h4>Daftar Pelanggan</h4>
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Nama</th>
+                    <th>
+                        <a href="{{ route('admin.menu.users', ['sortOrder' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
+                            Nama
+                            @if ($sortOrder === 'asc')
+                                <img src="/image/arrow-up.svg" alt="">
+                            @else
+                                <img src="/image/arrow-down.svg" alt="">
+                            @endif
+                        </a>
+                    </th>
+                    <th>Nomor Telepon</th>
                     <th>Email</th>
-                    <th>Telepon</th>
+                    <th>Alamat</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($customers as $customer)
+                @foreach ($users as $index => $user)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $customer->name }}</td>
-                        <td>{{ $customer->email }}</td>
-                        <td>{{ $customer->phone }}</td>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->phone_number }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->address }}</td>
                     </tr>
                 @endforeach
             </tbody>

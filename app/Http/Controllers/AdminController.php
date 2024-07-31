@@ -41,16 +41,16 @@ class AdminController extends Controller
 
     public function vehicle()
     {
-        return view('admin.menu.vehicle');
+        return view('admin.menu.vehicles');
     }
 
     public function booking()
     {
-        return view('admin.menu.booking');
+        return view('admin.menu.bookings');
     }
 
     public function queue()
     {
-        return view('admin.menu.queue');
+        return view('admin.menu.queues');
     }
 }

@@ -28,10 +28,25 @@ class VehicleController extends Controller
 
     public function index()
     {
-
         $vehicles = Vehicle::where('user_id', auth()->id())->orderBy('vehicle_brand')->get();
         return view('profile', compact('vehicles'));
     }
+
+    public function adminIndex(Request $request)
+    {
+        $sortOrder = $request->get('sortOrder', 'asc');
+        $sortBy = $request->get('sortBy', 'vehicle_brand');
+
+        $allowedSortColumns = ['vehicle_brand', 'vehicle_type', 'license_plate'];
+        if (!in_array($sortBy, $allowedSortColumns)) {
+            $sortBy = 'vehicle_brand';
+        }
+
+        $vehicles = Vehicle::orderBy($sortBy, $sortOrder)->get();
+
+        return view('admin.menu.vehicles', compact('vehicles', 'sortOrder', 'sortBy'));
+    }
+
 
     public function destroy($id)
     {

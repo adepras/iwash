@@ -7,10 +7,12 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
-        return view('admin.users.index', compact('users'));
+        $sortOrder = $request->get('sortOrder', 'asc');
+        $users = User::orderBy('name', $sortOrder)->get();
+
+        return view('admin.menu.users', compact('users', 'sortOrder'));
     }
 
     public function destroy(User $user)
@@ -35,4 +37,5 @@ class UserController extends Controller
 
         return redirect()->route('admin.users.index')->with('success', 'User berhasil diperbarui');
     }
+
 }

@@ -18,7 +18,7 @@ class AdminDashboardController extends Controller
         $todayBookingsCount = Booking::whereDate('created_at', Carbon::today())->count();
 
         // Mengirimkan data ke view
-        return view('admin.dashboard', [
+        return view('admin.menu.dashboard', [
             'userCount' => $userCount,
             'todayBookingsCount' => $todayBookingsCount
         ]);

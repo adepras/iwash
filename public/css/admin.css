@@ -9,8 +9,9 @@ body {
 /* Main layout */
 .main-content {
     display: flex;
+    width: 100%;
     margin-top: 60px;
-    margin-left: 250px;
+    padding-left: 250px;
     transition: margin-left 0.3s;
 }
 
@@ -23,7 +24,7 @@ body {
     display: flex;
     justify-content: space-between;
     background-color: #fff;
-    padding: 12px 30px 12px 10px;
+    padding: 12px 30px 12px 20px;
     position: fixed;
     width: calc(100% - 250px);
     top: 0;
@@ -54,7 +55,7 @@ body {
 }
 
 .btn-list img {
-    width: 25px;
+    width: 20px;
     height: auto;
 }
 
@@ -163,3 +164,58 @@ body {
     opacity: 0;
 }
 
+/* Main Content */
+.container {
+    width: 100%;
+    padding: 15px;
+    background-color: #f4f6f9;
+    transition: width 0.3s;
+}
+
+h4 {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+    font-weight: 600;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 15px;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+.table thead th {
+    background-color: #495057;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+
+.table th a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table th a,
+.table thead th {
+    color: #fff;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.table th a img {
+    margin-left: 8px;
+    width: 16px;
+    height: auto;
+}
