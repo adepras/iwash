@@ -95,11 +95,16 @@
             @else
                 <div class="detail-order mt-4">
                     @foreach ($bookings as $booking)
-                        <div class="order-item mb-3 p-2 border rounded">
-                            <p>Status: {{ $booking->status }}</p>
-                            <p>Tanggal Pemesanan: {{ $booking->created_at->format('d-m-Y') }}</p>
+                        <div class="order-item">
+                            <div class="pay-status">
+                                <h6>Status {{ $booking->status }}</h6>
+                                <p>Belum Bayar</p>
+                            </div>
+                            <p>Tanggal Pemesanan: {{ $booking->created_at->format('d M Y') }}</p>
                             <p>Waktu Kedatangan: {{ $booking->time_booking }}</p>
-                            <button type="button" onclick="window.location.href='{{ route('detail_order', ['id' => $booking->id]) }}'">Detail Order</button>    
+                            <button type="button" class="btn-submit mt-4"
+                                onclick="window.location.href='{{ route('detail_order', ['id' => $booking->id]) }}'">Detail
+                                Order</button>
                         </div>
                     @endforeach
                 </div>

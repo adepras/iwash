@@ -11,12 +11,12 @@ class AdminController extends Controller
 {
     public function admin()
     {
-        return view('admin.admin-app');
+        return view('admin.layouts.admin-app');
     }
 
     public function adminprofile()
     {
-        return view('admin.admin-profile');
+        return view('admin.profile.admin-profile');
     }
 
     public function dashboard()
@@ -28,7 +28,7 @@ class AdminController extends Controller
         $todayBookingsCount = Booking::whereDate('created_at', Carbon::today())->count();
 
         // Mengirimkan data ke view
-        return view('admin.dashboard', [
+        return view('admin.menu.dashboard', [
             'userCount' => $userCount,
             'todayBookingsCount' => $todayBookingsCount
         ]);
@@ -36,21 +36,21 @@ class AdminController extends Controller
 
     public function users()
     {
-        return view('admin.users');
+        return view('admin.menu.users');
+    }
+
+    public function vehicle()
+    {
+        return view('admin.menu.vehicle');
     }
 
     public function booking()
     {
-        return view('admin.booking');
+        return view('admin.menu.booking');
     }
 
     public function queue()
     {
-        return view('admin.queue');
-    }
-
-    public function sidebar()
-    {
-        return view('admin.sidebar');
+        return view('admin.menu.queue');
     }
 }

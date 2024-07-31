@@ -7,7 +7,7 @@
 
     <div class="container-detail-order py-5">
         <h2>Detail Pesanan Layanan iWash</h2>
-        {{-- <a href="{{ url()->previous() }}"><img src="/image/back-to.svg" alt="">Kembali ke menu layanan</a> --}}
+        <a href="{{ route('menu') }}"><img src="/image/back-to.svg" alt="">Kembali ke menu layanan</a>
         <div class="container-detail mt-5 mb-2">
             <div class="layout-order">
                 <h5>Pesanan Layanan Anda Telah Dibuat</h5>
@@ -20,7 +20,7 @@
                     <div class="detail-title">
                         <h6>Waktu Kedatangan : {{ $booking->time_booking }}</h6>
                         <h6>{{ $service }}</h6>
-                        <p>{{ $package }}</p>
+                        <h6>{{ $package }}</h6>
                         <ul>
                             <li>Total Harga :</li>
                             <li>Rp {{ number_format($booking->price, 0, ',', '.') }}</li>
@@ -57,7 +57,13 @@
                             <li>Nomor Polisi :</li>
                             <li>{{ $booking->vehicle->license_plate ?? 'Tidak tersedia' }}</li>
                         </ul>
-                        <h6>Status {{ $status }}</h6>
+                        <h6 class="mt-4">Status {{ $status }}</h6>
+                        <div class="d-flex justify-content-between">
+                            <h6>Durasi Pembayaran</h6>
+                            <span class="countdown" style="color: red;">00:03:00</span>
+                        </div>
+                        <p class="mt-2"> Segera lakukan pembayaran sebelum durasi pembayaran habis untuk menghindari
+                            pembatalan pemesanan secara otomatis.</p>
                     </div>
                 </div>
                 <div class="order-menu pay-now mt-3">
@@ -83,8 +89,8 @@
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                Pembayaran dapat dilakukan melalui transfer ke Bank yang tersedia via Virtual Account yang
-                                diberikan pada proses pembayaran.
+                                Pembayaran dapat dilakukan melalui metode pembayaran yang tersedia sebelum durasi pembayaran
+                                telah habis. Jika durasi pembayaran habis maka pemesanan akan otomatis dibatalkan.
                             </div>
                         </div>
                     </div>

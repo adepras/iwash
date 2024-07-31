@@ -79,12 +79,19 @@ Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
 Route::middleware(['auth', 'admin'])->group(function () {
     // Admin
     Route::put('/admin/profile', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
+
+    // Admin View
     Route::get('/admin/profile', [AdminController::class, 'adminprofile'])->name('admin.adminprofile');
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
-    Route::get('/booking', [AdminController::class, 'booking'])->name('admin.booking');
-    Route::get('/queue', [AdminController::class, 'queue'])->name('admin.queue');
+    Route::get('/admin/menu/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/menu/users', [AdminController::class, 'users'])->name('admin.users');
+    Route::get('/admin/menu/vehicle', [AdminController::class, 'vehicle'])->name('admin.vehicle');
+    Route::get('/admin/menu/booking', [AdminController::class, 'booking'])->name('admin.booking');
+    Route::get('/admin/menu/queue', [AdminController::class, 'queue'])->name('admin.queue');
+
+
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard.index');
+
+    // Admin - Users
     Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
     Route::get('/admin/customers', [CustomerController::class, 'index'])->name('admin.customers.index');
     Route::get('/admin/bookings/today', [BookingController::class, 'today'])->name('admin.bookings.today');

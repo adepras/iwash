@@ -1,4 +1,4 @@
-@extends('admin.admin-app')
+@extends('admin.layouts.admin-app')
 
 @section('title', 'Admin | Profil Admin')
 
@@ -8,7 +8,6 @@
     <div class="booking-container">
         <h1>Profil Admin</h1>
         
-        <!-- Tampilkan pesan sukses jika ada -->
         @if(session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}

@@ -1,5 +1,6 @@
-{{-- resources/views/admin/dashboard.blade.php --}}
-@extends('layouts.admin')
+@extends('admin.layouts.admin-app')
+
+@section('title', 'Admin | Dashboard')
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
