@@ -6,19 +6,6 @@ body {
     background-color: #f4f6f9;
 }
 
-/* Main layout */
-.main-content {
-    display: flex;
-    width: calc(100% - 250px);
-    margin-top: 60px;
-    margin-left: 250px;
-    transition: margin-left 0.3s;
-}
-
-.main-content.collapsed {
-    margin-left: 73px;
-}
-
 /* Header */
 .navbar {
     display: flex;
@@ -165,11 +152,25 @@ body {
 }
 
 /* Main Content */
+.main-content {
+    display: flex;
+    width: calc(100% - 250px);
+    margin-top: 60px;
+    margin-left: 250px;
+    transition: margin-left 0.3s;
+}
+
+.main-content.collapsed {
+    margin-left: 73px;
+    width: calc(100% - 73px);
+}
+
 .container {
     width: 100%;
     padding: 15px;
     background-color: #f4f6f9;
     transition: width 0.3s;
+    box-sizing: border-box;
 }
 
 h4 {
