@@ -9,9 +9,9 @@ body {
 /* Main layout */
 .main-content {
     display: flex;
-    width: 100%;
+    width: calc(100% - 250px);
     margin-top: 60px;
-    padding-left: 250px;
+    margin-left: 250px;
     transition: margin-left 0.3s;
 }
 
@@ -184,6 +184,11 @@ h4 {
     margin-bottom: 1rem;
     color: #212529;
     border-collapse: collapse;
+}
+
+.table thead th,
+.table tbody td {
+    white-space: nowrap;
 }
 
 .table th,
