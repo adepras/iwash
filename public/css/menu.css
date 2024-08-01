@@ -476,3 +476,299 @@
     font-size: 14px;
     color: #333;
 }
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .container-menu {
+        width: 100%;
+    }
+
+    .container-menu h2 {
+        font-size: 24px;
+    }
+
+    .container-menu p {
+        font-size: 18px;
+    }
+
+    .option-menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .option-menu img {
+        width: 40px;
+    }
+
+    .btn-menu {
+        width: 80%;
+    }
+
+    .btn-menu img {
+        width: 30px;
+    }
+
+    .price-menu {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .card-price {
+        width: 45%;
+    }
+
+    .card-price:nth-child(4),
+    .card-price:nth-child(5) {
+        width: 100%;
+    }
+
+    .card-price ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    .card-price h5 {
+        color: #333;
+        text-align: start;
+    }
+
+    .card-price img {
+        width: 18px;
+        height: auto;
+        margin: -2px 8px 0 0;
+    }
+
+    .card-service img {
+        width: 16px;
+        margin: -2px 10px 0 0;
+    }
+
+    .card-service li {
+        list-style: none;
+        padding: 3px 0;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .price {
+        margin-top: auto;
+    }
+
+    .price p {
+        font-size: 13px;
+        color: #777;
+        margin: 0;
+    }
+
+    .price h6 {
+        margin: 0;
+        color: #333;
+        font-weight: 600;
+    }
+
+    .select-price {
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+    }
+
+    .form-check-input {
+        cursor: pointer;
+    }
+
+    .form-check-input:checked {
+        background-color: #22b6f6;
+        border-color: #22b6f6;
+    }
+
+    .form-check-input:focus {
+        box-shadow: none;
+    }
+
+    .estimation {
+        width: fit-content;
+        font-size: 5px;
+        text-align: center;
+        padding: 3px 5px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .container-wash {
+        padding: 0 20px;
+    }
+
+    .container-wash h2 {
+        font-size: 24px;
+    }
+
+    .container-wash a,
+    .container-detail-order a {
+        font-size: 12px;
+    }
+
+    .btn-car {
+        width: 30%;
+        font-size: 14px;
+    }
+
+    .data-order {
+        width: 100%;
+    }
+
+    .data-layout {
+        width: 100%;
+    }
+
+    .booking-date,
+    .booking-time {
+        width: 100% !important;
+    }
+
+    .form-input {
+        width: 100%;
+    }
+
+    .form-input label {
+        font-size: 12px;
+    }
+
+    .form-input input,
+    .form-input select {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-col {
+        width: 100%;
+    }
+
+    .error-message {
+        font-size: 10px;
+    }
+
+    .vehicle-list {
+        width: 100%;
+    }
+
+    .vehicle-item {
+        padding: 10px;
+        width: 100%;
+    }
+
+    .vehicle-item p {
+        font-size: 12px;
+    }
+
+    .container-detail-order {
+        padding: 0 20px;
+    }
+
+    .container-detail {
+        flex-direction: column;
+    }
+
+    .layout-order {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .detail-order {
+        margin-left: 0;
+    }
+
+    .pay-logo img {
+        width: 60px;
+    }
+
+    .line {
+        margin: 3px 0;
+    }
+
+    .detail-title h6 {
+        font-size: 14px;
+    }
+
+    .detail-title p {
+        font-size: 12px;
+    }
+
+    .detail-title ul {
+        padding: 0;
+    }
+
+    .pay-now {
+        margin-left: 0;
+    }
+
+    .pay-now h5 {
+        font-size: 14px;
+    }
+
+    .pay-price h6,
+    .pay-price p {
+        margin: 0 3px;
+    }
+
+    .btn-back {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .layout-faq {
+        width: 100%;
+    }
+
+    .accordion-item h2 {
+        font-size: 14px;
+    }
+
+    .accordion-body {
+        font-size: 12px;
+    }
+
+    .accordion-button:not(.collapsed) {
+        color: #333;
+    }
+
+    .accordion-button {
+        font-size: 14px;
+    }
+
+    .accordion-button:not(.collapsed) {
+        color: #333;
+    }
+
+    .accordion-button.collapsed {
+        color: #333;
+    }
+
+    .accordion-button.collapsed:hover {
+        color: #333;
+    }
+
+    .data-layout {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .order-menu {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .btn-reset,
+    .btn-next,
+    .btn-back {
+        width: 45%;
+    }
+}

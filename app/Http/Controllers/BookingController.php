@@ -340,12 +340,6 @@ class BookingController extends Controller
         return redirect()->route('profile')->with('status', 'Booking has been canceled.');
     }
 
-    public function queue()
-    {
-        $bookings = Booking::where('status', 'pending')->get();
-        return view('admin.menu.queues', compact('bookings'));
-    }
-
     public function index()
     {
         $bookings = Booking::where('user_id', auth()->id())->get();

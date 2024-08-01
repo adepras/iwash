@@ -16,16 +16,17 @@ use App\Models\Booking;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\QueueController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResetPasswordController;
-use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\Admin\CustomerController; 
 use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\Admin\CustomerController;
-use App\Http\Controllers\UserController;
 
 // Halaman Website
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -87,19 +88,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/admin/profile', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
     Route::get('/admin/profile', [AdminController::class, 'adminprofile'])->name('admin.adminprofile');
 
-    // Admin Sidebar View
-    Route::get('/admin/menu/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/admin/menu/users', [AdminController::class, 'users'])->name('admin.users');
-    Route::get('/admin/menu/vehicle', [AdminController::class, 'vehicle'])->name('admin.vehicle');
-    Route::get('/admin/menu/booking', [AdminController::class, 'booking'])->name('admin.booking');
-    Route::get('/admin/menu/queue', [AdminController::class, 'queue'])->name('admin.queue');
-
     // Admin
-    Route::get('/admin/menu/dashboard', [AdminDashboardController::class, 'index'])->name('admin.menu.dashboard');
+    Route::get('/admin/menu/dashboard', [DashboardController::class, 'index'])->name('admin.menu.dashboard');
     Route::get('/admin/menu/users', [UserController::class, 'index'])->name('admin.menu.users');
     Route::get('/admin/menu/vehicles', [VehicleController::class, 'adminIndex'])->name('admin.menu.vehicles');
     Route::get('/admin/menu/bookings', [BookingController::class, 'index'])->name('admin.menu.bookings');
-    Route::get('/admin/menu/queues', [BookingController::class, 'queue'])->name('admin.menu.queues');
+    Route::get('/admin/menu/queues', [QueueController::class, 'index'])->name('admin.menu.queues');
 
     // Admin
     Route::get('/admin/customers', [CustomerController::class, 'index'])->name('admin.customers.index');
