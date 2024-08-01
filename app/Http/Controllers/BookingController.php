@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Midtrans\Snap;
 use App\Models\Slot;
 use App\Models\User;
 use App\Models\Outlet;
 use App\Models\Booking;
+use Midtrans\Notification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -53,7 +55,7 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-    
+
         $validated = $request->validate([
             'service' => 'required',
             'package' => 'required',
@@ -63,22 +65,22 @@ class BookingController extends Controller
             'time_booking' => 'required|date_format:H:i',
             'vehicle_id' => 'required|exists:vehicles,id',
         ]);
-    
+
         $dateBooking = Carbon::parse($validated['date_booking'])->toDateString();
         $timeBooking = Carbon::parse($validated['time_booking'])->toTimeString();
         $outlet = Outlet::find(1);
-    
+
         // Fungsi untuk memeriksa dan membuat slot jika belum ada
         $slot = $this->checkAndCreateSlots($outlet, $dateBooking, $timeBooking);
-    
+
         // Ambil semua booking yang dibuat dalam 5 detik terakhir
         $currentTimestamp = Carbon::now();
         $startTimestamp = $currentTimestamp->copy()->subSeconds(5);
-    
+
         $recentBookings = Booking::where('booking_date', $dateBooking)
             ->whereBetween('created_at', [$startTimestamp, $currentTimestamp])
             ->get();
-    
+
         // Tambahkan booking saat ini ke dalam list recentBookings
         $recentBookings->push((object) [
             'id' => null,
@@ -93,13 +95,13 @@ class BookingController extends Controller
             'status' => 'pending',
             'created_at' => $currentTimestamp,
         ]);
-    
+
         // Urutkan booking berdasarkan estimasi durasi (SJF)
         $sortedBookings = $recentBookings->sortBy('estimated');
-    
+
         foreach ($sortedBookings as $bookingData) {
             if ($bookingData->id == null) {
-    
+
                 $booking = new Booking([
                     'id' => (string) \Illuminate\Support\Str::uuid(),
                     'service' => $bookingData->service,
@@ -114,10 +116,10 @@ class BookingController extends Controller
                     'vehicle_id' => $bookingData->vehicle_id,
                     'status' => 'pending',
                 ]);
-    
+
                 // Periksa ketersediaan slot berdasarkan nilai estimated
                 $slots = $this->getSlotsBasedOnEstimated($outlet->id, $dateBooking, $timeBooking, $bookingData->estimated);
-    
+
                 foreach ($slots as $slot) {
                     if ($slot->booked) {
                         foreach ($sortedBookings as $bookingDataOld) {
@@ -133,7 +135,7 @@ class BookingController extends Controller
                                         $slot->booking_id = null;
                                         $slot->save();
                                     }
-    
+
                                     // Update booking dengan informasi baru
                                     $existingBooking->service = $bookingDataOld->service;
                                     $existingBooking->package = $bookingDataOld->package;
@@ -146,16 +148,16 @@ class BookingController extends Controller
                                     $existingBooking->phone_number = $bookingDataOld->phone_number;
                                     $existingBooking->vehicle_id = $bookingDataOld->vehicle_id;
                                     $existingBooking->status = 'pending';
-    
+
                                     // Periksa ketersediaan slot berdasarkan nilai estimated
                                     $slotsNew = $this->getSlotsBasedOnEstimated($outlet->id, $dateBooking, $timeBookingOld, $existingBooking->estimated);
-    
+
                                     foreach ($slotsNew as $slot) {
                                         if ($slot->booked) {
                                             return redirect()->back()->withErrors(['time_booking' => 'Slot waktu tidak tersedia atau sudah dipesan']);
                                         }
                                     }
-    
+
                                     // Tandai slot-slot yang dipilih sebagai sudah dipesan
                                     foreach ($slotsNew as $slot) {
                                         $slot->booked = true;
@@ -168,26 +170,26 @@ class BookingController extends Controller
                         }
                     }
                 }
-    
+
                 // Tandai slot-slot yang dipilih sebagai sudah dipesan
                 foreach ($slots as $slot) {
                     $slot->booked = true;
                     $slot->save();
                 }
-    
+
                 $booking->save();
-    
+
                 foreach ($slots as $slot) {
                     $slot->booking_id = $booking->id;
                     $slot->save();
                 }
             }
         }
-    
+
         return redirect()->route('detail_order', ['id' => $booking->id])
             ->with('success', 'Booking berhasil dibuat! Slot waktu: ' . $timeBooking);
     }
-    
+
 
     private function checkAndCreateSlots($outlet, $dateBooking, $timeBooking)
     {
@@ -300,18 +302,57 @@ class BookingController extends Controller
 
     public function detailOrder($id)
     {
-        $booking = Booking::findOrFail($id);
-        return view('menu.detail_order', compact('booking'));
+        $booking = Booking::with('vehicle')->findOrFail($id);
+        $user = User::find($booking->user_id);
+
+        $date_booking = Carbon::parse($booking->booking_date)->format('d M Y');
+        $time_booking = Carbon::parse($booking->time_booking)->format('H:i');
+        $phone_number = $user->phone_number;
+        $sensor_phone_number = substr($phone_number, 0, 4) . str_repeat('*', strlen($phone_number) - 7) . substr($phone_number, -3);
+
+        // Generate Midtrans Snap Token
+        $params = [
+            'transaction_details' => [
+                'order_id' => $booking->id,
+                'gross_amount' => $booking->price,
+            ],
+            'customer_details' => [
+                'first_name' => $user->name,
+                'last_name' => '',
+                'email' => $user->email,
+                'phone' => $user->phone_number,
+            ]
+        ];
+
+        $snapToken = Snap::getSnapToken($params);
+
+        return view('detail_order', [
+            'booking' => $booking,
+            'snapToken' => $snapToken,
+            'date_booking' => $date_booking,
+            'time_booking' => $time_booking,
+            'name' => $user->name,
+            'phone_number' => $sensor_phone_number,
+            'service' => $booking->service,
+            'package' => $booking->package,
+            'estimated' => $booking->estimated,
+            'status' => $booking->status,
+        ]);
     }
 
-    // public function cancelBooking($id)
-    // {
-    //     $booking = Booking::findOrFail($id);
-    //     $booking->status = 'Cancelled';
-    //     $booking->save();
+    public function cancelBooking($id)
+    {
+        $booking = Booking::findOrFail($id);
 
-    //     return redirect()->back()->with('status', 'Pemesanan Layanan Anda Dibatalkan');
-    // }
+        if ($booking->status === 'pending') {
+            $booking->status = 'canceled';
+            $booking->save();
+
+            // Notification::send($booking->user, new BookingCanceledNotification($booking));
+        }
+
+        return redirect()->route('profile')->with('status', 'Booking has been canceled.');
+    }
 
     public function queue()
     {

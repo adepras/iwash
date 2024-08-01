@@ -14,7 +14,7 @@ class OutletSeeder extends Seeder
     public function run()
     {
         Outlet::create([
-            'name' => 'iWash Main Outlet',
+            'name' => 'iWash Main Slot 1',
             'opening_time' => '08:00:00',
             'closing_time' => '16:00:00',
         ]);

@@ -70,6 +70,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/check-active-booking/{id}', [VehicleController::class, 'checkActiveBooking']);
 
     // Route::patch('/bookings/{id}/cancel', [BookingController::class, 'cancelBooking'])->name('cancelBooking');
+    Route::get('/cancel_booking/{id}', [BookingController::class, 'cancelBooking'])->name('cancel_booking');
+
 });
 
 // Admin

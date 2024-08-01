@@ -62,7 +62,7 @@
                             <h6>Durasi Pembayaran</h6>
                             <span class="countdown" style="color: red;">00:03:00</span>
                         </div>
-                        <p class="mt-2"> Segera lakukan pembayaran sebelum durasi pembayaran habis untuk menghindari
+                        <p class="mt-2">Segera lakukan pembayaran sebelum durasi pembayaran habis untuk menghindari
                             pembatalan pemesanan secara otomatis.</p>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                         <p>Total Pembayaran</p>
                         <h6>Rp {{ number_format($booking->price, 0, ',', '.') }}</h6>
                     </div>
-                    <button class="btn-next" type="submit">Bayar</button>
+                    <button class="btn-next" id="pay-button">Bayar</button>
                 </div>
                 <button type="button" class="btn-back mt-3"
                     onclick="window.location.href='{{ route('profile') }}#status-pemesanan'">Lihat Status
@@ -90,7 +90,7 @@
                         <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 Pembayaran dapat dilakukan melalui metode pembayaran yang tersedia sebelum durasi pembayaran
-                                telah habis. Jika durasi pembayaran habis maka pemesanan akan otomatis dibatalkan.
+                                habis. Jika durasi pembayaran habis maka pemesanan akan otomatis dibatalkan.
                             </div>
                         </div>
                     </div>
@@ -126,4 +126,39 @@
             </div>
         </div>
     </div>
+
+    <script src="https://app.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
+    <script>
+        document.getElementById('pay-button').addEventListener('click', function() {
+            snap.pay('{{ $snapToken }}');
+        });
+
+        // Countdown Timer
+        function startCountdown(duration, display) {
+            var timer = duration,
+                hours, minutes, seconds;
+            setInterval(function() {
+                hours = parseInt(timer / 3600, 10);
+                minutes = parseInt((timer % 3600) / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                hours = hours < 10 ? '0' + hours : hours;
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+
+                display.textContent = hours + ':' + minutes + ':' + seconds;
+
+                if (--timer < 0) {
+                    window.location.href = "{{ route('cancel_booking', ['id' => $booking->id]) }}";
+                }
+            }, 1000);
+        }
+
+        window.onload = function() {
+            var threeMinutes = 60 * 3,
+                display = document.querySelector('.countdown');
+            startCountdown(threeMinutes, display);
+        };
+    </script>
+
 @endsection
