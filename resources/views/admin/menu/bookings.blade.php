@@ -7,6 +7,10 @@
 
     <div class="container">
         <h1>Today's Bookings</h1>
+
+        <!-- Tambahkan Tombol Download -->
+        <a href="{{ route('admin.bookings.download') }}" class="btn btn-primary mb-3">Download CSV</a>
+
         <table class="table table-striped">
             <thead>
                 <tr>

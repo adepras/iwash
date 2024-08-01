@@ -12,6 +12,7 @@ use Midtrans\Notification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 
 class BookingController extends Controller
 {
@@ -370,4 +371,41 @@ class BookingController extends Controller
         $bookings = Booking::where('booking_date', Carbon::today())->get();
         return view('admin.menu.bookings', compact('bookings'));
     }
+}
+
+//download file csv
+function downloadCsv()
+{
+    $today = Carbon::today()->format('Y-m-d');
+    $bookings = Booking::whereDate('booking_date', $today)->get();
+
+    $filename = 'bookings_' . $today . '.csv';
+
+    $headers = [
+        "Content-type" => "text/csv",
+        "Content-Disposition" => "attachment; filename=\"$filename\"",
+        "Pragma" => "no-cache",
+        "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+        "Expires" => "0"
+    ];
+
+    $callback = function() use ($bookings) {
+        $file = fopen('php://output', 'w');
+        fputcsv($file, ['ID', 'User ID', 'Service', 'Booking Date', 'Status', 'Created At']);
+
+        foreach ($bookings as $booking) {
+            fputcsv($file, [
+                $booking->id,
+                $booking->user_id,
+                $booking->service,
+                $booking->booking_date,
+                $booking->status,
+                $booking->created_at
+            ]);
+        }
+
+        fclose($file);
+    };
+
+    return response()->stream($callback, 200, $headers);
 }

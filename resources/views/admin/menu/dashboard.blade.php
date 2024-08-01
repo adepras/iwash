@@ -13,7 +13,7 @@
                 <div class="card-header">Total Pengguna</div>
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a href="{{ route('admin.users.index') }}" class="text-white">{{ $userCount }}</a>
+                        <a href="{{ route('admin.menu.users') }}" class="text-white">{{ $userCount }}</a>
                     </h5>
                     <p class="card-text">Jumlah Total Pengguna.</p>
                 </div>
