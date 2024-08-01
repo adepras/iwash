@@ -25,4 +25,9 @@ class Vehicle extends Model
     {
         return $this->bookings()->where('status', '!=', 'finished')->exists();
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

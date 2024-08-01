@@ -37,12 +37,22 @@ class VehicleController extends Controller
         $sortOrder = $request->get('sortOrder', 'asc');
         $sortBy = $request->get('sortBy', 'vehicle_brand');
 
-        $allowedSortColumns = ['vehicle_brand', 'vehicle_type', 'license_plate'];
+        $allowedSortColumns = ['vehicle_brand', 'vehicle_type', 'license_plate', 'name'];
         if (!in_array($sortBy, $allowedSortColumns)) {
             $sortBy = 'vehicle_brand';
         }
 
-        $vehicles = Vehicle::orderBy($sortBy, $sortOrder)->get();
+        $vehicles = Vehicle::with('user')->get();
+
+        if ($sortBy === 'name') {
+            $vehicles = $vehicles->sortBy(function ($vehicle) {
+                return $vehicle->user->name;
+            }, SORT_REGULAR, $sortOrder === 'desc');
+        } else {
+            $vehicles = $vehicles->sortBy($sortBy, SORT_REGULAR, $sortOrder === 'desc');
+        }
+
+        $vehicles = $vehicles->values();
 
         return view('admin.menu.vehicles', compact('vehicles', 'sortOrder', 'sortBy'));
     }

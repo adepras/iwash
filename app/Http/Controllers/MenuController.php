@@ -27,9 +27,11 @@ class MenuController extends Controller
     }
 
     // Salon Mobil dan Detailing
-    public function menu2()
+    public function menu2(Request $request)
     {
         $vehicles = Vehicle::where('user_id', auth()->id())->get();
+        $date = $request->get('date_booking', Carbon::today());
+        $slots = $this->getAvailableSlots($date);
 
         return view('menu.menu_second', compact('vehicles'));
     }

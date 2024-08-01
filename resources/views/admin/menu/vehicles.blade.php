@@ -50,6 +50,19 @@
                             @endif
                         </a>
                     </th>
+                    <th>
+                        <a
+                            href="{{ route('admin.menu.vehicles', ['sortBy' => 'name', 'sortOrder' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
+                            Nama Pemilik
+                            @if ($sortBy === 'name')
+                                @if ($sortOrder === 'asc')
+                                    <img src="/image/arrow-up.svg" alt="">
+                                @else
+                                    <img src="/image/arrow-down.svg" alt="">
+                                @endif
+                            @endif
+                        </a>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -59,6 +72,7 @@
                         <td>{{ $vehicle->vehicle_brand }}</td>
                         <td>{{ $vehicle->vehicle_type }}</td>
                         <td>{{ $vehicle->license_plate }}</td>
+                        <td>{{ $vehicle->user->name }}</td>
                     </tr>
                 @endforeach
             </tbody>

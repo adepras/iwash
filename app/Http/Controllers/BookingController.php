@@ -309,8 +309,7 @@ class BookingController extends Controller
         $time_booking = Carbon::parse($booking->time_booking)->format('H:i');
         $phone_number = $user->phone_number;
         $sensor_phone_number = substr($phone_number, 0, 4) . str_repeat('*', strlen($phone_number) - 7) . substr($phone_number, -3);
-
-        // Generate Midtrans Snap Token
+        
         $params = [
             'transaction_details' => [
                 'order_id' => $booking->id,
