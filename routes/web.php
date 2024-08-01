@@ -72,6 +72,11 @@ Route::middleware(['auth'])->group(function () {
     // Route::patch('/bookings/{id}/cancel', [BookingController::class, 'cancelBooking'])->name('cancelBooking');
     Route::get('/cancel_booking/{id}', [BookingController::class, 'cancelBooking'])->name('cancel_booking');
 
+    Route::get('/loading', function () {
+        return view('menu.loading');
+    })->name('loading');
+    
+    Route::get('/process_booking', [BookingController::class, 'processBooking'])->name('process_booking');
 });
 
 // Admin

@@ -12,6 +12,7 @@ use Midtrans\Notification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
@@ -54,8 +55,7 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
-        $user = Auth::user();
-
+        // Menyimpan data booking yang telah divalidasi ke session
         $validated = $request->validate([
             'service' => 'required',
             'package' => 'required',
@@ -66,183 +66,170 @@ class BookingController extends Controller
             'vehicle_id' => 'required|exists:vehicles,id',
         ]);
 
-        $dateBooking = Carbon::parse($validated['date_booking'])->toDateString();
-        $timeBooking = Carbon::parse($validated['time_booking'])->toTimeString();
-        $outlet = Outlet::find(1);
-
-        // Fungsi untuk memeriksa dan membuat slot jika belum ada
-        $slot = $this->checkAndCreateSlots($outlet, $dateBooking, $timeBooking);
-
-        // Ambil semua booking yang dibuat dalam 5 detik terakhir
-        $currentTimestamp = Carbon::now();
-        $startTimestamp = $currentTimestamp->copy()->subSeconds(5);
-
-        $recentBookings = Booking::where('booking_date', $dateBooking)
-            ->whereBetween('created_at', [$startTimestamp, $currentTimestamp])
-            ->get();
-
-        // Tambahkan booking saat ini ke dalam list recentBookings
-        $recentBookings->push((object) [
-            'id' => null,
-            'user_id' => $user->id,
-            'vehicle_id' => $validated['vehicle_id'],
+        // Simpan data booking sementara untuk kemudian dicek
+        $booking = new Booking([
+            'id' => (string) \Illuminate\Support\Str::uuid(),
             'service' => $validated['service'],
             'package' => $validated['package'],
             'price' => $validated['price'],
             'estimated' => $validated['estimated'],
-            'date_booking' => $dateBooking,
-            'time_booking' => $timeBooking,
+            'booking_date' => $validated['date_booking'],
+            'time_booking' => $validated['time_booking'],
+            'user_id' => $validated['vehicle_id'],
+            'name' => Auth::user()->name,
+            'phone_number' => Auth::user()->phone_number,
+            'vehicle_id' => $validated['vehicle_id'],
             'status' => 'pending',
-            'created_at' => $currentTimestamp,
         ]);
 
-        // Urutkan booking berdasarkan estimasi durasi (SJF)
-        $sortedBookings = $recentBookings->sortBy('estimated');
+        $booking->save();
 
-        foreach ($sortedBookings as $bookingData) {
-            if ($bookingData->id == null) {
+        // Simpan data booking ke dalam session
+        session([
+            'validated_booking_data' => $validated,
+            'user_id' => Auth::id(),
+        ]);
 
-                $booking = new Booking([
-                    'id' => (string) \Illuminate\Support\Str::uuid(),
-                    'service' => $bookingData->service,
-                    'package' => $bookingData->package,
-                    'price' => $bookingData->price,
-                    'estimated' => $bookingData->estimated,
-                    'booking_date' => $dateBooking,
-                    'time_booking' => $timeBooking,
-                    'user_id' => $bookingData->user_id,
-                    'name' => $user->name,
-                    'phone_number' => $user->phone_number,
-                    'vehicle_id' => $bookingData->vehicle_id,
-                    'status' => 'pending',
-                ]);
+        // Arahkan ke halaman loading
+        return redirect()->route('loading');
+    }
 
-                // Periksa ketersediaan slot berdasarkan nilai estimated
-                $slots = $this->getSlotsBasedOnEstimated($outlet->id, $dateBooking, $timeBooking, $bookingData->estimated);
+    public function processBooking(Request $request)
+    {
+        $validated = session('validated_booking_data');
 
-                foreach ($slots as $slot) {
-                    if ($slot->booked) {
-                        foreach ($sortedBookings as $bookingDataOld) {
-                            if ($bookingDataOld->id !== null && $bookingDataOld->id !== $booking->id) {
-                                // Ini adalah booking yang sudah ada dalam daftar recentBookings, perbarui status dan slot
-                                $existingBooking = Booking::find($bookingDataOld->id);
-                                if ($existingBooking) {
-                                    // Tandai slot lama yang terkait dengan booking ini sebagai tidak tersedia
-                                    $timeBookingOld = Carbon::parse($timeBooking)->addMinutes($bookingData->estimated)->toTimeString();
-                                    $oldSlots = Slot::where('booking_id', $existingBooking->id)->get();
-                                    foreach ($oldSlots as $slot) {
-                                        $slot->booked = false;
-                                        $slot->booking_id = null;
-                                        $slot->save();
-                                    }
-
-                                    // Update booking dengan informasi baru
-                                    $existingBooking->service = $bookingDataOld->service;
-                                    $existingBooking->package = $bookingDataOld->package;
-                                    $existingBooking->price = $bookingDataOld->price;
-                                    $existingBooking->estimated = $bookingDataOld->estimated;
-                                    $existingBooking->booking_date = $dateBooking;
-                                    $existingBooking->time_booking = $timeBookingOld;
-                                    $existingBooking->user_id = $bookingDataOld->user_id;
-                                    $existingBooking->name = $bookingDataOld->name;
-                                    $existingBooking->phone_number = $bookingDataOld->phone_number;
-                                    $existingBooking->vehicle_id = $bookingDataOld->vehicle_id;
-                                    $existingBooking->status = 'pending';
-
-                                    // Periksa ketersediaan slot berdasarkan nilai estimated
-                                    $slotsNew = $this->getSlotsBasedOnEstimated($outlet->id, $dateBooking, $timeBookingOld, $existingBooking->estimated);
-
-                                    foreach ($slotsNew as $slot) {
-                                        if ($slot->booked) {
-                                            return redirect()->back()->withErrors(['time_booking' => 'Slot waktu tidak tersedia atau sudah dipesan']);
-                                        }
-                                    }
-
-                                    // Tandai slot-slot yang dipilih sebagai sudah dipesan
-                                    foreach ($slotsNew as $slot) {
-                                        $slot->booked = true;
-                                        $slot->booking_id = $existingBooking->id;
-                                        $slot->save();
-                                    }
-                                    $existingBooking->save();
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // Tandai slot-slot yang dipilih sebagai sudah dipesan
-                foreach ($slots as $slot) {
-                    $slot->booked = true;
-                    $slot->save();
-                }
-
-                $booking->save();
-
-                foreach ($slots as $slot) {
-                    $slot->booking_id = $booking->id;
-                    $slot->save();
-                }
-            }
+        if (!$validated) {
+            return redirect()->route('menu1')->withErrors(['time_booking' => 'Sesi telah berakhir, silakan ulangi proses booking']);
         }
 
-        return redirect()->route('detail_order', ['id' => $booking->id])
-            ->with('success', 'Booking berhasil dibuat! Slot waktu: ' . $timeBooking);
+        $dateBooking = Carbon::parse($validated['date_booking'])->toDateString();
+        $timeBooking = Carbon::parse($validated['time_booking'])->toTimeString();
+
+        DB::beginTransaction();
+
+        try {
+            // Cari data booking yang paling baru (dalam 5 detik terakhir)
+            $currentTimestamp = Carbon::now();
+            $startTimestamp = $currentTimestamp->copy()->subSeconds(5);
+
+            $recentBookings = Booking::where('booking_date', $dateBooking)
+                ->whereBetween('created_at', [$startTimestamp, $currentTimestamp])
+                ->get();
+
+            // Urutkan booking berdasarkan estimated duration (untuk menerapkan algoritma Shortest Job First)
+            $sortedBookings = $recentBookings->sortBy('estimated');
+
+            // Ambil data booking pada sortedBookings yang memiliki estimated duration paling kecil
+            $bookingData = $sortedBookings->first();
+
+            // Cek dan buat slot berdasarkan estimated duration
+            $slots = $this->checkAndCreateSlotsBasedOnEstimated($bookingData->booking_date, $bookingData->time_booking, $bookingData->estimated);
+
+            // Tandai slot yang dipilih sebagai booked
+            foreach ($slots as $slot) {
+                $slot->booked = true;
+                $slot->save();
+            }
+
+            // Simpan data booking
+            $booking = new Booking([
+                'id' => (string) \Illuminate\Support\Str::uuid(),
+                'service' => $bookingData->service,
+                'package' => $bookingData->package,
+                'price' => $bookingData->price,
+                'estimated' => $bookingData->estimated,
+                'booking_date' => $bookingData->booking_date,
+                'time_booking' => $bookingData->time_booking,
+                'user_id' => $bookingData->user_id,
+                'name' => $bookingData->name,
+                'phone_number' => $bookingData->phone_number,
+                'vehicle_id' => $bookingData->vehicle_id,
+                'status' => 'pending',
+            ]);
+
+            $booking->save();
+
+            // Sesuaikan slot dengan booking
+            foreach ($slots as $slot) {
+                $slot->booking_id = $booking->id;
+                $slot->save();
+            }
+
+            DB::commit();
+
+            // Hapus data booking yang disimpan di session
+            session()->forget('validated_booking_data');
+
+            // Jika user pada data booking sama dengan user yang sedang login, maka diarahkan ke halaman detail_order
+            if ($booking->user_id == Auth::id()) {
+                return redirect()->route('detail_order', ['id' => $booking->id]);
+            } else {
+                // Jika user pada data booking tidak sama dengan user yang sedang login, maka diarahkan untuk kembali 
+                return redirect()->route('menu1')->withErrors(['time_booking' => 'Tidak ada slot waktu yang tersedia']);
+            }
+        } catch (\Exception $e) {
+            dd($e);
+            DB::rollBack();
+            return redirect()->route('menu1')->withErrors(['time_booking' => 'Terjadi kesalahan : ' . $e->getMessage()]);
+        }
     }
 
 
-    private function checkAndCreateSlots($outlet, $dateBooking, $timeBooking)
+    private function checkAndCreateSlotsBasedOnEstimated($dateBooking, $timeBooking, $estimated)
     {
-        $slot = Slot::where('date', $dateBooking)
-            ->where('start_time', $timeBooking)
-            ->where('outlet_id', $outlet->id)
-            ->first();
-        if (!$slot) {
-            $this->generateSlots($outlet, $dateBooking);
+        $slots = [];
+
+        // Iterate through all outlets to find available slots
+        for ($outletId = 1; $outletId <= Outlet::count(); $outletId++) {
+            $outlet = Outlet::find($outletId);
             $slot = Slot::where('date', $dateBooking)
                 ->where('start_time', $timeBooking)
                 ->where('outlet_id', $outlet->id)
                 ->first();
-        }
-        return $slot;
-    }
 
-    private function getSlotsBasedOnEstimated($outletId, $dateBooking, $timeBooking, $estimated)
-    {
-        $slots = [];
-        $slot = Slot::where('date', $dateBooking)
-            ->where('start_time', $timeBooking)
-            ->where('outlet_id', $outletId)
-            ->first();
-
-        if ($estimated == 60) {
-            $slots[] = $slot;
-        } elseif ($estimated == 120) {
-            $slots[] = $slot;
-            $nextTime = Carbon::parse($timeBooking)->addMinutes(60)->toTimeString();
-            $nextSlot = Slot::where('date', $dateBooking)
-                ->where('start_time', $nextTime)
-                ->where('outlet_id', $outletId)
-                ->first();
-            if ($nextSlot) {
-                $slots[] = $nextSlot;
+            // If slot not found, generate new slots for the date
+            if (!$slot) {
+                $this->generateSlots($outlet, $dateBooking);
+                $slot = Slot::where('date', $dateBooking)
+                    ->where('start_time', $timeBooking)
+                    ->where('outlet_id', $outlet->id)
+                    ->first();
             }
-        } elseif ($estimated == 180) {
-            $slots[] = $slot;
-            $nextTime = Carbon::parse($timeBooking)->addMinutes(60)->toTimeString();
-            $nextTime2 = Carbon::parse($timeBooking)->addMinutes(120)->toTimeString();
-            $nextSlot = Slot::where('date', $dateBooking)
-                ->where('start_time', $nextTime)
-                ->where('outlet_id', $outletId)
-                ->first();
-            $nextSlot2 = Slot::where('date', $dateBooking)
-                ->where('start_time', $nextTime2)
-                ->where('outlet_id', $outletId)
-                ->first();
-            if ($nextSlot) {
-                $slots[] = $nextSlot;
-                if ($nextSlot2) {
-                    $slots[] = $nextSlot2;
+
+            // If slot is found and not booked, add it to slots array
+            if ($slot && !$slot->booked) {
+                $slots[] = $slot;
+
+                if ($estimated == 60) {
+                    break;
+                } elseif ($estimated == 120) {
+                    $nextTime = Carbon::parse($timeBooking)->addMinutes(60)->toTimeString();
+                    $nextSlot = Slot::where('date', $dateBooking)
+                        ->where('start_time', $nextTime)
+                        ->where('outlet_id', $outlet->id)
+                        ->first();
+                    if ($nextSlot && !$nextSlot->booked) {
+                        $slots[] = $nextSlot;
+                    }
+                    break;
+                } elseif ($estimated == 180) {
+                    $nextTime = Carbon::parse($timeBooking)->addMinutes(60)->toTimeString();
+                    $nextTime2 = Carbon::parse($timeBooking)->addMinutes(120)->toTimeString();
+                    $nextSlot = Slot::where('date', $dateBooking)
+                        ->where('start_time', $nextTime)
+                        ->where('outlet_id', $outlet->id)
+                        ->first();
+                    $nextSlot2 = Slot::where('date', $dateBooking)
+                        ->where('start_time', $nextTime2)
+                        ->where('outlet_id', $outlet->id)
+                        ->first();
+                    if ($nextSlot && !$nextSlot->booked) {
+                        $slots[] = $nextSlot;
+                        if ($nextSlot2 && !$nextSlot2->booked) {
+                            $slots[] = $nextSlot2;
+                        }
+                    }
+                    break;
                 }
             }
         }
@@ -309,7 +296,7 @@ class BookingController extends Controller
         $time_booking = Carbon::parse($booking->time_booking)->format('H:i');
         $phone_number = $user->phone_number;
         $sensor_phone_number = substr($phone_number, 0, 4) . str_repeat('*', strlen($phone_number) - 7) . substr($phone_number, -3);
-        
+
         $params = [
             'transaction_details' => [
                 'order_id' => $booking->id,

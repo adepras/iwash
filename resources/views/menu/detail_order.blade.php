@@ -129,9 +129,7 @@
 
     <script src="https://app.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
     <script>
-        document.getElementById('pay-button').addEventListener('click', function() {
-            snap.pay('{{ $snapToken }}');
-        });
+        
 
         // Countdown Timer
         function startCountdown(duration, display) {
