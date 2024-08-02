@@ -1,12 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Loading</title>
+@extends('layouts.app')
+
+@section('title', 'iWash | Proses Pemesanan')
+
+@section('content')
+    <style>
+        .loading-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+    </style>
     <script type="text/javascript">
         function redirectToProcessBooking() {
             var bookingUrl = "{{ route('process_booking') }}";
-            
-            console.log("Redirecting to: " + bookingUrl); // Debugging line
+
+            console.log("Redirecting to: " + bookingUrl);
 
             if (bookingUrl) {
                 window.location.href = bookingUrl;
@@ -15,11 +25,15 @@
             }
         }
 
-        // Atur waktu untuk redirect ke halaman proses booking
+        // Atur waktu untuk redirect ke proses booking
         setTimeout(redirectToProcessBooking, 5000);
     </script>
-</head>
-<body>
-    <h1>Please wait, processing your booking...</h1>
-</body>
-</html>
+
+    <body>
+        <div class="loading-container">
+            <div class="spinner-border text-primary" role="status">
+            </div>
+            <h1 class="mt-3">Sedang Memproses Pesanan Anda...</h1>
+        </div>
+    </body>
+@endsection
