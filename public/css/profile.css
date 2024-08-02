@@ -219,3 +219,107 @@
     color: #fff;
     font-size: 14px;
 }
+
+.pay-status p.success {
+    background-color: green;
+}
+
+.pay-status p.pending {
+    background-color: orange;
+}
+
+.pay-status p.cancel {
+    background-color: red;
+}
+
+@media screen and (max-width: 768px) {
+
+    .profile-title,
+    .profile-data,
+    .vehicle-data,
+    .form-input,
+    .order-item {
+        width: 80%;
+    }
+
+    .btn-tools,
+    .btn-submit,
+    .btn-edit,
+    .btn-save,
+    .btn-back {
+        width: 30%;
+        font-size: 14px;
+        padding: 8px;
+        margin-left: 5px;
+    }
+
+    .btn-tools {
+        width: 100%;
+    }
+
+    .btn-submit,
+    .btn-edit,
+    .btn-save,
+    .btn-back {
+        width: 40%;
+    }
+
+    .order-item p {
+        font-size: 14px;
+    }
+
+    .pay-status p {
+        font-size: 12px;
+    }
+
+    .pay-status p.success,
+    .pay-status p.pending,
+    .pay-status p.cancel {
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+
+    .btn-remove {
+        padding: 0 10px;
+    }
+
+    .remove-icon {
+        width: 20px;
+    }
+
+    .profile-data label {
+        font-size: 16px;
+    }
+
+    .profile-data input,
+    .profile-data select,
+    .vehicle-item {
+        font-size: 14px;
+    }
+
+    .profile-title h2,
+    .vehicle-data h2 {
+        font-size: 20px;
+    }
+
+    .vehicle-header,
+    .vehicle-row {
+        padding: 5px 0;
+    }
+
+    .header-item {
+        font-size: 14px;
+    }
+
+    .form-input label {
+        font-size: 12px;
+    }
+
+    .form-input input {
+        font-size: 12px;
+    }
+
+    .form-input label span {
+        font-size: 10px;
+    }
+}

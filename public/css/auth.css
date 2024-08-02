@@ -164,3 +164,37 @@
     margin-top: 10px;
     text-align: right;
 }
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .container-register,
+    .container-login,
+    .container-forgot,
+    .container-reset {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container-form {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-col {
+        width: 100%;
+    }
+
+    .btn-confirm {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-submit,
+    .btn-back {
+        width: 100%;
+    }
+}

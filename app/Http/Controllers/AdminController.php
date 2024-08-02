@@ -18,39 +18,4 @@ class AdminController extends Controller
     {
         return view('admin.profile.admin-profile');
     }
-
-    public function dashboard()
-    {
-        // Menghitung jumlah total pengguna
-        $userCount = User::count();
-
-        // Menghitung jumlah pemesanan yang dibuat hari ini
-        $todayBookingsCount = Booking::whereDate('created_at', Carbon::today())->count();
-
-        // Mengirimkan data ke view
-        return view('admin.menu.dashboard', [
-            'userCount' => $userCount,
-            'todayBookingsCount' => $todayBookingsCount
-        ]);
-    }
-
-    public function users()
-    {
-        return view('admin.menu.users');
-    }
-
-    public function vehicle()
-    {
-        return view('admin.menu.vehicles');
-    }
-
-    public function booking()
-    {
-        return view('admin.menu.bookings');
-    }
-
-    public function queue()
-    {
-        return view('admin.menu.queues');
-    }
 }
