@@ -75,11 +75,11 @@ class BookingController extends Controller
             'estimated' => $validated['estimated'],
             'booking_date' => $validated['date_booking'],
             'time_booking' => $validated['time_booking'],
-            'user_id' => $validated['vehicle_id'],
+            'user_id' => Auth::id(),
             'name' => Auth::user()->name,
             'phone_number' => Auth::user()->phone_number,
             'vehicle_id' => $validated['vehicle_id'],
-            'status' => 'pending',
+            'status' => 'temporary',
         ]);
 
         $booking->save();
@@ -103,7 +103,6 @@ class BookingController extends Controller
         }
 
         $dateBooking = Carbon::parse($validated['date_booking'])->toDateString();
-        $timeBooking = Carbon::parse($validated['time_booking'])->toTimeString();
 
         DB::beginTransaction();
 
@@ -112,7 +111,7 @@ class BookingController extends Controller
             $currentTimestamp = Carbon::now();
             $startTimestamp = $currentTimestamp->copy()->subSeconds(10);
 
-            $recentBookings = Booking::where('booking_date', $dateBooking)
+            $recentBookings = Booking::where([['booking_date', $dateBooking], ['status', 'temporary']])
                 ->whereBetween('created_at', [$startTimestamp, $currentTimestamp])
                 ->get();
 
@@ -122,46 +121,87 @@ class BookingController extends Controller
             // Ambil data booking pada sortedBookings yang memiliki estimated duration paling kecil
             $bookingData = $sortedBookings->first();
 
-            if (!$bookingData) {
-                DB::rollBack();
-                return redirect()->route('menu1')->withErrors(['time_booking' => 'Tidak ada booking yang ditemukan dalam rentang waktu yang ditentukan']);
+            if ($bookingData->user_id == Auth::id()) {
+                // Cek dan buat slot berdasarkan estimated duration
+                $slots = $this->checkAndCreateSlotsBasedOnEstimated($bookingData->booking_date, $bookingData->time_booking, $bookingData->estimated);
+
+                // Simpan data booking
+                $booking = new Booking([
+                    'id' => (string) \Illuminate\Support\Str::uuid(),
+                    'service' => $bookingData->service,
+                    'package' => $bookingData->package,
+                    'price' => $bookingData->price,
+                    'estimated' => $bookingData->estimated,
+                    'booking_date' => $bookingData->booking_date,
+                    'time_booking' => $bookingData->time_booking,
+                    'user_id' => $bookingData->user_id,
+                    'name' => $bookingData->name,
+                    'phone_number' => $bookingData->phone_number,
+                    'vehicle_id' => $bookingData->vehicle_id,
+                    'status' => 'pending',
+                ]);
+            } else {
+                // Ambil data booking pada sortedBookings yang memiliki estimated duration paling kecil
+                $bookingDataOld = $sortedBookings->where('user_id', Auth::id())->first();
+
+                $slotTemp = Slot::where('date', $bookingDataOld->booking_date)
+                    ->where('booking_id', null)
+                    ->where('start_time', $bookingDataOld->time_booking)->skip(1)->first();
+                if ($slotTemp) {
+                    // Cek dan buat slot berdasarkan estimated duration
+                    $slots = $this->checkAndCreateSlotsBasedOnEstimated($bookingDataOld->booking_date, $bookingDataOld->time_booking, $bookingDataOld->estimated);
+
+                    // Simpan data booking
+                    $booking = new Booking([
+                        'id' => (string) \Illuminate\Support\Str::uuid(),
+                        'service' => $bookingDataOld->service,
+                        'package' => $bookingDataOld->package,
+                        'price' => $bookingDataOld->price,
+                        'estimated' => $bookingDataOld->estimated,
+                        'booking_date' => $bookingDataOld->booking_date,
+                        'time_booking' => $bookingDataOld->time_booking,
+                        'user_id' => $bookingDataOld->user_id,
+                        'name' => $bookingDataOld->name,
+                        'phone_number' => $bookingDataOld->phone_number,
+                        'vehicle_id' => $bookingDataOld->vehicle_id,
+                        'status' => 'pending',
+                    ]);
+                } else {
+                    $slotOld = Slot::where('date', $bookingDataOld->booking_date)
+                        ->where('booking_id', null)
+                        ->where('start_time', '!=', $bookingData->time_booking)
+                        ->orderBy('start_time')
+                        ->first();
+
+                    // Cek dan buat slot berdasarkan estimated duration
+                    $slots = $this->checkAndCreateSlotsBasedOnEstimated($bookingDataOld->booking_date, $slotOld->start_time, $bookingDataOld->estimated);
+
+                    // Simpan data booking
+                    $booking = new Booking([
+                        'id' => (string) \Illuminate\Support\Str::uuid(),
+                        'service' => $bookingDataOld->service,
+                        'package' => $bookingDataOld->package,
+                        'price' => $bookingDataOld->price,
+                        'estimated' => $bookingDataOld->estimated,
+                        'booking_date' => $bookingDataOld->booking_date,
+                        'time_booking' => $slotOld->start_time,
+                        'user_id' => $bookingDataOld->user_id,
+                        'name' => $bookingDataOld->name,
+                        'phone_number' => $bookingDataOld->phone_number,
+                        'vehicle_id' => $bookingDataOld->vehicle_id,
+                        'status' => 'pending',
+                    ]);
+                }
+
             }
 
-            // Cek dan buat slot berdasarkan estimated duration
-            $slots = $this->checkAndCreateSlotsBasedOnEstimated($bookingData->booking_date, $bookingData->time_booking, $bookingData->estimated);
-
-            // if (!$slots) {
-            //     DB::rollBack();
-            //     return redirect()->route('menu1')->withErrors(['time_booking' => 'Tidak ada slot waktu yang tersedia']);
-            // }
-
-            // Tandai slot yang dipilih sebagai booked
-            foreach ($slots as $slot) {
-                $slot->booked = true;
-                $slot->save();
-            }
-
-            // Simpan data booking
-            $booking = new Booking([
-                'id' => (string) \Illuminate\Support\Str::uuid(),
-                'service' => $bookingData->service,
-                'package' => $bookingData->package,
-                'price' => $bookingData->price,
-                'estimated' => $bookingData->estimated,
-                'booking_date' => $bookingData->booking_date,
-                'time_booking' => $bookingData->time_booking,
-                'user_id' => $bookingData->user_id,
-                'name' => $bookingData->name,
-                'phone_number' => $bookingData->phone_number,
-                'vehicle_id' => $bookingData->vehicle_id,
-                'status' => 'pending',
-            ]);
 
             $booking->save();
 
             // Sesuaikan slot dengan booking
             foreach ($slots as $slot) {
                 $slot->booking_id = $booking->id;
+                $slot->booked = true;
                 $slot->save();
             }
 
@@ -169,10 +209,7 @@ class BookingController extends Controller
 
             // Hapus data booking yang disimpan di session
             session()->forget('validated_booking_data');
-
-            // Delete bookings with status "temporary"
-            Booking::where('status', 'temporary')->delete();
-
+            Booking::where([['status', 'temporary'], ['user_id', Auth::id()]])->delete();
             // Jika user pada data booking sama dengan user yang sedang login, maka diarahkan ke halaman detail_order
             if ($booking->user_id == Auth::id()) {
                 return redirect()->route('detail_order', ['id' => $booking->id]);
@@ -181,10 +218,12 @@ class BookingController extends Controller
                 return redirect()->route('menu1')->withErrors(['time_booking' => 'Tidak ada slot waktu yang tersedia']);
             }
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();
-            return redirect()->route('menu1')->withErrors(['time_booking' => 'Terjadi kesalahan: ' . $e->getMessage()]);
+            return redirect()->route('menu1')->withErrors(['time_booking' => 'Terjadi kesalahan : ' . $e->getMessage()]);
         }
     }
+
 
     private function checkAndCreateSlotsBasedOnEstimated($dateBooking, $timeBooking, $estimated)
     {
@@ -233,6 +272,43 @@ class BookingController extends Controller
                     $nextSlot2 = Slot::where('date', $dateBooking)
                         ->where('start_time', $nextTime2)
                         ->where('outlet_id', $outlet->id)
+                        ->first();
+                    if ($nextSlot && !$nextSlot->booked) {
+                        $slots[] = $nextSlot;
+                        if ($nextSlot2 && !$nextSlot2->booked) {
+                            $slots[] = $nextSlot2;
+                        }
+                    }
+                    break;
+                }
+            } else if ($slot && $outletId == Outlet::count()) {
+                $slotOld = Slot::where('date', $dateBooking)
+                    ->where('booking_id', null)
+                    ->orderBy('start_time')
+                    ->first();
+                $slots[] = $slotOld;
+                if ($estimated == 60) {
+                    break;
+                } elseif ($estimated == 120) {
+                    $nextTime = Carbon::parse($slotOld->start_time)->addMinutes(60)->toTimeString();
+                    $nextSlot = Slot::where('date', $dateBooking)
+                        ->where('start_time', $nextTime)
+                        ->where('outlet_id', $slotOld->outlet_id)
+                        ->first();
+                    if ($nextSlot && !$nextSlot->booked) {
+                        $slots[] = $nextSlot;
+                    }
+                    break;
+                } elseif ($estimated == 180) {
+                    $nextTime = Carbon::parse($slotOld->start_time)->addMinutes(60)->toTimeString();
+                    $nextTime2 = Carbon::parse($slotOld->start_time)->addMinutes(120)->toTimeString();
+                    $nextSlot = Slot::where('date', $dateBooking)
+                        ->where('start_time', $nextTime)
+                        ->where('outlet_id', $slotOld->outlet_id)
+                        ->first();
+                    $nextSlot2 = Slot::where('date', $dateBooking)
+                        ->where('start_time', $nextTime2)
+                        ->where('outlet_id', $slotOld->outlet_id)
                         ->first();
                     if ($nextSlot && !$nextSlot->booked) {
                         $slots[] = $nextSlot;
