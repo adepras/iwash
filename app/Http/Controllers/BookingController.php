@@ -108,9 +108,9 @@ class BookingController extends Controller
         DB::beginTransaction();
 
         try {
-            // Cari data booking yang paling baru (dalam 5 detik terakhir)
+            // Cari data booking yang paling baru (dalam 10 detik terakhir)
             $currentTimestamp = Carbon::now();
-            $startTimestamp = $currentTimestamp->copy()->subSeconds(5);
+            $startTimestamp = $currentTimestamp->copy()->subSeconds(10);
 
             $recentBookings = Booking::where('booking_date', $dateBooking)
                 ->whereBetween('created_at', [$startTimestamp, $currentTimestamp])
@@ -122,8 +122,18 @@ class BookingController extends Controller
             // Ambil data booking pada sortedBookings yang memiliki estimated duration paling kecil
             $bookingData = $sortedBookings->first();
 
+            if (!$bookingData) {
+                DB::rollBack();
+                return redirect()->route('menu1')->withErrors(['time_booking' => 'Tidak ada booking yang ditemukan dalam rentang waktu yang ditentukan']);
+            }
+
             // Cek dan buat slot berdasarkan estimated duration
             $slots = $this->checkAndCreateSlotsBasedOnEstimated($bookingData->booking_date, $bookingData->time_booking, $bookingData->estimated);
+
+            // if (!$slots) {
+            //     DB::rollBack();
+            //     return redirect()->route('menu1')->withErrors(['time_booking' => 'Tidak ada slot waktu yang tersedia']);
+            // }
 
             // Tandai slot yang dipilih sebagai booked
             foreach ($slots as $slot) {
@@ -160,6 +170,9 @@ class BookingController extends Controller
             // Hapus data booking yang disimpan di session
             session()->forget('validated_booking_data');
 
+            // Delete bookings with status "temporary"
+            Booking::where('status', 'temporary')->delete();
+
             // Jika user pada data booking sama dengan user yang sedang login, maka diarahkan ke halaman detail_order
             if ($booking->user_id == Auth::id()) {
                 return redirect()->route('detail_order', ['id' => $booking->id]);
@@ -168,12 +181,10 @@ class BookingController extends Controller
                 return redirect()->route('menu1')->withErrors(['time_booking' => 'Tidak ada slot waktu yang tersedia']);
             }
         } catch (\Exception $e) {
-            // dd($e);
             DB::rollBack();
-            return redirect()->route('menu1')->withErrors(['time_booking' => 'Terjadi kesalahan : ' . $e->getMessage()]);
+            return redirect()->route('menu1')->withErrors(['time_booking' => 'Terjadi kesalahan: ' . $e->getMessage()]);
         }
     }
-
 
     private function checkAndCreateSlotsBasedOnEstimated($dateBooking, $timeBooking, $estimated)
     {
