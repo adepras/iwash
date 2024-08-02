@@ -15,10 +15,28 @@ class UserSeeder extends Seeder
     {
         $userData = [
             [
-                'name' => 'Ade Prasetyo',
-                'phone_number' => '+6281326793922',
-                'email' => 'adeprasestyo6@gmail.com',
+                'name' => 'Ade',
+                'phone_number' => '+6281234567890',
+                'email' => 'akunuser1@gmail.com',
                 'password' => bcrypt('akunuser1'),
+                'address' => 'Kec.Kutoarjo, Kab.Purworejo',
+                'gender' => 'male',
+                'role' => 'user'
+            ],
+            [
+                'name' => 'Pras',
+                'phone_number' => '+6281234567890',
+                'email' => 'akunuser2@gmail.com',
+                'password' => bcrypt('akunuser2'),
+                'address' => 'Kec.Kutoarjo, Kab.Purworejo',
+                'gender' => 'male',
+                'role' => 'user'
+            ],
+            [
+                'name' => 'Setyo',
+                'phone_number' => '+6281234567890',
+                'email' => 'akunuser3@gmail.com',
+                'password' => bcrypt('akunuser3'),
                 'address' => 'Kec.Kutoarjo, Kab.Purworejo',
                 'gender' => 'male',
                 'role' => 'user'
@@ -26,9 +44,9 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Admin Iwash',
                 'phone_number' => '081219999204',
-                'email' => 'iwashadmin@gmail.com',
+                'email' => 'admin@gmail.com',
                 'address' => 'Kec.Kutoarjo, Kab.Purworejo',
-                'password' => bcrypt('admin1234'),
+                'password' => bcrypt('admin#1234'),
                 'gender' => 'male',
                 'role' => 'admin'
             ],
