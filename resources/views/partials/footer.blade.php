@@ -33,7 +33,7 @@
         </ul>
     </div>
     <div class="licence">
-        <p><img src="image/c-circle.svg" alt="">iWash 2024. All Rights Reserved</p>
+        <p><img src="/image/c-circle.svg" alt="">iWash 2024. All Rights Reserved</p>
         <a href="">Term and Condition</a>
         <a href="">Privacy Policy</a>
     </div>

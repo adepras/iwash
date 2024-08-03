@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Booking;
 use Carbon\Carbon;
 
-class AdminDashboardController extends Controller
+class DashboardController extends Controller
 {
     public function index()
     {

@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Booking;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,6 +26,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\Admin\CustomerController; 
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\PaymentController;
+
 
 // Halaman Website
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -101,3 +102,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/bookings/download', [BookingController::class, 'downloadCsv'])->name('admin.bookings.download');
     Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 });
+
+//midtrans
+Route::post('/get-snap-token', [PaymentController::class, 'getSnapToken'])->name('get-snap-token');
+Route::get('/payment/snap-token/{id}', [PaymentController::class, 'createSnapToken'])->name('payment.snap-token');
+Route::post('/payment/create', [PaymentController::class, 'createTransaction'])->name('payment.create');
+Route::get('/payment-success/{id}', [PaymentController::class, 'success'])->name('payment.success');
+Route::get('/payment-pending/{id}', [PaymentController::class, 'pending'])->name('payment.pending');
+Route::get('/payment-error/{id}', [PaymentController::class, 'error'])->name('payment.error');

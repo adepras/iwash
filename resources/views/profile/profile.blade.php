@@ -97,14 +97,20 @@
                     @foreach ($bookings as $booking)
                         <div class="order-item">
                             <div class="pay-status">
-                                <h6>Status {{ $booking->status }}</h6>
-                                <p>Belum Bayar</p>
+                                {{-- <h6>Status {{ $booking->status }}</h6> --}}
+                                @if ($booking->status === 'paid')
+                                    <p class="bg-success">Pesanan Sukses</p>
+                                @else
+                                    <p class="bg-danger">Belum Bayar</p>
+                                @endif
                             </div>
                             <p>Tanggal Pemesanan: {{ $booking->created_at->format('d M Y') }}</p>
                             <p>Waktu Kedatangan: {{ $booking->time_booking }}</p>
-                            <button type="button" class="btn-submit mt-4"
-                                onclick="window.location.href='{{ route('detail_order', ['id' => $booking->id]) }}'">Detail
-                                Order</button>
+                            @if ($booking->status === 'pending')
+                                <button type="button" class="btn-submit mt-4"
+                                    onclick="window.location.href='{{ route('detail_order', ['id' => $booking->id]) }}'">Detail
+                                    Order</button>
+                            @endif
                         </div>
                     @endforeach
                 </div>
