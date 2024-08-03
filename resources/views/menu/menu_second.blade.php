@@ -31,24 +31,24 @@
                 {{-- Salon Mobil / Detailing --}}
                 <h5>Pilih Paket Salon Mobil / Detailing</h5>
                 <div class="price-menu">
-                    <div class="card-price selectable" data-package="Detailing Interior" data-price="50000" data-time="60">
+                    <div class="card-price selectable" data-package="Detailing Interior" data-price="50000" data-time="120">
                         <h5>Detailing Interior</h5>
                         <div class="price mt-3">
                             <p>Harga</p>
                             <h6 class="service-price">Rp50.000</h6>
-                            <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 1 jam</p>
+                            <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 2 jam</p>
                         </div>
                     </div>
-                    <div class="card-price selectable" data-package="Detailing Ekterior" data-price="60000" data-time="60">
+                    <div class="card-price selectable" data-package="Detailing Ekterior" data-price="60000" data-time="120">
                         <h5>Detailing Eksterior</h5>
                         <div class="price mt-3">
                             <p>Harga</p>
                             <h6 class="service-price">Rp60.000</h6>
-                            <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 1 jam</p>
+                            <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 2 jam</p>
                         </div>
                     </div>
                     <div class="card-price selectable" data-package="Detailing Kaca Mobil" data-price="40000"
-                        data-time="30">
+                        data-time="60">
                         <h5>Detailing Kaca Mobil</h5>
                         <div class="price mt-3">
                             <p>Harga</p>
@@ -147,7 +147,10 @@
                 $('#selected-package').val($(this).data('package'));
                 $('#selected-price').val($(this).data('price'));
                 $('#selected-time').val($(this).data('time'));
+                console.log($(this).data('time'));
             });
+
+
 
             $('.booking-time').change(function() {
                 $('#selected-time-booking').val($(this).val());

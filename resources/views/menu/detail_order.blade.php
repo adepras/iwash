@@ -60,7 +60,7 @@
                         <h6 class="mt-4">Status {{ $status }}</h6>
                         <div class="d-flex justify-content-between">
                             <h6>Durasi Pembayaran</h6>
-                            <span class="countdown" style="color: red;">00:03:00</span>
+                            <span class="countdown" style="color: red;">--:--:--</span>
                         </div>
                         <p class="mt-2">Segera lakukan pembayaran sebelum durasi pembayaran habis untuk menghindari
                             pembatalan pemesanan secara otomatis.</p>
@@ -129,11 +129,6 @@
 
     <script src="https://app.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
     <script>
-        document.getElementById('pay-button').addEventListener('click', function() {
-            snap.pay('{{ $snapToken }}');
-        });
-        
-
         // Countdown Timer
         function startCountdown(duration, display) {
             var timer = duration,
@@ -156,9 +151,18 @@
         }
 
         window.onload = function() {
-            var threeMinutes = 60 * 3,
-                display = document.querySelector('.countdown');
-            startCountdown(threeMinutes, display);
+            var createdAt = new Date("{{ $booking->created_at }}").getTime();
+            var now = new Date().getTime();
+            var elapsed = Math.floor((now - createdAt) / 1000);
+            var threeMinutes = 60 * 3;
+            var remainingTime = threeMinutes - elapsed;
+
+            if (remainingTime > 0) {
+                var display = document.querySelector('.countdown');
+                startCountdown(remainingTime, display);
+            } else {
+                window.location.href = "{{ route('cancel_booking', ['id' => $booking->id]) }}";
+            }
         };
     </script>
 

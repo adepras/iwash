@@ -33,7 +33,7 @@ class MenuController extends Controller
         $date = $request->get('date_booking', Carbon::today());
         $slots = $this->getAvailableSlots($date);
 
-        return view('menu.menu_second', compact('vehicles'));
+        return view('menu.menu_second', compact('vehicles', 'slots'));
     }
 
     private function getAvailableSlots($date)

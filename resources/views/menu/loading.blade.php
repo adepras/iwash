@@ -26,7 +26,7 @@
         }
 
         // Atur waktu untuk redirect ke proses booking
-        setTimeout(redirectToProcessBooking, 5000);
+        setTimeout(redirectToProcessBooking, 7000);
     </script>
 
     <body>
