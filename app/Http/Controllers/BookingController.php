@@ -224,20 +224,23 @@ class BookingController extends Controller
         }
     }
 
-
+    // Memeriksa dan membuat slot berdasarkan estimated duration yang diberikan
     private function checkAndCreateSlotsBasedOnEstimated($dateBooking, $timeBooking, $estimated)
     {
+        // Inisialisai array untuk menyimpan slot yang tersedia untuk booking berdasarkan estimated duration yang diberikan 
         $slots = [];
 
-        // Iterate through all outlets to find available slots
+        // Looping untuk mencari slot yang tersedia berdasarkan outlet
         for ($outletId = 1; $outletId <= Outlet::count(); $outletId++) {
+            // Cari outlet berdasarkan id
             $outlet = Outlet::find($outletId);
+            // Cari slot berdasarkan tanggal, waktu booking, dan outlet
             $slot = Slot::where('date', $dateBooking)
                 ->where('start_time', $timeBooking)
                 ->where('outlet_id', $outlet->id)
                 ->first();
 
-            // If slot not found, generate new slots for the date
+            // Jika slot tidak ditemukan, maka buat slot baru untuk outlet tersebut
             if (!$slot) {
                 $this->generateSlots($outlet, $dateBooking);
                 $slot = Slot::where('date', $dateBooking)
@@ -246,12 +249,14 @@ class BookingController extends Controller
                     ->first();
             }
 
-            // If slot is found and not booked, add it to slots array
+            // Jika slot ditemukan dan slot tersebut belum di booking, maka slot tersebut akan disimpan
             if ($slot && !$slot->booked) {
                 $slots[] = $slot;
 
+                // Jika estimated duration adalah 60 menit, maka proses berhenti
                 if ($estimated == 60) {
                     break;
+                // Jika estimated duration adalah 120 menit, maka proses akan mencari slot selanjutnya 
                 } elseif ($estimated == 120) {
                     $nextTime = Carbon::parse($timeBooking)->addMinutes(60)->toTimeString();
                     $nextSlot = Slot::where('date', $dateBooking)
@@ -262,6 +267,7 @@ class BookingController extends Controller
                         $slots[] = $nextSlot;
                     }
                     break;
+                // Jika estimated duration adalah 180 menit, maka proses akan mencari slot selanjutnya
                 } elseif ($estimated == 180) {
                     $nextTime = Carbon::parse($timeBooking)->addMinutes(60)->toTimeString();
                     $nextTime2 = Carbon::parse($timeBooking)->addMinutes(120)->toTimeString();
@@ -281,6 +287,7 @@ class BookingController extends Controller
                     }
                     break;
                 }
+            // Jika slot ditemukan dan slot tersebut sudah di booking, maka proses akan mencari slot selanjutnya
             } else if ($slot && $outletId == Outlet::count()) {
                 $slotOld = Slot::where('date', $dateBooking)
                     ->where('booking_id', null)
