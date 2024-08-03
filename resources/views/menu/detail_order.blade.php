@@ -18,7 +18,7 @@
                     </div>
                     <hr class="line">
                     <div class="detail-title">
-                        <h6>Waktu Kedatangan : {{ $booking->time_booking }}</h6>
+                        <h6>Waktu Kedatangan : {{ $booking->time_booking }} WIB</h6>
                         <h6>{{ $service }}</h6>
                         <h6>{{ $package }}</h6>
                         <ul>
