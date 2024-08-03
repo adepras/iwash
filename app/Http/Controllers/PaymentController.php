@@ -11,6 +11,7 @@ class PaymentController extends Controller
 {
     public function __construct()
     {
+        // Atur konfigurasi Midtrans
         Config::$serverKey = config('services.midtrans.serverKey');
         Config::$isProduction = config('services.midtrans.isProduction');
         Config::$isSanitized = config('services.midtrans.isSanitized');
@@ -18,6 +19,7 @@ class PaymentController extends Controller
     }
     public function createTransaction(Request $request)
     {
+        // Ambil data booking dari request
         $bookingId = $request->input('booking_id');
         $booking = Booking::find($bookingId);
 
@@ -25,13 +27,13 @@ class PaymentController extends Controller
             return response()->json(['error' => 'Booking not found.'], 404);
         }
 
-        // Configure Midtrans
+        // Konfigurasi pembayaran
         Config::$serverKey = config('services.midtrans.serverKey');
         Config::$isSanitized = true;
         Config::$is3ds = true;
         Config::$isProduction = config('services.midtrans.environment') === 'production';
 
-        // Create transaction data
+        // Buat array untuk dikirim ke Midtrans
         $transactionData = [
             'transaction_details' => [
                 'order_id' => $booking->id,
@@ -61,7 +63,7 @@ class PaymentController extends Controller
 
     public function getSnapToken(Request $request)
     {
-        $booking = $request->booking; // Assuming booking data is passed in the request
+        $booking = $request->booking; // Ambil data booking dari request
         $transactionDetails = [
             'order_id' => $booking->id,
             'gross_amount' => $booking->price,
@@ -83,7 +85,7 @@ class PaymentController extends Controller
     }
     public function success($id)
     {
-        // Handle successful payment
+        // Handle payment success
         $booking = Booking::findOrFail($id);
         // Update booking status or other logic
         $booking->status = 'paid';

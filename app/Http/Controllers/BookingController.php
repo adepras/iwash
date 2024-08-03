@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Outlet;
 use App\Models\Booking;
 use Midtrans\Notification;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -256,7 +257,7 @@ class BookingController extends Controller
                 // Jika estimated duration adalah 60 menit, maka proses berhenti
                 if ($estimated == 60) {
                     break;
-                // Jika estimated duration adalah 120 menit, maka proses akan mencari slot selanjutnya 
+                    // Jika estimated duration adalah 120 menit, maka proses akan mencari slot selanjutnya 
                 } elseif ($estimated == 120) {
                     $nextTime = Carbon::parse($timeBooking)->addMinutes(60)->toTimeString();
                     $nextSlot = Slot::where('date', $dateBooking)
@@ -267,7 +268,7 @@ class BookingController extends Controller
                         $slots[] = $nextSlot;
                     }
                     break;
-                // Jika estimated duration adalah 180 menit, maka proses akan mencari slot selanjutnya
+                    // Jika estimated duration adalah 180 menit, maka proses akan mencari slot selanjutnya
                 } elseif ($estimated == 180) {
                     $nextTime = Carbon::parse($timeBooking)->addMinutes(60)->toTimeString();
                     $nextTime2 = Carbon::parse($timeBooking)->addMinutes(120)->toTimeString();
@@ -287,7 +288,7 @@ class BookingController extends Controller
                     }
                     break;
                 }
-            // Jika slot ditemukan dan slot tersebut sudah di booking, maka proses akan mencari slot selanjutnya
+                // Jika slot ditemukan dan slot tersebut sudah di booking, maka proses akan mencari slot selanjutnya
             } else if ($slot && $outletId == Outlet::count()) {
                 $slotOld = Slot::where('date', $dateBooking)
                     ->where('booking_id', null)
@@ -431,7 +432,7 @@ class BookingController extends Controller
             // Notification::send($booking->user, new BookingCanceledNotification($booking));
         }
 
-        return redirect()->route('profile')->with('status', 'Booking has been canceled.');
+        return redirect()->route('profile')->with('status', 'Pesanan telah dibatalkan.');
     }
 
     public function queue()
@@ -450,6 +451,23 @@ class BookingController extends Controller
     {
         $bookings = Booking::where('booking_date', Carbon::today())->get();
         return view('admin.menu.bookings', compact('bookings'));
+    }
+
+    public function downloadReceipt($id)
+    {
+        $booking = Booking::findOrFail($id);
+        $service = $booking->service;
+        $package = $booking->package;
+        $estimated = $booking->estimated;
+        $date_booking = $booking->created_at->format('d-m-Y');
+        $name = $booking->user->name;
+        $phone_number = $booking->user->phone_number;
+        $status = $booking->status;
+
+        $data = compact('booking', 'service', 'package', 'estimated', 'date_booking', 'name', 'phone_number', 'status');
+
+        $pdf = Pdf::loadView('pdf.receipt', $data);
+        return $pdf->download('bukti_pembayaran_' . $booking->id . '.pdf');
     }
 }
 

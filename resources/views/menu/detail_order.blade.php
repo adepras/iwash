@@ -103,8 +103,8 @@
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                Proses mengantri kendaraan dengan datang ke outlet iWash kemudian berikan bukti pemesanan
-                                dan pembayaran yang dikirimkan melalui WhatsApp.
+                                Proses mengantri kendaraan dengan datang ke tempat dan kemudian berikan bukti pemesanan
+                                dan pembayaran Anda.
                             </div>
                         </div>
                     </div>
@@ -184,7 +184,6 @@
                     if (data.snap_token) {
                         snap.pay(data.snap_token, {
                             onSuccess: function (result) {
-                                // Handle successful payment
                                 alert("Payment Success");
                                 console.log(result);
                                 window.location.href = "{{ route('payment.success', ['id' => $booking->id]) }}";

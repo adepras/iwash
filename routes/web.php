@@ -24,7 +24,7 @@ use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResetPasswordController;
-use App\Http\Controllers\Admin\CustomerController; 
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\PaymentController;
 
@@ -77,8 +77,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/loading', function () {
         return view('menu.loading');
     })->name('loading');
-    
+
     Route::get('/process_booking', [BookingController::class, 'processBooking'])->name('process_booking');
+    Route::get('/download-receipt/{id}', [BookingController::class, 'downloadReceipt'])->name('download.receipt');
 });
 
 // Admin

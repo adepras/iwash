@@ -56,7 +56,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn-remove">
-                                    <img src="{{ asset('image/remove-ill.png') }}" alt="Remove" class="remove-icon">
+                                    <img src="{{ asset('/image/remove-ill.png') }}" alt="Remove" class="remove-icon">
                                 </button>
                             </form>
                         </div>
@@ -95,21 +95,30 @@
             @else
                 <div class="detail-order mt-4">
                     @foreach ($bookings as $booking)
-                        <div class="order-item">
-                            <div class="pay-status">
-                                {{-- <h6>Status {{ $booking->status }}</h6> --}}
-                                @if ($booking->status === 'paid')
-                                    <p class="bg-success">Pesanan Sukses</p>
-                                @else
-                                    <p class="bg-danger">Belum Bayar</p>
-                                @endif
+                        <div class="order-item mb-4" data-created-at="{{ $booking->created_at }}">
+                            <div class="d-flex justify-content-between">
+                                <div class="pay-status">
+                                    @if ($booking->status === 'paid')
+                                        <p class="bg-success mb-3">Pemesanan Sukses</p>
+                                    @else
+                                        <p class="bg-danger mb-3">Belum Bayar</p>
+                                    @endif
+                                </div>
+                                <div class="download-detail">
+                                    <button type="button" class="btn-download mt-3"
+                                        onclick="window.location.href='{{ route('download.receipt', ['id' => $booking->id]) }}'"><img
+                                            src="{{ asset('/image/download-ill.png') }}" alt=""></button>
+                                </div>
                             </div>
+                            <p>ID Pemesanan: {{ $booking->id }}</p>
                             <p>Tanggal Pemesanan: {{ $booking->created_at->format('d M Y') }}</p>
-                            <p>Waktu Kedatangan: {{ $booking->time_booking }}</p>
+                            <p>Waktu: {{ $booking->time_booking }} WIB</p>
                             @if ($booking->status === 'pending')
-                                <button type="button" class="btn-submit mt-4"
+                                <button type="button" class="btn-detail mt-3"
                                     onclick="window.location.href='{{ route('detail_order', ['id' => $booking->id]) }}'">Detail
                                     Order</button>
+                                <div id="countdown-{{ $booking->id }}" class="countdown mt-2" style="color: red;"
+                                    data-created-at="{{ $booking->created_at }}"></div>
                             @endif
                         </div>
                     @endforeach
@@ -117,4 +126,30 @@
             @endif
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const countdownElements = document.querySelectorAll('.countdown');
+
+            countdownElements.forEach(function(element) {
+                const createdAt = new Date(element.dataset.createdAt);
+                const countdownTime = new Date(createdAt.getTime() + 3 * 60 * 1000);
+
+                const interval = setInterval(function() {
+                    const now = new Date().getTime();
+                    const distance = countdownTime - now;
+
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    element.innerHTML = minutes + "menit" + seconds + "detik";
+
+                    if (distance < 0) {
+                        clearInterval(interval);
+                        element.innerHTML = "EXPIRED";
+                    }
+                }, 1000);
+            });
+        });
+    </script>
+
 @endsection

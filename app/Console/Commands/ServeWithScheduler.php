@@ -19,7 +19,7 @@ class ServeWithScheduler extends Command
      *
      * @var string
      */
-    protected $description = 'Serve the application and run the scheduler';
+    protected $description = 'Start Laravel development server and scheduler';
 
     /**
      * Execute the console command.

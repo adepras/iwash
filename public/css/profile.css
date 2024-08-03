@@ -169,10 +169,17 @@
     color: #333;
 }
 
+.btn-download {
+    width: fit-content;
+    border: none;
+    background: none;
+}
+
 .btn-submit,
 .btn-edit,
 .btn-save,
-.btn-back {
+.btn-back,
+.btn-detail {
     font-size: 16px;
     font-weight: 500;
     border-radius: 8px;
@@ -180,9 +187,14 @@
     padding: 10px;
 }
 
+.btn-detail {
+    padding: 0;
+}
+
 .btn-submit,
 .btn-edit,
-.btn-save {
+.btn-save,
+.btn-detail {
     background-color: #2277b9;
     border: 1px solid #2277b9;
     color: #fff;
@@ -210,6 +222,11 @@
 .pay-status {
     display: flex;
     justify-content: space-between;
+}
+
+.download-detail img {
+    width: 30px;
+    height: auto;
 }
 
 .pay-status p {

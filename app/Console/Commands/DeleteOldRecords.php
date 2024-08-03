@@ -20,7 +20,7 @@ class DeleteOldRecords extends Command
      *
      * @var string
      */
-    protected $description = 'Delete records older than 3 minutes';
+    protected $description = 'Hapus data booking yang sudah lama (lebih dari 3 menit) dan statusnya masih pending atau canceled';
 
     /**
      * Execute the console command.
@@ -41,7 +41,7 @@ class DeleteOldRecords extends Command
             ->where('created_at', '<', $threshold)
             ->delete();
 
-        $this->info('Old records deleted successfully.');
+        $this->info('Data booking yang sudah lama berhasil dihapus.');
         
         return 0;
     }
