@@ -2,7 +2,7 @@
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-light">
-        <a href="" class="btn-list"><img src="/image/list.svg" alt=""></a>
+        <a href="" class="btn-list"><img src="/image/arrow-bar-left.svg" alt="Toggle Sidebar"></a>
         <div class="nav-button">
             @auth
                 {{-- <button class="nav-profile" onclick="window.location.href='{{ route('admin.adminprofile') }}'">Profil</button> --}}
@@ -15,3 +15,5 @@
         </div>
     </nav>
 </header>
+
+<script src="javascript/sidebar.js"></script>

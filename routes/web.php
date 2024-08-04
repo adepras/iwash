@@ -95,7 +95,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/menu/users', [UserController::class, 'index'])->name('admin.menu.users');
     Route::get('/admin/menu/vehicles', [VehicleController::class, 'adminIndex'])->name('admin.menu.vehicles');
     Route::get('/admin/menu/bookings', [BookingController::class, 'index'])->name('admin.menu.bookings');
-    Route::get('/admin/menu/queues', [QueueController::class, 'index'])->name('admin.menu.queues');
 
     // Admin
     Route::get('/admin/customers', [CustomerController::class, 'index'])->name('admin.customers.index');

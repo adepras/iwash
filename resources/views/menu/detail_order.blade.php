@@ -155,7 +155,7 @@
             var createdAt = new Date("{{ $booking->created_at }}").getTime();
             var now = new Date().getTime();
             var elapsed = Math.floor((now - createdAt) / 1000);
-            var threeMinutes = 60 * 3;
+            var threeMinutes = 60 * 5;
             var remainingTime = threeMinutes - elapsed;
 
             if (remainingTime > 0) {

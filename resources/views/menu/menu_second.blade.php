@@ -36,7 +36,8 @@
                         <div class="price mt-3">
                             <p>Harga</p>
                             <h6 class="service-price">Rp50.000</h6>
-                            <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 2 jam</p>
+                            <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 2
+                                jam</p>
                         </div>
                     </div>
                     <div class="card-price selectable" data-package="Detailing Ekterior" data-price="60000" data-time="120">
@@ -44,7 +45,8 @@
                         <div class="price mt-3">
                             <p>Harga</p>
                             <h6 class="service-price">Rp60.000</h6>
-                            <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 2 jam</p>
+                            <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 2
+                                jam</p>
                         </div>
                     </div>
                     <div class="card-price selectable" data-package="Detailing Kaca Mobil" data-price="40000"
@@ -53,7 +55,8 @@
                         <div class="price mt-3">
                             <p>Harga</p>
                             <h6 class="service-price">Rp40.000</h6>
-                            <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 1 jam</p>
+                            <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 1
+                                jam</p>
                         </div>
                     </div>
                     <div class="card-price selectable" data-package="Detailing Mesin Mobil" data-price="40000"
@@ -62,7 +65,8 @@
                         <div class="price mt-3">
                             <p>Harga</p>
                             <h6 class="service-price">Rp40.000</h6>
-                            <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 1 jam</p>
+                            <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 1
+                                jam</p>
                         </div>
                     </div>
                     <div class="card-price selectable" data-package="Detailing Ban & Velg" data-price="30000"
@@ -71,7 +75,8 @@
                         <div class="price mt-3">
                             <p>Harga</p>
                             <h6 class="service-price">Rp30.000</h6>
-                            <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 1 jam</p>
+                            <p class="estimation mt-3 service-time"><img src="image/stopwatch.svg" alt="">Estimasi 1
+                                jam</p>
                         </div>
                     </div>
                 </div>
@@ -98,8 +103,8 @@
                         <div class="form-row">
                             <div class="form-col">
                                 <label for="date">Pilih Tanggal<span>*</span></label>
-                                <input type="date" class="form-control booking-date" id="date"
-                                    name="date_booking" required>
+                                <input type="date" class="form-control booking-date" id="date" name="date_booking"
+                                    required>
                             </div>
                         </div>
                         <div class="form-row">
@@ -163,6 +168,23 @@
                 $('#date').val('');
                 $('#time').val('');
             });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.getElementById('date');
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = ('0' + (today.getMonth() + 1)).slice(-2);
+            const day = ('0' + today.getDate()).slice(-2);
+            const maxDate = `${year}-${month}-${day}`;
+
+            dateInput.setAttribute('min', maxDate);
+
+            const now = today.getHours();
+            if (now >= 15) {
+                dateInput.setAttribute('min', `${year}-${month}-${('0' + (today.getDate() + 1)).slice(-2)}`);
+            }
         });
     </script>
 

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 
 <div class="container">
-    <h1>Admin Dashboard</h1>
+    <h3>Admin Dashboard</h3>
     <div class="row">
         <div class="col-md-6">
             <div class="card text-white bg-primary mb-3">

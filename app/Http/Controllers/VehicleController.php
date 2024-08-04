@@ -36,13 +36,25 @@ class VehicleController extends Controller
     {
         $sortOrder = $request->get('sortOrder', 'asc');
         $sortBy = $request->get('sortBy', 'vehicle_brand');
+        $search = $request->input('search');
 
         $allowedSortColumns = ['vehicle_brand', 'vehicle_type', 'license_plate', 'name'];
         if (!in_array($sortBy, $allowedSortColumns)) {
             $sortBy = 'vehicle_brand';
         }
 
-        $vehicles = Vehicle::with('user')->get();
+        $vehicles = Vehicle::with('user')
+            ->where(function ($query) use ($search) {
+                if ($search) {
+                    $query->where('vehicle_brand', 'LIKE', "%{$search}%")
+                        ->orWhere('vehicle_type', 'LIKE', "%{$search}%")
+                        ->orWhere('license_plate', 'LIKE', "%{$search}%")
+                        ->orWhereHas('user', function ($q) use ($search) {
+                            $q->where('name', 'LIKE', "%{$search}%");
+                        });
+                }
+            })
+            ->get();
 
         if ($sortBy === 'name') {
             $vehicles = $vehicles->sortBy(function ($vehicle) {
@@ -54,7 +66,7 @@ class VehicleController extends Controller
 
         $vehicles = $vehicles->values();
 
-        return view('admin.menu.vehicles', compact('vehicles', 'sortOrder', 'sortBy'));
+        return view('admin.menu.vehicles', compact('vehicles', 'sortOrder', 'sortBy', 'search'));
     }
 
 

@@ -10,7 +10,20 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $sortOrder = $request->get('sortOrder', 'asc');
-        $users = User::orderBy('name', $sortOrder)->get();
+        $search = $request->input('search');
+
+        $users = User::query()
+            ->where('role', '<>', 'admin')
+            ->where(function ($query) use ($search) {
+                if ($search) {
+                    $query->where('name', 'LIKE', "%{$search}%")
+                        ->orWhere('phone_number', 'LIKE', "%{$search}%")
+                        ->orWhere('email', 'LIKE', "%{$search}%")
+                        ->orWhere('address', 'LIKE', "%{$search}%");
+                }
+            })
+            ->orderBy('name', $sortOrder)
+            ->get();
 
         return view('admin.menu.users', compact('users', 'sortOrder'));
     }
@@ -37,5 +50,4 @@ class UserController extends Controller
 
         return redirect()->route('admin.users.index')->with('success', 'User berhasil diperbarui');
     }
-
 }

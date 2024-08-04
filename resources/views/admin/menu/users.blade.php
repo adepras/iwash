@@ -6,13 +6,24 @@
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 
     <div class="container">
-        <h4>Daftar Pelanggan</h4>
+        <h3>Daftar Pelanggan</h3>
+        <div class="container-tools mb-2">
+            {{-- Refresh --}}
+            <a href="{{ route('admin.menu.users') }}" class="btn-refresh"><img src="/image/arrow-clockwise.svg"
+                    alt=""></a>
+            {{-- Pencarian --}}
+            <form action="{{ route('admin.menu.users') }}" method="GET" class="d-inline-block">
+                <input type="text" name="search" class="form-control" placeholder="Cari..."
+                    value="{{ request('search') }}">
+            </form>
+        </div>
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>No</th>
                     <th>
-                        <a href="{{ route('admin.menu.users', ['sortOrder' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
+                        <a
+                            href="{{ route('admin.menu.users', ['sortOrder' => $sortOrder === 'asc' ? 'desc' : 'asc', 'search' => request('search')]) }}">
                             Nama
                             @if ($sortOrder === 'asc')
                                 <img src="/image/arrow-up.svg" alt="">

@@ -82,7 +82,7 @@ body {
 }
 
 .sidebar-header img {
-    width: 60px;
+    width: 70px;
     height: auto;
 }
 
@@ -167,17 +167,10 @@ body {
 
 .container {
     width: 100%;
-    padding: 15px;
+    padding: 30px;
     background-color: #f4f6f9;
     transition: width 0.3s;
     box-sizing: border-box;
-}
-
-h4 {
-    margin-bottom: 20px;
-    color: #333;
-    text-align: center;
-    font-weight: 600;
 }
 
 .table {
@@ -223,5 +216,48 @@ h4 {
 .table th a img {
     margin-left: 8px;
     width: 16px;
+    height: auto;
+}
+
+/* Container Tools */
+.container-tools {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
+.container-tools form{
+    margin: 0;
+    padding: 0;
+}
+
+.container-tools input {
+    padding: 8px 10px;
+    border: 1px solid #dbdbdb;
+    border-radius: 6px;
+}
+
+.container-tools input::placeholder {
+    color: #5c5c5c;
+    font-size: 16px;
+}
+
+.container-tools input:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #dbdbdb;
+}
+
+.btn-refresh {
+    padding: 8px 10px;
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 6px;
+}
+
+.btn-refresh img {
+    width: 22px;
     height: auto;
 }

@@ -164,4 +164,21 @@
             });
         });
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.getElementById('date');
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = ('0' + (today.getMonth() + 1)).slice(-2);
+            const day = ('0' + today.getDate()).slice(-2);
+            const maxDate = `${year}-${month}-${day}`;
+
+            dateInput.setAttribute('min', maxDate);
+
+            const now = today.getHours();
+            if (now >= 15) {
+                dateInput.setAttribute('min', `${year}-${month}-${('0' + (today.getDate() + 1)).slice(-2)}`);
+            }
+        });
+    </script>
 @endsection

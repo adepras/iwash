@@ -6,11 +6,18 @@
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 
     <div class="container">
-        <h1>Today's Bookings</h1>
-
-        <!-- Tambahkan Tombol Download -->
+        <h3>Data Pemesanan dan Antrian</h3>
         <a href="{{ route('admin.bookings.download') }}" class="btn btn-primary mb-3">Download CSV</a>
-
+        <div class="container-tools mb-2">
+            {{-- Refresh --}}
+            <a href="{{ route('admin.menu.bookings') }}" class="btn-refresh"><img src="/image/arrow-clockwise.svg"
+                    alt=""></a>
+            {{-- Pencarian --}}
+            <form action="" method="GET" class="d-inline-block">
+                <input type="text" name="search" class="form-control" placeholder="Cari..."
+                    value="{{ request('search') }}">
+            </form>
+        </div>
         <table class="table table-striped">
             <thead>
                 <tr>

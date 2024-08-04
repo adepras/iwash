@@ -30,7 +30,7 @@ class DeleteOldRecords extends Command
     public function handle()
     {
         $now = Carbon::now();
-        $threshold = $now->subMinutes(3);
+        $threshold = $now->subMinutes(5);
 
         DB::table('bookings')
         ->where('status', 'pending')

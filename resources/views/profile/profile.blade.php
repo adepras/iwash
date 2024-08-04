@@ -130,7 +130,9 @@
 
             countdownElements.forEach(function(element) {
                 const createdAt = new Date(element.dataset.createdAt);
-                const countdownTime = new Date(createdAt.getTime() + 3 * 60 * 1000);
+                const countdownTime = new Date(createdAt.getTime() + 5 * 60 * 1000);
+
+                let warningShown = false;
 
                 const interval = setInterval(function() {
                     const now = new Date().getTime();
@@ -139,11 +141,20 @@
                     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                    element.innerHTML = minutes + "menit" + seconds + "detik";
+                    element.innerHTML = minutes + " menit " + seconds + " detik";
 
                     if (distance < 0) {
                         clearInterval(interval);
                         element.innerHTML = "EXPIRED";
+                    } else if (distance <= 2 * 60 * 1000 && !warningShown) {
+                        warningShown = true;
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Peringatan',
+                            text: 'Waktu pembayaran pesanan Anda tersisa 2 menit!',
+                            timer: 1500,
+                            showConfirmButton: false
+                        });
                     }
                 }, 1000);
             });

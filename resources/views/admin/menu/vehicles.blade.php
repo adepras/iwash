@@ -6,7 +6,17 @@
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 
     <div class="container">
-        <h4>Daftar Kendaraan</h4>
+        <h3>Daftar Kendaraan</h3>
+        <div class="container-tools mb-2">
+            {{-- Refresh --}}
+            <a href="{{ route('admin.menu.vehicles') }}" class="btn-refresh"><img src="/image/arrow-clockwise.svg"
+                    alt=""></a>
+            {{-- Pencarian --}}
+            <form action="{{ route('admin.menu.vehicles') }}" method="GET" class="d-inline-block">
+                <input type="text" name="search" class="form-control" placeholder="Cari..."
+                    value="{{ request('search') }}">
+            </form>
+        </div>
         <table class="table table-striped">
             <thead>
                 <tr>

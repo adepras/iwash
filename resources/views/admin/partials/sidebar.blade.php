@@ -19,8 +19,5 @@
         <button type="button" id="booking" data-url="{{ route('admin.menu.bookings') }}">
             <img src="/image/app.svg" alt=""><span>Data Pemesanan</span>
         </button>
-        <button type="button" id="queue" data-url="{{ route('admin.menu.queues') }}">
-            <img src="/image/app.svg" alt=""><span>Data Antrian</span>
-        </button>
     </div>
 </aside>

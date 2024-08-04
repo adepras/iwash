@@ -421,38 +421,6 @@ class BookingController extends Controller
         ]);
     }
 
-    public function cancelBooking($id)
-    {
-        $booking = Booking::findOrFail($id);
-
-        if ($booking->status === 'pending') {
-            $booking->status = 'canceled';
-            $booking->save();
-
-            // Notification::send($booking->user, new BookingCanceledNotification($booking));
-        }
-
-        return redirect()->route('profile')->with('status', 'Pesanan telah dibatalkan.');
-    }
-
-    public function queue()
-    {
-        $bookings = Booking::where('status', 'pending')->get();
-        return view('admin.menu.queues', compact('bookings'));
-    }
-
-    public function index()
-    {
-        $bookings = Booking::where('user_id', auth()->id())->get();
-        return view('admin.menu.bookings', compact('bookings'));
-    }
-
-    public function today()
-    {
-        $bookings = Booking::where('booking_date', Carbon::today())->get();
-        return view('admin.menu.bookings', compact('bookings'));
-    }
-
     public function downloadReceipt($id)
     {
         $booking = Booking::findOrFail($id);
@@ -467,8 +435,36 @@ class BookingController extends Controller
         $data = compact('booking', 'service', 'package', 'estimated', 'date_booking', 'name', 'phone_number', 'status');
 
         $pdf = Pdf::loadView('pdf.receipt', $data);
-        return $pdf->download('bukti_pembayaran_' . $booking->id . '.pdf');
+        return $pdf->download('bukti_pemesanan_' . $booking->id . '.pdf');
     }
+
+    public function cancelBooking($id)
+    {
+        $booking = Booking::findOrFail($id);
+
+        if ($booking->status === 'pending') {
+            $booking->status = 'canceled';
+            $booking->save();
+
+            // Notification::send($booking->user, new BookingCanceledNotification($booking));
+        }
+
+        return redirect()->route('profile')->with('status', 'Pesanan telah dibatalkan.');
+    }
+
+    public function index()
+    {
+        $bookings = Booking::where('user_id', auth()->id())->get();
+        return view('admin.menu.bookings', compact('bookings'));
+    }
+
+    public function today()
+    {
+        $bookings = Booking::where('booking_date', Carbon::today())->get();
+        return view('admin.menu.bookings', compact('bookings'));
+    }
+
+
 }
 
 //download file csv

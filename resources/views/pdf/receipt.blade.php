@@ -145,7 +145,7 @@ use Carbon\Carbon;
             <div class="status {{ $booking->status == 'paid' ? 'paid' : 'pending' }}">
                 Status {{ $booking->status == 'paid' ? 'Pembayaran Lunas' : 'Pembayaran Belum Lunas' }}
             </div>
-            <p class="mt-3" ><span style="color: red;">*</span>Ini merupakan bukti bahwa anda telah melakukan pemesanan dan pembayaran.</p>
+            <p class="mt-3" ><span style="color: red;">*</span>Surat ini sebagai bukti pemesanan dan pembayaran yang sah.</p>
         </div>
     </div>
 </body>

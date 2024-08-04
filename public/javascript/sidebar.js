@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const btnList = document.querySelector(".btn-list");
+    const btnImage = btnList.querySelector("img");
     const sidebar = document.querySelector(".sidebar");
     const navbar = document.querySelector(".navbar");
     const mainContent = document.querySelector(".main-content");
@@ -9,6 +10,12 @@ document.addEventListener("DOMContentLoaded", function () {
         sidebar.classList.toggle("collapsed");
         navbar.classList.toggle("collapsed");
         mainContent.classList.toggle("collapsed");
+
+        if (sidebar.classList.contains("collapsed")) {
+            btnImage.src = "/image/arrow-bar-right.svg";
+        } else {
+            btnImage.src = "/image/arrow-bar-left.svg";
+        }
     });
 
     sidebar.addEventListener("mouseenter", function () {
@@ -17,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
             navbar.classList.remove("collapsed");
             sidebar.classList.add("uncollapsed");
             sidebar.classList.remove("collapsed");
+            btnImage.src = "/image/arrow-bar-left.svg";
         }
     });
 
@@ -26,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
             navbar.classList.add("collapsed");
             sidebar.classList.add("collapsed");
             sidebar.classList.remove("uncollapsed");
+            btnImage.src = "/image/arrow-bar-right.svg";
         }
     });
 });
