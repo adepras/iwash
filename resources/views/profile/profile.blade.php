@@ -3,6 +3,7 @@
 @section('title', 'iWash | Profil')
 
 @section('content')
+    <?php use Carbon\Carbon; ?>
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 
     <div class="container-profile py-5">
@@ -96,27 +97,24 @@
                 <div class="detail-order mt-4">
                     @foreach ($bookings as $booking)
                         <div class="order-item mb-4" data-created-at="{{ $booking->created_at }}">
-                            <div class="d-flex justify-content-between">
+                            <div class="status-header">
                                 <div class="pay-status">
                                     @if ($booking->status === 'paid')
-                                        <p class="bg-success mb-3">Pemesanan Sukses</p>
+                                        <p class="bg-success mb-2">Pemesanan Sukses</p>
                                     @else
-                                        <p class="bg-danger mb-3">Belum Bayar</p>
+                                        <p class="bg-danger mb-2">Belum Bayar</p>
                                     @endif
                                 </div>
-                                <div class="download-detail">
-                                    <button type="button" class="btn-download mt-3"
-                                        onclick="window.location.href='{{ route('download.receipt', ['id' => $booking->id]) }}'"><img
-                                            src="{{ asset('/image/download-ill.png') }}" alt=""></button>
-                                </div>
+                                <button type="button" class="btn-download"
+                                    onclick="window.location.href='{{ route('download.receipt', ['id' => $booking->id]) }}'"><img
+                                        src="{{ asset('/image/download-ill.png') }}" alt=""></button>
                             </div>
                             <p>ID Pemesanan: {{ $booking->id }}</p>
                             <p>Tanggal Pemesanan: {{ $booking->created_at->format('d M Y') }}</p>
-                            <p>Waktu: {{ $booking->time_booking }} WIB</p>
+                            <p>Waktu: {{ Carbon::parse($booking->time_booking)->format('H:i') }} WIB</p>
                             @if ($booking->status === 'pending')
                                 <button type="button" class="btn-detail mt-3"
-                                    onclick="window.location.href='{{ route('detail_order', ['id' => $booking->id]) }}'">Detail
-                                    Order</button>
+                                    onclick="window.location.href='{{ route('detail_order', ['id' => $booking->id]) }}'">Detail</button>
                                 <div id="countdown-{{ $booking->id }}" class="countdown mt-2" style="color: red;"
                                     data-created-at="{{ $booking->created_at }}"></div>
                             @endif

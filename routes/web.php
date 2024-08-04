@@ -77,7 +77,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/loading', function () {
         return view('menu.loading');
     })->name('loading');
-
+    
     Route::get('/process_booking', [BookingController::class, 'processBooking'])->name('process_booking');
     Route::get('/download-receipt/{id}', [BookingController::class, 'downloadReceipt'])->name('download.receipt');
 });

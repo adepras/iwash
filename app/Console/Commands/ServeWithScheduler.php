@@ -28,19 +28,16 @@ class ServeWithScheduler extends Command
      */
     public function handle()
     {
-        // Start the Laravel development server
         $this->info('Starting Laravel development server...');
         $server = new Process(['php', 'artisan', 'serve']);
         $server->start();
 
-        // Start the scheduler
         $this->info('Starting scheduler...');
         $scheduler = new Process(['php', 'artisan', 'schedule:work']);
         $scheduler->start();
 
-        // Output the server and scheduler logs
         while ($server->isRunning() && $scheduler->isRunning()) {
-            usleep(500000); // 0.5 seconds
+            usleep(500000);
             if ($output = $server->getIncrementalOutput()) {
                 $this->info($output);
             }
