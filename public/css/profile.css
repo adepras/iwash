@@ -228,7 +228,7 @@
 .order-item {
     padding: 20px;
     border-radius: 18px;
-    background-color: #f9f9f9;
+    background-color: #f6f6f6;
 }
 
 .order-item p {
@@ -247,9 +247,10 @@
     border-radius: 8px;
     color: #fff;
     font-size: 14px;
+    opacity: 0.9;
 }
 
-.pay-status p.success {
+/* .pay-status p.success {
     background-color: green;
 }
 
@@ -259,19 +260,21 @@
 
 .pay-status p.cancel {
     background-color: red;
-}
+} */
 
 @media screen and (max-width: 768px) {
 
     .profile-title,
     .profile-data,
     .vehicle-data,
-    .form-input,
-    .order-item {
+    .form-input {
         width: 80%;
     }
 
-    .btn-tools,
+    .order-item {
+        width: 100%;
+    }
+
     .btn-submit,
     .btn-edit,
     .btn-save,
@@ -283,7 +286,7 @@
     }
 
     .btn-tools {
-        width: 100%;
+        width: 80%;
     }
 
     .btn-submit,
@@ -340,6 +343,16 @@
         font-size: 14px;
     }
 
+    .detail-order {
+        width: 100%;
+    }
+
+    .form-input {
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+    }
+
     .form-input label {
         font-size: 12px;
     }
@@ -350,5 +363,10 @@
 
     .form-input label span {
         font-size: 10px;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 10px;
     }
 }
