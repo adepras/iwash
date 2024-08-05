@@ -7,7 +7,7 @@
 
     <div class="container">
         <h3>Data Pemesanan dan Antrian</h3>
-        <a href="{{ route('admin.bookings.download') }}" class="btn btn-primary mb-3">Download CSV</a>
+        <a href="{{ route('bookings.downloadCsv') }}" class="btn btn-primary mb-3">Download CSV</a>
         <div class="container-tools mb-2">
             {{-- Refresh --}}
             <a href="{{ route('admin.menu.bookings') }}" class="btn-refresh"><img src="/image/arrow-clockwise.svg"

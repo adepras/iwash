@@ -99,7 +99,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // Admin
     Route::get('/admin/customers', [CustomerController::class, 'index'])->name('admin.customers.index');
     Route::get('/admin/bookings/today', [BookingController::class, 'today'])->name('admin.bookings.today');
-    Route::get('/admin/bookings/download', [BookingController::class, 'downloadCsv'])->name('admin.bookings.download');
+    Route::get('/bookings/download-csv', [BookingController::class, 'downloadCsv'])->name('bookings.downloadCsv');
     Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 });
 
