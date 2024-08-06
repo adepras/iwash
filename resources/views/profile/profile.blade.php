@@ -97,27 +97,34 @@
                 <div class="detail-order mt-4">
                     @foreach ($bookings as $booking)
                         <div class="order-item mb-4" data-created-at="{{ $booking->created_at }}">
-                            <div class="status-header">
-                                <div class="pay-status">
-                                    @if ($booking->status === 'paid')
-                                        <p class="bg-success mb-2">Pemesanan Sukses</p>
+                            <div class="pay-status">
+                                @if ($booking->status === 'paid')
+                                    <p class="bg-success mb-2">Pemesanan Sukses</p>
+                                @else
+                                    <p class="bg-danger mb-2">Belum Bayar</p>
+                                @endif
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="mt-4">
+                                    <p>ID Pemesanan: {{ $booking->id }}</p>
+                                    <p>Tanggal Pemesanan: {{ $booking->created_at->format('d M Y') }}</p>
+                                    <p>Waktu: {{ Carbon::parse($booking->time_booking)->format('H:i') }} WIB</p>
+                                    @if ($booking->status === 'pending')
+                                        <button type="button" class="btn-detail mt-3"
+                                            onclick="window.location.href='{{ route('detail_order', ['id' => $booking->id]) }}'">Detail</button>
+                                        <div id="countdown-{{ $booking->id }}" class="countdown mt-2"
+                                            style="color: red;" data-created-at="{{ $booking->created_at }}"></div>
                                     @else
-                                        <p class="bg-danger mb-2">Belum Bayar</p>
+                                        <button type="button" class="btn-cancel mt-3"
+                                            onclick="">Batalkan</button>
                                     @endif
                                 </div>
-                                <button type="button" class="btn-download"
-                                    onclick="window.location.href='{{ route('download.receipt', ['id' => $booking->id]) }}'"><img
-                                        src="{{ asset('/image/download-ill.png') }}" alt=""></button>
+                                <div class="d-flex">
+                                    <button type="button" class="btn-download"
+                                        onclick="window.location.href='{{ route('download.receipt', ['id' => $booking->id]) }}'"><img
+                                            src="{{ asset('/image/download-ill.png') }}" alt=""></button>
+                                </div>
                             </div>
-                            <p>ID Pemesanan: {{ $booking->id }}</p>
-                            <p>Tanggal Pemesanan: {{ $booking->created_at->format('d M Y') }}</p>
-                            <p>Waktu: {{ Carbon::parse($booking->time_booking)->format('H:i') }} WIB</p>
-                            @if ($booking->status === 'pending')
-                                <button type="button" class="btn-detail mt-3"
-                                    onclick="window.location.href='{{ route('detail_order', ['id' => $booking->id]) }}'">Detail</button>
-                                <div id="countdown-{{ $booking->id }}" class="countdown mt-2" style="color: red;"
-                                    data-created-at="{{ $booking->created_at }}"></div>
-                            @endif
                         </div>
                     @endforeach
                 </div>
@@ -151,8 +158,8 @@
                         Swal.fire({
                             icon: 'warning',
                             title: 'Peringatan',
-                            text: 'Waktu pembayaran pesanan Anda tersisa 2 menit!',
-                            timer: 1500,
+                            text: 'Waktu pembayaran pesanan Anda tersisa kurang dari 2 menit!',
+                            timer: 1800,
                             showConfirmButton: false
                         });
                     }

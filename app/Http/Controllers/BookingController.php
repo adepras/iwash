@@ -465,51 +465,51 @@ class BookingController extends Controller
         return view('admin.menu.bookings', compact('bookings'));
     }
 
-//download csv
-public function downloadCsv()
-{
-    // Mendapatkan tanggal hari ini
-    $today = Carbon::today()->format('Y-m-d');
+    //download csv
+    public function downloadCsv()
+    {
+        // Mendapatkan tanggal hari ini
+        $today = Carbon::today()->format('Y-m-d');
 
-    // Mengambil semua booking yang dilakukan pada hari ini
-    $bookings = Booking::whereDate('booking_date', $today)->get();
+        // Mengambil semua booking yang dilakukan pada hari ini
+        $bookings = Booking::whereDate('booking_date', $today)->get();
 
-    // Menentukan nama file yang akan diunduh
-    $filename = 'bookings_' . $today . '.csv';
+        // Menentukan nama file yang akan diunduh
+        $filename = 'bookings_' . $today . '.csv';
 
-    // Menentukan header untuk file CSV
-    $headers = [
-        "Content-type" => "text/csv",
-        "Content-Disposition" => "attachment; filename=\"$filename\"",
-        "Pragma" => "no-cache",
-        "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
-        "Expires" => "0"
-    ];
+        // Menentukan header untuk file CSV
+        $headers = [
+            "Content-type" => "text/csv",
+            "Content-Disposition" => "attachment; filename=\"$filename\"",
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0"
+        ];
 
-    // Callback untuk menuliskan data ke file CSV
-    $callback = function () use ($bookings) {
-        $file = fopen('php://output', 'w');
+        // Callback untuk menuliskan data ke file CSV
+        $callback = function () use ($bookings) {
+            $file = fopen('php://output', 'w');
 
-        // Menulis header kolom ke CSV
-        fputcsv($file, ['ID', 'User ID', 'Service', 'Booking Date', 'Status', 'Created At']);
+            // Menulis header kolom ke CSV
+            fputcsv($file, ['ID', 'User ID', 'Service', 'Booking Date', 'Status', 'Created At']);
 
-        // Menulis setiap baris data booking ke CSV
-        foreach ($bookings as $booking) {
-            fputcsv($file, [
-                $booking->id,
-                $booking->user_id,
-                $booking->service,
-                $booking->booking_date,
-                $booking->status,
-                $booking->created_at
-            ]);
-        }
+            // Menulis setiap baris data booking ke CSV
+            foreach ($bookings as $booking) {
+                fputcsv($file, [
+                    $booking->id,
+                    $booking->user_id,
+                    $booking->service,
+                    $booking->booking_date,
+                    $booking->status,
+                    $booking->created_at
+                ]);
+            }
 
-        // Menutup file CSV
-        fclose($file);
-    };
+            // Menutup file CSV
+            fclose($file);
+        };
 
-    // Mengirimkan respons dengan stream CSV
-    return response()->stream($callback, 200, $headers);
-}
+        // Mengirimkan respons dengan stream CSV
+        return response()->stream($callback, 200, $headers);
+    }
 }

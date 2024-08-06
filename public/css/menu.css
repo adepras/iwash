@@ -722,6 +722,7 @@
 
     .layout-faq {
         width: 100%;
+        margin-top: 50px;
     }
 
     .accordion-item h2 {
