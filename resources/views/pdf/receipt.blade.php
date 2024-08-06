@@ -143,9 +143,11 @@ use Carbon\Carbon;
                 <li>{{ $booking->vehicle->license_plate ?? 'Tidak tersedia' }}</li>
             </ul>
             <div class="status {{ $booking->status == 'paid' ? 'paid' : 'pending' }}">
-                Status {{ $booking->status == 'paid' ? 'Pembayaran Lunas' : 'Pembayaran Belum Lunas' }}
+                Status
+                {{ ($booking->status == 'paid' ? 'Pembayaran Lunas' : $booking->status == 'cancelled') ? 'Pemesanan Dibatalkan' : 'Pembayaran Belum Lunas' }}
             </div>
-            <p class="mt-3" ><span style="color: red;">*</span>Surat ini sebagai bukti pemesanan dan pembayaran yang sah.</p>
+            <p class="mt-3"><span style="color: red;">*</span>Surat ini sebagai bukti pemesanan dan pembayaran yang
+                sah.</p>
         </div>
     </div>
 </body>

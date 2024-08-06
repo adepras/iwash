@@ -439,18 +439,29 @@ class BookingController extends Controller
         return $pdf->download('bukti_pemesanan_' . $booking->id . '.pdf');
     }
 
-    public function cancelBooking($id)
+    public function failedBooking($id)
     {
         $booking = Booking::findOrFail($id);
 
         if ($booking->status === 'pending') {
-            $booking->status = 'canceled';
+            $booking->status = 'failed';
             $booking->save();
-
-            // Notification::send($booking->user, new BookingCanceledNotification($booking));
         }
 
-        return redirect()->route('profile')->with('status', 'Pesanan telah dibatalkan.');
+        return redirect()->route('profile')->with('status', 'Pesananan Anda gagal.');
+    }
+
+    public function cancelBooking(Request $request, $id)
+    {
+        $booking = Booking::findOrFail($id);
+        Slot::where('booking_id',$booking->id)->delete();
+        if ($booking->status === 'paid') {
+            $booking->status = 'cancelled';
+            $booking->reason = $request->input('reason');
+            $booking->save();
+        }
+
+        return redirect()->route('profile')->with('status', 'Pesananan Anda dibatalkan.');
     }
 
     public function index()

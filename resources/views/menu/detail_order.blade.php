@@ -146,7 +146,7 @@
                 display.textContent = hours + ':' + minutes + ':' + seconds;
 
                 if (--timer < 0) {
-                    window.location.href = "{{ route('cancel_booking', ['id' => $booking->id]) }}";
+                    window.location.href = "{{ route('failed_booking', ['id' => $booking->id]) }}";
                 }
             }, 1000);
         }
@@ -162,7 +162,7 @@
                 var display = document.querySelector('.countdown');
                 startCountdown(remainingTime, display);
             } else {
-                window.location.href = "{{ route('cancel_booking', ['id' => $booking->id]) }}";
+                window.location.href = "{{ route('failed_booking', ['id' => $booking->id]) }}";
             }
         };
     </script>

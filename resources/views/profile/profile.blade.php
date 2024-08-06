@@ -99,9 +99,11 @@
                         <div class="order-item mb-4" data-created-at="{{ $booking->created_at }}">
                             <div class="pay-status">
                                 @if ($booking->status === 'paid')
-                                    <p class="bg-success mb-2">Pemesanan Sukses</p>
-                                @else
-                                    <p class="bg-danger mb-2">Belum Bayar</p>
+                                    <p class="bg-success mb-2">Pemesanan sukses</p>
+                                @elseif ($booking->status === 'pending')
+                                    <p class="bg-warning mb-2">Menunggu pembayaran</p>
+                                @elseif ($booking->status === 'cancelled')
+                                    <p class="bg-danger mb-2">Pesanan Anda dibatalkan</p>
                                 @endif
                             </div>
                             <div class="d-flex justify-content-between">
@@ -114,9 +116,11 @@
                                             onclick="window.location.href='{{ route('detail_order', ['id' => $booking->id]) }}'">Detail</button>
                                         <div id="countdown-{{ $booking->id }}" class="countdown mt-2"
                                             style="color: red;" data-created-at="{{ $booking->created_at }}"></div>
-                                    @else
-                                        <button type="button" class="btn-cancel mt-3"
-                                            onclick="">Batalkan</button>
+                                    @elseif ($booking->status === 'paid')
+                                        <button type="button" class="btn-cancel mt-3" data-bs-toggle="modal"
+                                            data-bs-target="#cancelModal">
+                                            Batalkan
+                                        </button>
                                     @endif
                                 </div>
                                 <div class="d-flex">
@@ -126,11 +130,34 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="cancelModalLabel">Alasan Pembatalan</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ route('cancelBooking', ['id' => $booking->id]) }}" method="POST">
+                                            @csrf
+                                            @method('POST')
+                                            <div class="mb-3">
+                                                <label for="reason" class="form-label">Beritahu kami kendala Anda</label>
+                                                <textarea class="form-control" id="reason" name="reason" rows="3" required></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Kirim</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
                 </div>
             @endif
         </div>
     </div>
+    <!-- Modal -->
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const countdownElements = document.querySelectorAll('.countdown');
@@ -165,6 +192,54 @@
                     }
                 }, 1000);
             });
+        });
+    </script>
+    <script>
+        document.getElementById('cancelForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Mengambil form data
+            let form = event.target;
+            let formData = new FormData(form);
+
+            // Mengirim data form menggunakan Fetch API
+            fetch(form.action, {
+                    method: form.method,
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                            'content')
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Menampilkan SweetAlert
+                        Swal.fire({
+                            title: 'Pemesanan dibatalkan',
+                            text: 'Pengembalian dana akan segera diproses, mohon tunggu.',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then(() => {
+                            window.location.href = '{{ route('profile') }}';
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Terjadi kesalahan saat membatalkan pesanan.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                })
+                .catch(error => {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Terjadi kesalahan saat membatalkan pesanan.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                });
         });
     </script>
 
