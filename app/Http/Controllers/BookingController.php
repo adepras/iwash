@@ -466,7 +466,7 @@ class BookingController extends Controller
 
     public function index()
     {
-        $bookings = Booking::where('user_id', auth()->id())->get();
+        $bookings = Booking::all();
         return view('admin.menu.bookings', compact('bookings'));
     }
 
