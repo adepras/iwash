@@ -467,7 +467,9 @@ class BookingController extends Controller
     public function index()
     {
         $bookings = Booking::all();
-        return view('admin.menu.bookings', compact('bookings'));
+        $outlets = Outlet::all();
+        $slots = Slot::where('booked', true)->get();
+        return view('admin.menu.bookings', compact('bookings', 'outlets', 'slots'));
     }
 
     public function today()
